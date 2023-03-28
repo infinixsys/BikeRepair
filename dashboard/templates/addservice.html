@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<!-- <?php include 'header.php'; ?> -->
+<div class="container-fluid">
+    <div class="row justify-content-end">
+        <!---<?php include 'sidemenu.php' ?>--->
+        <div class="col-lg-10 border">
+            <h4 class="text-center fw-bold mt-3">Add Service</h4>
+            <hr>
+            {{ msg }}
+            <form method="post" action="{% url 'addservice' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+            <div class="row px-4">
+                <!-- <div class="col-md-5 p-3 border"> -->
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Service Name</label>
+                    <input type="text" name="title" class="form-control" id="name" placeholder="Enter Service Name" aria-describedby="emailHelp" required>
+                </div>
+
+                <div class="col-md-6 mt-2">
+                    <label for="exampleInputEmail1" class="form-label">Select Category</label>
+                    <div class="border rounded">
+                        <select class="form-select" name="types" aria-label="Default select example" required>
+                            <option selected>Service Category</option>
+                            <option value="yearly">Annually</option>
+                            <option value="onetime">One Time</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- <div class="col-md-6 mt-2">
+                    <label for="exampleInputEmail1" class="form-label">Select Category</label>
+                    <div class="border rounded">
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Service Sub Category</option>
+                            <option value="1">IPC</option>
+                            <option value="2">WIFI/4G</option>
+                        </select>
+                    </div>
+                </div> -->
+                <!-- <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Service Model Number</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter Category Name" aria-describedby="emailHelp">
+                </div> -->
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Service Price</label>
+                    <input type="number" name="pricing" class="form-control" id="name" placeholder="Enter Category Name" aria-describedby="emailHelp" required>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Service Image</label>
+                    <input type="file" name="img" class="form-control" id="name" placeholder="Enter Category Name" aria-describedby="emailHelp" required>
+                </div>
+                <div class="col-md-12 mt-2">
+                        <label for="">Description</label>
+                        <textarea name="details" id="editor" required></textarea>
+
+                    </div>
+                    <div class="col-md-6  d-grid gap-2 my-3">
+                <button class="btn color d-grid gap-2">Add</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    CKEDITOR.replace('editor');
+</script>
+
+
+{% endblock %}
