@@ -39,10 +39,13 @@ class PlanName(models.Model):
         ('monthly', 'monthly'),
     )
     title = models.CharField(max_length=200, blank=True, null=True)
-    pricing = models.DecimalField(max_digits=12, decimal_places=2, blank=True, null=True)
+    pricing = models.IntegerField(blank=True, null=True)
     types = models.CharField(max_length=200, blank=True, null=True, choices=STATUS)
     details = RichTextField(default=None)
     img = models.ImageField(upload_to="plan_name/", blank=True, null=True)
+    services = models.CharField(max_length=200, blank=True, null=True)
+    card_details = models.CharField(max_length=200, blank=True, null=True)
+    line_price = models.IntegerField(blank=True, null=True)
     create_at = models.DateField(auto_now_add=True)
     update_at = models.DateField(auto_now=True)
 
@@ -70,6 +73,7 @@ class BookingDetails(models.Model):
     owner_name = models.CharField(max_length=200, blank=True, null=True)
     pin_code = models.CharField(max_length=200, blank=True, null=True)
     location = models.CharField(max_length=300, blank=True, null=True)
+    brand = models.CharField(max_length=200, blank=True, null=True)
     Vehicle_issues = models.TextField(default=None)
     create_at = models.DateField(auto_now_add=True)
     update_at = models.DateField(auto_now=True)

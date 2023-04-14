@@ -5,13 +5,14 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.decorators import api_view
-from rest_framework.generics import RetrieveUpdateAPIView, RetrieveAPIView
+from rest_framework.generics import RetrieveUpdateAPIView, RetrieveAPIView, ListCreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .utils import send_otp
-from .models import Profile, User
-from .serializers import UserUpdateSerializer, ProfileSerializer, UserSerializer, UserProfileSerializer
+from .models import Profile, User, PlanUpdate
+from .serializers import UserUpdateSerializer, ProfileSerializer, UserSerializer, UserProfileSerializer, \
+    PlanUpdateSerializer
 
 
 # Create your views here.
@@ -95,7 +96,7 @@ class LoginOtpView(APIView):
 
 
 class UserRetrieveUpdateAPIView(APIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     serializer_class = UserUpdateSerializer
 
     def put(self, request, user_id, format=None):
@@ -112,3 +113,6 @@ class UserProfile(RetrieveAPIView):
     serializer_class = UserProfileSerializer
 
 
+class PlanUpdateAPIView(ListCreateAPIView):
+    queryset = PlanUpdate.objects.all()
+    serializer_class = PlanUpdateSerializer

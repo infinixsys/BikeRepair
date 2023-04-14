@@ -17,7 +17,7 @@ class ServiceSerializer(serializers.ModelSerializer):
 class PlanNameSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlanName
-        fields = ('id', 'title', 'pricing', 'types', 'details')
+        fields = ('id', 'title', 'pricing', 'types', 'details', 'card_details', 'line_price')
 
 
 class NotificationSerializer(serializers.ModelSerializer):
@@ -30,7 +30,7 @@ class BookingDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookingDetails
         fields = ("user", "model", "vehicle_number", "year_of_purchase", "odometer_reading", "rc_number",
-                  "owner_name", "pin_code", "location", "Vehicle_issues")
+                  "owner_name", "pin_code", "location", "Vehicle_issues", "brand")
 
 
 class OrderSerializer(serializers.ModelSerializer):
