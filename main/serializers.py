@@ -14,10 +14,10 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ["id", "fname", "lname", "phone" ,"email","address","city","state","country","image","image"]
         extra_kwargs = {
             "id": {"read_only": True},
-            "fname": {"required": True},
-            "lname": {"required": True},
+            # "fname": {"required": True},
+            # "lname": {"required": True},
             "phone": {"required": True},
-            "email": {"required": True},
+            # "email": {"required": True},
         }
 
 

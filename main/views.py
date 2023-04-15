@@ -185,43 +185,43 @@ class ValidatePhoneSendOTP(APIView):
 # verify otp
 class VerifyPhoneOTPView(APIView):
     def post(self, request, format=None):
-        try:
-            phone = request.data.get('phone')
-            otp = request.data.get('otp')
-            print(phone, otp)
+        # try:
+        phone = request.data.get('phone')
+        otp = request.data.get('otp')
+        print(phone, otp)
 
-            if phone and otp:
-                user = User.objects.filter(phone__iexact=phone)
-                if user.exists():
-                    user = user.first()
-                    if user.otp == otp:
-                        login(request, user)
-                        return Response({
-                            'status': True,
-                            'details': 'Login Successfully',
-                            'token': AuthToken.objects.create(user)[1],
-                            'response': {
-                                'id': user.id,
-                                'name': user.fname + ' ' + user.lname,
-                                'email': user.email,
-                                'phone': user.phone,
-                                'address': user.address,
-                                'city': user.city,
-                            }})
-                    else:
-                        return Response({'message': 'OTP does not match'}, status=status.HTTP_400_BAD_REQUEST)
+        if phone and otp:
+            user = User.objects.filter(phone__iexact=phone)
+            if user.exists():
+                user = user.first()
+                if user.otp == otp:
+                    login(request, user)
+                    return Response({
+                        'status': True,
+                        'details': 'Login Successfully',
+                        'token': AuthToken.objects.create(user)[1],
+                        'response': {
+                            'id': user.id,
+                            # 'name': user.fname + ' ' + user.lname,
+                            # 'email': user.email,
+                            'phone': user.phone,
+                            # 'address': user.address,
+                            # 'city': user.city,
+                        }})
                 else:
-                    return Response({'message': 'User does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+                    return Response({'message': 'OTP does not match'}, status=status.HTTP_400_BAD_REQUEST)
             else:
-                return Response({'message': 'Phone or OTP is missing'}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'message': 'User does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'message': 'Phone or OTP is missing'}, status=status.HTTP_400_BAD_REQUEST)
 
-        except Exception as e:
-            print(e)
-            return Response({
-                'status': False,
-                'message': str(e),
-                'details': 'Login Failed'
-            })
+        # except Exception as e:
+        #     print(e)
+        #     return Response({
+        #         'status': False,
+        #         'message': str(e),
+        #         'details': 'Login Failed'
+        #     })
 
 
 # logout api view
