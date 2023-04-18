@@ -29,7 +29,7 @@ class NotificationSerializer(serializers.ModelSerializer):
 class BookingDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookingDetails
-        fields = ("user", "model", "vehicle_number", "year_of_purchase", "odometer_reading", "rc_number",
+        fields = ("id","user", "model", "vehicle_number", "year_of_purchase", "odometer_reading", "rc_number",
                   "owner_name", "pin_code", "location", "Vehicle_issues", "brand")
 
 
