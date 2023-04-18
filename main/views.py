@@ -154,31 +154,40 @@ class ValidatePhoneSendOTP(APIView):
 
                             'message': 'OTP sent successfully',
                             'status': status.HTTP_200_OK,
-                        })
+                        }, status=status.HTTP_200_OK)
                     else:
                         data.otp = new_otp
                         data.save()
                         return Response({
                             'message': 'OTP sent successfully',
                             'status': status.HTTP_200_OK,
-                        })
+                        },
+                            status=status.HTTP_200_OK
+                        )
 
                 else:
                     return Response({
                         'message': 'User not found ! please register',
                         'status': status.HTTP_404_NOT_FOUND,
-                    }
+                    },
+                        status=status.HTTP_400_BAD_REQUEST
                     )
+
             else:
                 return Response({
                     'message': 'Phone number is required',
                     'status': status.HTTP_400_BAD_REQUEST,
-                })
+                },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
         except Exception as e:
             return Response({
                 'message': str(e),
                 'status': status.HTTP_400_BAD_REQUEST,
-            })
+            },
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
 
 # verify otp
@@ -257,6 +266,3 @@ class UserRetrieveUpdateAPIView(APIView):
 class UserProfile(RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserProfileSerializer
-
-
-
