@@ -101,3 +101,15 @@ class ClientReview(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class PlanUpdate(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    plane_name = models.ForeignKey(PlanName, on_delete=models.CASCADE, blank=True, null=True)
+    name = models.CharField(max_length=200, blank=True, null=True)
+    mobile_number = models.CharField(max_length=20, blank=True, null=True)
+    address = models.CharField(max_length=500, blank=True, null=True)
+    location = models.CharField(max_length=200, blank=True, null=True)
+
+    def __str__(self):
+        return self.name

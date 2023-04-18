@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib import admin
 
-from main.models import Profile, PlanUpdate, Role
+from main.models import Profile, Role
 
 User = get_user_model()
 
@@ -56,4 +56,3 @@ admin.site.unregister(Group)
 # Register onthersmodels
 admin.site.register(Profile)
 
-admin.site.register(PlanUpdate)

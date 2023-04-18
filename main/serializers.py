@@ -1,6 +1,6 @@
 import imp
 from rest_framework import serializers
-from .models import Profile, User, PlanUpdate, Role
+from .models import Profile, User, Role
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -50,7 +50,3 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = ("id", 'mobile', 'image', 'name', 'address', 'location', 'plan')
 
 
-class PlanUpdateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PlanUpdate
-        fields = ('id', 'user', 'plane_name', 'name', 'mobile_number', 'address', 'location')

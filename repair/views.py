@@ -7,10 +7,10 @@ from rest_framework.response import Response
 
 from .models import AboutUs, Services, PlanName, Notification, Order, ClientReview, BookingDetails
 from .serializers import AboutUsSerializer, ServiceSerializer, PlanNameSerializer, \
-    NotificationSerializer, OrderSerializer, ClientReviewSerializer, BookingDetailsSerializer
+    NotificationSerializer, OrderSerializer, ClientReviewSerializer, BookingDetailsSerializer, PlanUpdateSerializer
 from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveAPIView
 from django.conf import settings
-
+from repair.models import PlanUpdate
 
 # Create your views here.
 
@@ -115,3 +115,8 @@ class OrderAPIView(ListAPIView):
 class ClientReviewAPIView(ListCreateAPIView):
     queryset = ClientReview.objects.all()
     serializer_class = ClientReviewSerializer
+
+
+class PlanUpdateAPIView(ListCreateAPIView):
+    queryset = PlanUpdate.objects.all()
+    serializer_class = PlanUpdateSerializer

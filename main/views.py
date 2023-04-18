@@ -4,9 +4,8 @@ from rest_framework.views import APIView
 from rest_framework import viewsets
 from django.contrib.auth import get_user_model
 
-from main.models import PlanUpdate
 from main.serializers import RegisterSerializer, UserUpdateSerializer, UserSerializer, ProfileSerializer, \
-    UserProfileSerializer, PlanUpdateSerializer
+    UserProfileSerializer
 from main.utils import otp_generator
 from knox.models import AuthToken
 from django.contrib.auth import login
@@ -260,6 +259,4 @@ class UserProfile(RetrieveAPIView):
     serializer_class = UserProfileSerializer
 
 
-class PlanUpdateAPIView(ListCreateAPIView):
-    queryset = PlanUpdate.objects.all()
-    serializer_class = PlanUpdateSerializer
+

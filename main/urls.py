@@ -18,6 +18,4 @@ urlpatterns = [
     # path('api/login/otp/', LoginOtpView.as_view(), name='login_otp'),
     path('api/user/update/<int:user_id>', UserRetrieveUpdateAPIView.as_view(), name='user_update'),
     path('api/user/profile/<int:pk>', UserProfile.as_view(), name="user_profile"),
-    path('api/user/plan/update/', PlanUpdateAPIView.as_view(), name='PlanUpdateAPIView'),
-
 ]

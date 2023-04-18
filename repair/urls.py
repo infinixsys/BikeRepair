@@ -13,4 +13,6 @@ urlpatterns = [
 
     path('order/details/', OrderAPIView.as_view(), name='OrderAPIView'),
     path('api/client/review', ClientReviewAPIView.as_view(), name='client_review'),
+    path('api/user/plan/update/', PlanUpdateAPIView.as_view(), name='PlanUpdateAPIView'),
+
 ]
