@@ -16,5 +16,5 @@ urlpatterns = [
     path('api/user/plan/update/', PlanUpdateAPIView.as_view(), name='PlanUpdateAPIView'),
 
     path('api/support/', SuppportAPIView.as_view(), name='SuppportAPIView'),
-
+    path('api/update/delete/booking/bikes/<int:pk>', BookingDeleteUpdateAPI.as_view(), name='BookingDeleteUpdateAPI'),
 ]

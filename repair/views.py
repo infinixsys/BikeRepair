@@ -9,9 +9,11 @@ from .models import AboutUs, Services, PlanName, Notification, Order, ClientRevi
 from .serializers import AboutUsSerializer, ServiceSerializer, PlanNameSerializer, \
     NotificationSerializer, OrderSerializer, ClientReviewSerializer, BookingDetailsSerializer, PlanUpdateSerializer, \
     SupportSerializer
-from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView, \
+    RetrieveDestroyAPIView, RetrieveUpdateAPIView
 from django.conf import settings
 from repair.models import PlanUpdate
+
 
 # Create your views here.
 
@@ -37,6 +39,11 @@ class NotificationListAPI(ListAPIView):
 
 
 class BookingDetailsAPIView(ListCreateAPIView):
+    queryset = BookingDetails.objects.all()
+    serializer_class = BookingDetailsSerializer
+
+
+class BookingDeleteUpdateAPI(RetrieveDestroyAPIView, RetrieveUpdateAPIView):
     queryset = BookingDetails.objects.all()
     serializer_class = BookingDetailsSerializer
 
