@@ -16,21 +16,23 @@
                <a href="approvedreview.php"><button class="btn btn-success">Approved</button></a>
                  </div>
             </div>
+            {% for i in rev %}
             <div class="row justify-content-center">
                 <div class="col-lg-12 my-2">
                     <div class="bg-white shadow-sm rounded p-2 border-style">
                       <div class="d-flex justify-content-between">
-                      <h6 class="fw-bold text-danger">Amit kumar</h6>
+                      <h6 class="fw-bold text-danger">{{ i.name }}</h6>
                       <div style="cursor:pointer;">
                       <i class="bi bi-pencil-square text-warning"></i>
                       <i class="bi bi-archive text-danger"></i>
                       <i class="bi bi-check-circle text-success"></i>
                       </div>
                       </div>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, ullam harum dolores aliquam distinctio necessitatibus labore quae, aliquid debitis nisi similique. Enim, inventore reiciendis eos, dolorem et voluptatum quod repellendus est mollitia, explicabo numquam quis. Quisquam perspiciatis aspernatur nemo, possimus architecto voluptate quidem fugiat, nesciunt est, provident eius saepe quia.</p>
+                        <p>{{ i.txt }}</p>
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 </div>

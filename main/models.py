@@ -47,7 +47,7 @@ class User(AbstractBaseUser):
     phone = models.CharField(validators=[phone_regex], max_length=15, unique=True)
     fname = models.CharField(max_length=50, blank=True, null=True)
     lname = models.CharField(max_length=50, blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
+    email = models.EmailField(max_length=200, blank=True, null=True)
     address = models.TextField(max_length=500, blank=True, null=True)
     city = models.CharField(max_length=50, blank=True, null=True)
     state = models.CharField(max_length=50, blank=True, null=True)

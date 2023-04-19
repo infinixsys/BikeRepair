@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- <?php include 'header.php'; ?> -->
+<div class="container-fluid">
+    <div class="row justify-content-end">
+        <!---<?php include 'sidemenu.php' ?>--->
+        <div class="col-lg-10 border">
+            <h4 class="text-center fw-bold mt-3">Add Faq</h4>
+            <hr>
+            {{ msg }}
+            <form method="post" >
+                {% csrf_token %}
+            <div class="row px-4">
+                <!-- <div class="col-md-5 p-3 border"> -->
+                <div class="col-md-12 mt-2">
+                    <label for="name" class="form-label" >Question Name</label>
+                    <input type="text" class="form-control" name="question" id="name" placeholder="Enter  Name" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-12 mt-2">
+                        <label for="">Write Answer Here</label>
+                        <textarea name="answer" id="editor"></textarea>
+
+                    </div>
+                    <div class="col-md-7  d-grid gap-2 my-3">
+                <button class="btn color d-grid gap-2">Add</button>
+                </div>
+            </div>
+                </form>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    CKEDITOR.replace('editor');
+</script>
+
+{% endblock %}

@@ -5,9 +5,10 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import AboutUs, Services, PlanName, Notification, Order, ClientReview, BookingDetails
+from .models import AboutUs, Services, PlanName, Notification, Order, ClientReview, BookingDetails, Support
 from .serializers import AboutUsSerializer, ServiceSerializer, PlanNameSerializer, \
-    NotificationSerializer, OrderSerializer, ClientReviewSerializer, BookingDetailsSerializer, PlanUpdateSerializer
+    NotificationSerializer, OrderSerializer, ClientReviewSerializer, BookingDetailsSerializer, PlanUpdateSerializer, \
+    SupportSerializer
 from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveAPIView
 from django.conf import settings
 from repair.models import PlanUpdate
@@ -120,3 +121,8 @@ class ClientReviewAPIView(ListCreateAPIView):
 class PlanUpdateAPIView(ListCreateAPIView):
     queryset = PlanUpdate.objects.all()
     serializer_class = PlanUpdateSerializer
+
+
+class SuppportAPIView(ListCreateAPIView):
+    queryset = Support.objects.all()
+    serializer_class = SupportSerializer

@@ -95,9 +95,14 @@ class Order(models.Model):
 
 
 class ClientReview(models.Model):
+    STATUS = (
+        ('approved', 'approved'),
+        ('disapproved', 'disapproved'),
+    )
     name = models.CharField(max_length=300, blank=True, null=True)
     img = models.ImageField(upload_to="img/", blank=True, null=True)
     txt = models.TextField(default=None)
+    status = models.CharField(max_length=200, blank=True, null=True, choices=STATUS)
 
     def __str__(self):
         return self.name
@@ -113,3 +118,33 @@ class PlanUpdate(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Support(models.Model):
+    name = models.CharField(max_length=200, blank=True, null=True)
+    contact = models.CharField(max_length=200, blank=True, null=True)
+    txt = models.TextField(default=None, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class FQA(models.Model):
+    question = models.CharField(max_length=500, blank=True, null=True)
+    answer = RichTextField(default=None, blank=True, null=True)
+
+    # def __str__(self):
+    #     return self.question
+
+
+class Mechanic(models.Model):
+    name = models.CharField(max_length=200, blank=True, null=True)
+    profile = models.CharField(max_length=200, blank=True, null=True)
+    email = models.CharField(max_length=200, blank=True, null=True)
+    price = models.CharField(max_length=200, blank=True, null=True)
+    experiance = models.CharField(max_length=200, blank=True, null=True)
+    number = models.CharField(max_length=200, blank=True, null=True)
+    img = models.ImageField(upload_to="mechanic/", blank=True, null=True)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+

@@ -87,4 +87,85 @@ def editplan(request, id):
 
 
 def review(request):
-    return render(request, 'review.html')
+    rev = ClientReview.objects.all()
+    return render(request, 'review.html', {'rev': rev})
+
+
+def mechanice(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        profile = request.POST.get('profile')
+        email = request.POST.get('email')
+        price = request.POST.get('price')
+        experiance = request.POST.get('experiance')
+        number = request.POST.get('number')
+        img = request.POST.get('img')
+        data = Mechanic.objects.create(name=name, profile=profile, email=email, price=price, experiance=experiance,
+                                       number=number, img=img)
+        data.save()
+        msg = "Your Detail Has Been Submitted !!"
+        return render(request, 'addmechanic.html', {'msg': msg})
+    return render(request, 'addmechanic.html')
+
+
+def booking_leads(request):
+    plane = PlanUpdate.objects.all()
+
+    return render(request, 'booking_leads.html', {'plane': plane})
+
+
+def booking_details(request, id):
+    plane = PlanUpdate.objects.get(id=id)
+    return render(request, 'booking-details.html', {'plane': plane})
+
+
+def user_profile(request):
+    plane = PlanUpdate.objects.all()
+    # for i in plane:
+    #     print(i.user.)
+    return render(request, 'user_profile.html', {'plane': plane})
+
+
+def user_history(request, id):
+    plane = PlanUpdate.objects.get(id=id)
+    return render(request, 'user-history.html', {'plane': plane})
+
+
+def support(request):
+    sup = Support.objects.all()
+    return render(request, 'support.html', {'sup': sup})
+
+
+def account(request):
+    return render(request, 'account.html')
+
+
+def bill_view(request):
+    return render(request, 'bill-view.html')
+
+
+def faq(request):
+    if request.method == 'POST':
+        question = request.POST.get('question')
+        answer = request.POST.get('answer')
+        data = FQA.objects.create(question=question, answer=answer)
+        data.save()
+        msg = "FQA is Added Successfully !!"
+        return render(request, 'addfaq.html', {'msg': msg})
+    return render(request, 'addfaq.html')
+
+
+def banner(request):
+    return render(request, 'banner.html')
+
+
+def add_banner(request):
+    return render(request, 'add-banner.html')
+
+
+def offer_banner(reqeust):
+    return render(reqeust, 'offer-banner.html')
+
+
+def add_offer_banner(reqeust):
+    return render(reqeust, 'add-offer-banner.html')

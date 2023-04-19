@@ -52,3 +52,10 @@ class PlanUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlanUpdate
         fields = ('id', 'user', 'plane_name', 'name', 'mobile_number', 'address', 'location')
+
+
+class SupportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Support
+        fields = "__all__"
+

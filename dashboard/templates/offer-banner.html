@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- <?php include 'header.php'; ?> -->
+<div class="container-fluid">
+    <div class="row justify-content-end">
+        <!---<?php include 'sidemenu.php' ?>--->
+        <div class="col-lg-10  border p-4">
+            <div class="d-flex justify-content-between p-3">
+                <h4>Offer Banner</h4>
+            </div>
+            <div class="row">
+                <div class="col-md-8 mb-3">
+                    <a href="{% url 'add_offer_banner' %}"><button class="btn btn-success"> <i class="bi bi-plus text-white"></i> Add Banner </button></a>
+                </div>
+                <!-- <div class="col-md-4">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <span class="input-group-text" id="basic-addon2"> <i class="bi bi-search"></i> </span>
+                    </div>
+                </div> -->
+            </div>
+            <table class="table">
+                <thead>
+                    <tr class="bg-dark text-white">
+                        <th scope="col">#</th>
+                        <th scope="col">Banner name</th>
+                        <th scope="col">Banner priority</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row" class="table-secondary">1</th>
+                        <td class="table-success">banner name</td>
+                        <td class="table-success">1</td>
+                        <td class="table-primary"><img src="" alt="img name"></td>
+                        <td class="table-warning">
+                            <i class="bi bi-pencil-square fs-4 text-warning"></i>
+                            <i class="bi bi-archive text-danger fs-4"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

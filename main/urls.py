@@ -3,9 +3,9 @@ from main.views import *
 from rest_framework import routers
 from knox.views import LogoutView
 
-
 router = routers.DefaultRouter()
 router.register(r'user-register', RegisterView, basename='task')
+# router.register(r'api/user/profile', UserProfile, basename='user_profile')
 
 urlpatterns = [
     path('', include(router.urls)),
@@ -17,5 +17,5 @@ urlpatterns = [
     # path('api/login/attempt/', LoginAttemptView.as_view(), name='login_attempt'),
     # path('api/login/otp/', LoginOtpView.as_view(), name='login_otp'),
     path('api/user/update/<int:user_id>', UserRetrieveUpdateAPIView.as_view(), name='user_update'),
-    path('api/user/profile/<int:pk>', UserProfile.as_view(), name="user_profile"),
+    path('api/user/profile/', UserProfile.as_view(), name="user_profile"),
 ]

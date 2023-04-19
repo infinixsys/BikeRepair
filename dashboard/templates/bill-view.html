@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- <?php include 'header.php'; ?> -->
+<div class="container-fluid">
+    <div class="row justify-content-end">
+        <!---<?php include 'sidemenu.php' ?>--->
+        <div class="col-lg-10 border">
+            <h4 class="text-center fw-bold mt-3">Create Bill</h4>
+            <hr>
+            <div class="row px-4">
+                <!-- <div class="col-md-5 p-3 border"> -->
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Bike number</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter Bike Number" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Service number</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter service Number" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Customer Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Model Number</label>
+                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Rc Number</label>
+                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Units</label>
+                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="exampleInputEmail1" class="form-label">Select Category</label>
+                    <div class="border rounded">
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Service Category</option>
+                            <option value="1">Annually</option>
+                            <option value="2">One Type</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Service Price</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter Price" aria-describedby="emailHelp">
+                </div>
+
+                <div class="col-md-12 mt-2">
+                    <label for="">Description</label>
+                    <textarea name="editor"></textarea>
+
+                </div>
+                <div class="col-md-6  d-grid gap-2 my-3">
+                    <button class="btn color d-grid gap-2">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    CKEDITOR.replace('editor');
+</script>
+{% endblock %}

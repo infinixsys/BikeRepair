@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<!-- <?php include 'header.php'; ?> -->
+<div class="container-fluid">
+    <div class="row justify-content-end">
+        <!---<?php include 'sidemenu.php' ?>--->
+        <div class="col-lg-10 border">
+            <h4 class="text-center fw-bold mt-3">Add Banner</h4>
+            <hr>
+            <div class="row px-4">
+                <!-- <div class="col-md-5 p-3 border"> -->
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Banner Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter Banner Name" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Banner priority</label>
+                    <input type="number" class="form-control" id="name" placeholder="Enter sequence  number" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Upload Image</label>
+                    <input type="file" class="form-control" id="name" placeholder="Enter Category Name" aria-describedby="emailHelp">
+                </div>
+
+                <div class="col-md-6  d-grid gap-2 my-3">
+                    <button class="btn color d-grid gap-2">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    CKEDITOR.replace('editor');
+</script>
+
+{% endblock %}
