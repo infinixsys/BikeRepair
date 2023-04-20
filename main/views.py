@@ -263,12 +263,24 @@ class UserRetrieveUpdateAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class UserProfile(APIView):
-    def get(self, request):
-        serializer = UserProfileSerializer(self.request.user)
-        return Response(serializer.data)
-    # queryset = User.objects.all()
+# class UserProfile(APIView):
+#     def get(self, request):
+#         serializer = UserProfileSerializer(self.request.user)
+#         return Response(serializer.data)
+#     # queryset = User.objects.all()
     # serializer_class = UserProfileSerializer
+
+class UserProfile(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserProfileSerializer
+
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+
+        if pk == "current":
+            return self.request.user
+
+        return super().get_object()
 
 
 class UpdateProfileView(UpdateAPIView, ListAPIView):
