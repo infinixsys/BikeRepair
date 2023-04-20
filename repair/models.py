@@ -1,4 +1,6 @@
 import uuid
+from datetime import timezone
+
 from ckeditor.fields import RichTextField
 from django.db import models
 from main.models import User
@@ -148,3 +150,28 @@ class Mechanic(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+
+class Service(models.Model):
+    SERVICE_TYPES = (
+        ('one-time', 'One-Time'),
+        ('four-times', 'Four-Times'),
+    )
+    service_type = models.CharField(max_length=20, choices=SERVICE_TYPES)
+    date = models.DateField()
+    time = models.TimeField()
+    bike = models.ForeignKey(BookingDetails, on_delete=models.CASCADE)
+    expires = models.DateField(null=True, blank=True)
+    completed = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        if self.service_type == 'one-time':
+            self.expires = timezone.now() + timezone.timedelta(days=30)
+        elif self.service_type == 'four-times':
+            self.expires = timezone.now() + timezone.timedelta(days=365)
+        super().save(*args, **kwargs)
+
+    def remaining_services(self):
+        if self.service_type == 'four-times':
+            count = Service.objects.filter(bike=self.bike, service_type='four-times', completed=False).count()
+            return 4 - count
+        return None

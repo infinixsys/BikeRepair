@@ -1,11 +1,11 @@
-from rest_framework.generics import RetrieveAPIView, ListCreateAPIView
+from rest_framework.generics import RetrieveAPIView, ListCreateAPIView, UpdateAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from django.contrib.auth import get_user_model
 
 from main.serializers import RegisterSerializer, UserUpdateSerializer, UserSerializer, ProfileSerializer, \
-    UserProfileSerializer
+    UserProfileSerializer, UpdateUserSerializer
 from main.utils import otp_generator
 from knox.models import AuthToken
 from django.contrib.auth import login
@@ -270,3 +270,8 @@ class UserProfile(APIView):
     # queryset = User.objects.all()
     # serializer_class = UserProfileSerializer
 
+
+class UpdateProfileView(UpdateAPIView, ListAPIView):
+    queryset = User.objects.all()
+    # permission_classes = (IsAuthenticated,)
+    serializer_class = UpdateUserSerializer

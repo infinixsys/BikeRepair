@@ -59,3 +59,27 @@ class SupportSerializer(serializers.ModelSerializer):
         model = Support
         fields = "__all__"
 
+
+class ServiceSerializer(serializers.ModelSerializer):
+    bike = BookingDetailsSerializer()
+    expired = serializers.SerializerMethodField()
+    completed = serializers.SerializerMethodField()
+    message = serializers.SerializerMethodField()
+
+    def get_expired(self, obj):
+        return obj.expires and obj.expires < timezone.now()
+
+    def get_completed(self, obj):
+        if obj.service_type == 'one-time':
+            return obj.completed
+        return None
+
+    def get_message(self, obj):
+        if obj.service_type == 'four-times' and not obj.completed:
+            remaining = obj.remaining_services()
+            return f'{remaining} services remaining. Please book another service before the expiry date.'
+        return None
+
+    class Meta:
+        model = Service
+        fields = '__all__'

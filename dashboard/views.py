@@ -110,13 +110,12 @@ def mechanice(request):
 
 def booking_leads(request):
     plane = PlanUpdate.objects.all()
-
     return render(request, 'booking_leads.html', {'plane': plane})
 
 
-def booking_details(request, id):
-    plane = PlanUpdate.objects.get(id=id)
-    return render(request, 'booking-details.html', {'plane': plane})
+def booking_details(request):
+    # plane = PlanUpdate.objects.get(id=id)
+    return render(request, 'booking-details.html')
 
 
 def user_profile(request):
