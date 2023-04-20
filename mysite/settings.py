@@ -145,8 +145,8 @@ AUTH_USER_MODEL = 'main.User'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 
-PUBLIC_KEY = "**your razorpay key ID**"
-RAZOR_SECRET_KEY = "**your razorpay key secret**"
+PUBLIC_KEY = "rzp_test_TPT9JtYqBlDifL"
+RAZOR_SECRET_KEY = "LLL9UCA2zPzKd1NhxSS5aK1S"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
