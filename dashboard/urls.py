@@ -14,13 +14,16 @@ urlpatterns = [
     path('user/history/<int:id>', user_history, name='user_history'),
 
     path('account', account, name='account'),
-    path('bill/view', bill_view, name='bill_view'),
+    path('bill/create', create_bill, name='create_bill'),
+    path('bill/view', view_bill, name='view_bill'),
 
     path('banner', banner, name='banner'),
     path('add/banner', add_banner, name='add_banner'),
+    path('delete/banner/<int:pk>', delete_banner, name='delete_banner'),
 
     path('offer/banner', offer_banner, name='offer_banner'),
     path('add/offer/banner', add_offer_banner, name='add_offer_banner'),
+    path('delete/offer/banner/<int:pk>', delete_offer_banner, name="delete_offer_banner"),
 
     path('faq', faq, name='faq'),
     path('support', support, name='support'),

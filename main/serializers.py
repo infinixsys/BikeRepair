@@ -56,7 +56,7 @@ class UpdateUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("id",'phone', 'fname', 'lname', 'email', 'address')
+        fields = ("id", 'phone', 'fname', 'lname', 'email', 'address')
         # extra_kwargs = {
         #     'first_name': {'required': True},
         #     'last_name': {'required': True},

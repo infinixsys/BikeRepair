@@ -139,8 +139,12 @@ def account(request):
     return render(request, 'account.html')
 
 
-def bill_view(request):
-    return render(request, 'bill-view.html')
+def create_bill(request):
+    return render(request, 'create-bill.html')
+
+
+def view_bill(request):
+    return render(request, 'view-bill.html')
 
 
 def faq(request):
@@ -155,16 +159,48 @@ def faq(request):
 
 
 def banner(request):
-    return render(request, 'banner.html')
+    ban = AddBanner.objects.all()
+    return render(request, 'banner.html', {'ban': ban})
 
 
 def add_banner(request):
+    if request.method == "POST":
+        title = request.POST.get('title')
+        priority = request.POST.get('priority')
+        img = request.FILES['img']
+        data = AddBanner.objects.create(title=title, priority=priority, img=img)
+        data.save()
+        msg = "Your Banner Added Successfully !!"
+        return render(request, 'add-banner.html', {'msg': msg})
     return render(request, 'add-banner.html')
 
 
+def delete_banner(request, pk):
+    instance = AddBanner.objects.get(pk=pk)
+    instance.delete()
+    msg = "Your Images is Deleted !"
+    return render(request, 'banner.html', {'msg': msg})
+
+
 def offer_banner(reqeust):
-    return render(reqeust, 'offer-banner.html')
+    offban = AddOfferBanner.objects.all()
+    return render(reqeust, 'offer-banner.html', {'offban': offban})
 
 
-def add_offer_banner(reqeust):
-    return render(reqeust, 'add-offer-banner.html')
+def add_offer_banner(request):
+    if request.method == "POST":
+        title = request.POST.get('title')
+        priority = request.POST.get('priority')
+        img = request.FILES['img']
+        data = AddOfferBanner.objects.create(title=title, priority=priority, img=img)
+        data.save()
+        msg = "Your Banner Added Successfully !!"
+        return render(request, 'add-offer-banner.html', {'msg': msg})
+    return render(request, 'add-offer-banner.html')
+
+
+def delete_offer_banner(request, pk):
+    instance = AddOfferBanner.objects.get(pk=pk)
+    instance.delete()
+    msg = "Your Images is Deleted !"
+    return render(request, 'offer-banner.html', {'msg': msg})

@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<!-- <?php include 'header.php'; ?> -->
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 p-4">
+            <div class="row justify-content-center">
+                <div class="col-md-11">
+                    <div class="row bg-white" style="display: flex;justify-content:space-between">
+                        <div style="display: flex;justify-content:space-between">
+                            <div>
+                                <h2>Dr.Auto</h2>
+                                <img src="assets/img//drlogo.png" width="150px" alt="">
+                            </div>
+                            <div>
+                                <h4 style="color: #e5383b;">Invoice</h4>
+                                <div style="display:flex;">
+                                    <div>
+                                        <div><b>Date &nbsp;</b></div>
+                                        <div><b>Invoice #: &nbsp;</b></div>
+                                        <div><b>Customer ID:&nbsp;</b></div>
+                                        <div><b>Purchase Order&nbsp;</b></div>
+                                        <div><b>Payment Due by:&nbsp;</b></div>
+                                    </div>
+                                    <div>
+                                        <div style="border:1px solid black; padding-right:10px;padding-left:10px">&nbsp; Amit KUmar</div>
+                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; 8700282172</div>
+                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; 12</div>
+                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; 12/12/2023</div>
+                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; 12</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <div style="display: flex;justify-content:space-between">
+                            <div>
+                                <div style="width:100%;background-color:#e5383b;padding-left:10px;font-weight:bold;color:white;margin-top:1rem">Bill To :</div>
+                                <div style="display:flex;">
+                                    <div>
+                                        <div><b> [Name] &nbsp;</b></div>
+                                        <div><b>[Company Name] &nbsp;</b></div>
+                                        <div><b>[Street Address]&nbsp;</b></div>
+                                        <div><b>[City. ST Zip Code]&nbsp;</b></div>
+                                        <div><b>[Phone]&nbsp;</b></div>
+                                    </div>
+                                    <div>
+                                        <div>Amit KUmar</div>
+                                        <div>8700282172</div>
+                                        <div>12</div>
+                                        <div>12/12/2023</div>
+                                        <div>12</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="width:100%;background-color:#e5383b;padding-left:10px;font-weight:bold;color:white;margin-top:1rem;margin-bottom:.5rem">Ship To :</div>
+                                <div style="display:flex;">
+                                    <div>
+                                        <div><b>[Name] &nbsp;</b></div>
+                                        <div><b>[Company Name] &nbsp;</b></div>
+                                        <div><b>[Street Address] &nbsp;</b></div>
+                                        <div><b>[City.ST Zip Code]&nbsp;</b></div>
+                                        <div><b>[Phone]&nbsp;</b></div>
+                                    </div>
+                                    <div>
+                                        <div> &nbsp; Amit KUmar</div>
+                                        <div>&nbsp; 8700282172</div>
+                                        <div>&nbsp; 12</div>
+                                        <div>&nbsp; 12/12/2023</div>
+                                        <div>&nbsp; 12</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -->
+                    </div>
+                </div>
+
+            </div>
+            <div class="row justify-content-center" style="margin-top:.5rem;">
+                <div class="col-md-11">
+                    <table class="table table-striped border">
+                        <thead>
+                            <tr class="">
+                                <th scope="col">Salesperson</th>
+                                <th scope="col">Shipping Method</th>
+                                <th scope="col">Shipping Terms</th>
+                                <th scope="col">Payment Terms </th>
+                                <th scope="col">Due Date</th>
+                                <th scope="col">Delivery Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr>
+                                </div>
+                <d class="col-md-11">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr class="">
+                                <th scope="col">Item#</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Qty</th>
+                                <th scope="col">Unit Price</th>
+                                <th scope="col">Line Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>oil change</td>
+                                <td>1</td>
+                                <td>units</td>
+                                <td>1500 Rs.</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>oil change</td>
+                                <td>1</td>
+                                <td>units</td>
+                                <td>1500 Rs.</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>oil change</td>
+                                <td>1</td>
+                                <td>units</td>
+                                <td>1500 Rs.</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>oil change</td>
+                                <td>1</td>
+                                <td>units</td>
+                                <td>1500 Rs.</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>oil change</td>
+                                <td>1</td>
+                                <td>units</td>
+                                <td>1500 Rs.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr>
+                    <!--  -->
+                    <div style="display: flex;justify-content:space-between">
+                            <div style="width:70%;border-bottom:1px solid black">
+                              <div style="padding:5px;background-color:#e5383b;color:white;font-weight:bold">
+                              special Notes And instructions
+                            </div>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore, impedit.
+
+                            </p>
+                            </div>
+                            <div>
+                            <h5 class="text-secondary">Payable Amount</h5>
+
+                                <div style="display:flex;">
+                                    <div>
+                                        <div><b>TOTAL SERVICE &nbsp;</b></div>
+                                        <!-- <div><b>TOTAL PARTS &nbsp;</b></div> -->
+                                        <div><b>TAX :-&nbsp;</b></div>
+                                        <div><b>IGST&nbsp;</b></div>
+                                        <div><b>SGST:&nbsp;</b></div>
+                                        <div><b>CGST:&nbsp;</b></div>
+                                        <div><b>TOTAL:&nbsp;</b></div>
+                                    </div>
+                                    <div>
+                                        <div style="border:1px solid black; padding-right:10px;padding-left:10px">&nbsp;1000</div>
+                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp;1000</div>
+                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp;1000</div>
+                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp;1000</div>
+                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp;1000</div>
+                                        <div style="padding-right:10px;padding-left:10px;font-weight:bold">&nbsp;1000</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <hr>
+                    <div class="text-center">Make All Check payable to <br> <span style="font-weight:bold;"> Business name Thankyou for your Business</span></div>
+                    <hr>
+                    <address class="text-center">address</address>
+                    <button class="btn btn-success" id="printButton">Print Bill</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let printButton = document.getElementById('printButton');
+    printButton.addEventListener('click', () => {
+        printButton.setAttribute('style', 'display:none')
+        setTimeout(() => {
+            window.print()
+        }, "1000")
+    })
+</script>
+
+
+{% endblock %}
