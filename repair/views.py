@@ -5,12 +5,12 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import AboutUs, Services, PlanName, Notification, Order, ClientReview, BookingDetails, Support
+from .models import AboutUs, Services, PlanName, Notification, Order, ClientReview, BookingDetails, Support, Service
 from .serializers import AboutUsSerializer, ServiceSerializer, PlanNameSerializer, \
     NotificationSerializer, OrderSerializer, ClientReviewSerializer, BookingDetailsSerializer, PlanUpdateSerializer, \
     SupportSerializer
 from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView, \
-    RetrieveDestroyAPIView, RetrieveUpdateAPIView
+    RetrieveDestroyAPIView, RetrieveUpdateAPIView, RetrieveUpdateDestroyAPIView
 from django.conf import settings
 from repair.models import PlanUpdate
 
@@ -133,3 +133,24 @@ class PlanUpdateAPIView(ListCreateAPIView):
 class SuppportAPIView(ListCreateAPIView):
     queryset = Support.objects.all()
     serializer_class = SupportSerializer
+
+
+class ServiceList(ListCreateAPIView):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+
+    def perform_create(self, serializer):
+        if serializer.validated_data.get('service_type') == 'one-time':
+            serializer.save(completed=False)
+        else:
+            serializer.save()
+
+
+class ServiceDetail(RetrieveUpdateDestroyAPIView):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+
+    def perform_update(self, serializer):
+        if serializer.validated_data.get('completed') and serializer.validated_data['service_type'] == 'one-time':
+            serializer.validated_data['expires'] = None
+        serializer.save()

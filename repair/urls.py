@@ -17,4 +17,7 @@ urlpatterns = [
 
     path('api/support/', SuppportAPIView.as_view(), name='SuppportAPIView'),
     path('api/update/delete/booking/bikes/<int:pk>', BookingDeleteUpdateAPI.as_view(), name='BookingDeleteUpdateAPI'),
+
+    path('api/service/details/list/', ServiceList.as_view(), name='ServiceList'),
+    path('api/service/details/<int:pk>', ServiceDetail.as_view(), name='ServiceDetail')
 ]
