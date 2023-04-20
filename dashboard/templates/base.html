@@ -24,14 +24,14 @@
 <body>
 
 <div class="col-lg-2 d-flex flex-column flex-shrink-0 p-3 bg-light displayfixed">
-   <a href="index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+   <a href="{% url 'adminpanel' %}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
       <img src="assets/img//drlogo.png" width="120px" alt="">
 
    </a>
    <hr>
    <ul class="nav nav-pills flex-column mb-auto">
       <li>
-         <a href="index.php" class="nav-link color">
+         <a href="{% url 'adminpanel' %}" class="nav-link color">
             <i class="bi bi-speedometer2 text-white"></i>
             Dashboard
          </a>

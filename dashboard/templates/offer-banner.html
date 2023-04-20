@@ -33,16 +33,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                {% for i in offban %}
                     <tr>
-                        <th scope="row" class="table-secondary">1</th>
-                        <td class="table-success">banner name</td>
-                        <td class="table-success">1</td>
-                        <td class="table-primary"><img src="" alt="img name"></td>
+                        <th scope="row" class="table-secondary">{{ i.id }}</th>
+                        <td class="table-success">{{ i.title }}</td>
+                        <td class="table-success">{{ i.priority }}</td>
+                        <td class="table-primary"><img style="width:50px; height:50px;" src="{{ i.img.url }}" alt="img name"></td>
                         <td class="table-warning">
-                            <i class="bi bi-pencil-square fs-4 text-warning"></i>
-                            <i class="bi bi-archive text-danger fs-4"></i>
+                            <a href="{% url 'delete_offer_banner' i.pk %}"> <i class="bi bi-archive text-danger fs-4"></i></a>
                         </td>
                     </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>

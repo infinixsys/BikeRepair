@@ -12,7 +12,7 @@
             </div>
             <div class="row">
             <div class="col-md-8 mb-3">
-                    <a href="createbill.php"><button class="btn btn-success"> <i class="bi bi-plus text-white"></i> Create Bill </button></a>
+                    <a href="{% url 'create_bill' %}"><button class="btn btn-success"> <i class="bi bi-plus text-white"></i> Create Bill </button></a>
                 </div>
                 <div class="col-md-4">
                     <div class="input-group mb-3">
@@ -42,7 +42,7 @@
                         <td class="table-success">23246</td>
                         <td class="table-success">1000rs.</td>
                         <td class="table-warning">
-                           <a href="{% url 'bill_view' %}"><i class="bi bi-eye fs-4 text-success"></i></a>
+                           <a href="{% url 'view_bill' %}"><i class="bi bi-eye fs-4 text-success"></i></a>
                             <i class="bi bi-archive text-danger fs-4"></i>
                         </td>
                     </tr>
