@@ -1,12 +1,17 @@
+import datetime
 import uuid
 from datetime import timezone
 
 from ckeditor.fields import RichTextField
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+
 from main.models import User
 
-
 # Create your models here.
+
+today = datetime.datetime.today()
 
 
 class AboutUs(models.Model):
@@ -84,18 +89,6 @@ class BookingDetails(models.Model):
         return self.model
 
 
-class Order(models.Model):
-    plane_name = models.ForeignKey(PlanName, on_delete=models.CASCADE, blank=True, null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    order_amount = models.CharField(max_length=25)
-    order_payment_id = models.CharField(max_length=100)
-    isPaid = models.BooleanField(default=False)
-    order_date = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.plane_name.title
-
-
 class ClientReview(models.Model):
     STATUS = (
         ('approved', 'approved'),
@@ -151,27 +144,52 @@ class Mechanic(models.Model):
     update_at = models.DateTimeField(auto_now=True)
 
 
+class Order(models.Model):
+    plane_name = models.ForeignKey(PlanName, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    order_amount = models.CharField(max_length=25)
+    order_payment_id = models.CharField(max_length=100)
+    isPaid = models.BooleanField(default=False)
+    order_date = models.DateTimeField(auto_now=True)
+    expiry_date = models.DateTimeField(blank=True, null=True)
+
+
+@receiver(pre_save, sender=Order)
+def update_active(sender, instance, *args, **kwargs):
+    if instance.expiry_date == today:
+        instance.isPaid = False
+    else:
+        instance.paid = True
+
+    def __str__(self):
+        return self.order_amount
+
+
 class Service(models.Model):
-    SERVICE_TYPES = (
-        ('one-time', 'One-Time'),
-        ('four-times', 'Four-Times'),
+    STATUS = (
+        ('onetime', 'onetime'),
+        ('yearly', 'yearly'),
+        ('monthly', 'monthly'),
     )
-    service_type = models.CharField(max_length=20, choices=SERVICE_TYPES)
-    date = models.DateField()
-    time = models.TimeField()
-    bike = models.ForeignKey(BookingDetails, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    service_type = models.CharField(max_length=20, choices=STATUS)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True)
+    date = models.DateField(blank=True, null=True)
+    time = models.TimeField(blank=True, null=True)
+    bike = models.ForeignKey(BookingDetails, on_delete=models.CASCADE, blank=True, null=True)
     expires = models.DateField(null=True, blank=True)
     completed = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
-        if self.service_type == 'one-time':
+        if self.service_type == 'onetime':
             self.expires = timezone.now() + timezone.timedelta(days=30)
-        elif self.service_type == 'four-times':
+        elif self.service_type == 'yearly':
             self.expires = timezone.now() + timezone.timedelta(days=365)
+
         super().save(*args, **kwargs)
 
-    def remaining_services(self):
-        if self.service_type == 'four-times':
-            count = Service.objects.filter(bike=self.bike, service_type='four-times', completed=False).count()
+    def remaining_services(self, *args, **kwargs):
+        if self.service_type == 'yearly':
+            count = Service.objects.filter(bike=self.bike, service_type='yearly', completed=False).count()
             return 4 - count
         return None
