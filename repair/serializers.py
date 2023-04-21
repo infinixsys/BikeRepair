@@ -33,15 +33,6 @@ class BookingDetailsSerializer(serializers.ModelSerializer):
                   "owner_name", "pin_code", "location", "Vehicle_issues", "brand")
 
 
-class OrderSerializer(serializers.ModelSerializer):
-    order_date = serializers.DateTimeField(format="%d %B %Y %I:%M %p")
-
-    class Meta:
-        model = Order
-        fields = '__all__'
-        depth = 2
-
-
 class ClientReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClientReview
@@ -60,26 +51,16 @@ class SupportSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ServiceSerializer(serializers.ModelSerializer):
-    bike = BookingDetailsSerializer()
-    expired = serializers.SerializerMethodField()
-    completed = serializers.SerializerMethodField()
-    message = serializers.SerializerMethodField()
+class OrderSerializer(serializers.ModelSerializer):
+    order_date = serializers.DateTimeField(format="%d %B %Y %I:%M %p")
 
-    def get_expired(self, obj):
-        return obj.expires and obj.expires < timezone.now()
+    class Meta:
+        model = Order
+        fields = '__all__'
+        depth = 2
 
-    def get_completed(self, obj):
-        if obj.service_type == 'one-time':
-            return obj.completed
-        return None
 
-    def get_message(self, obj):
-        if obj.service_type == 'four-times' and not obj.completed:
-            remaining = obj.remaining_services()
-            return f'{remaining} services remaining. Please book another service before the expiry date.'
-        return None
-
+class ServiceDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
         fields = '__all__'

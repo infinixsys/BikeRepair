@@ -8,7 +8,7 @@ urlpatterns = [
     path('api/notification/list/', NotificationListAPI.as_view(), name='notification'),
     path('api/add/booking/details/', BookingDetailsAPIView.as_view(), name='add_vehicle'),
 
-    path('pay/', start_payment, name="payment"),
+    path('pay/<int:pk>', start_payment, name="payment"),
     path('payment/success/', handle_payment_success, name="payment_success"),
 
     path('order/details/', OrderAPIView.as_view(), name='OrderAPIView'),

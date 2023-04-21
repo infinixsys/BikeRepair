@@ -1,19 +1,22 @@
 import json
-
 import razorpay
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from main.models import User
 from .models import AboutUs, Services, PlanName, Notification, Order, ClientReview, BookingDetails, Support, Service
 from .serializers import AboutUsSerializer, ServiceSerializer, PlanNameSerializer, \
     NotificationSerializer, OrderSerializer, ClientReviewSerializer, BookingDetailsSerializer, PlanUpdateSerializer, \
-    SupportSerializer
+    SupportSerializer, ServiceDataSerializer
 from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView, \
-    RetrieveDestroyAPIView, RetrieveUpdateAPIView, RetrieveUpdateDestroyAPIView
+    RetrieveDestroyAPIView, RetrieveUpdateAPIView, RetrieveUpdateDestroyAPIView, get_object_or_404
 from django.conf import settings
 from repair.models import PlanUpdate
 
+from datetime import datetime, timedelta
 
 # Create your views here.
 
@@ -48,10 +51,12 @@ class BookingDeleteUpdateAPI(RetrieveDestroyAPIView, RetrieveUpdateAPIView):
     serializer_class = BookingDetailsSerializer
 
 
+# @login_required
 @api_view(['POST'])
-def start_payment(request):
-    amount = request.data['amount']
-    plane_name = request.data['plane_name']
+def start_payment(request, pk):
+    plane_name = get_object_or_404(PlanName, pk=pk)
+    user = request.user
+    amount = plane_name.pricing
 
     client = razorpay.Client(auth=(settings.PUBLIC_KEY, settings.RAZOR_SECRET_KEY))
 
@@ -59,17 +64,45 @@ def start_payment(request):
                                    "currency": "INR",
                                    "payment_capture": "1"})
 
-    order = Order.objects.create(plane_name=plane_name,
-                                 order_amount=amount,
-                                 order_payment_id=payment['id'])
+    if plane_name.types == 'monthly':
+        expiry_date = datetime.now() + timedelta(days=30)
+        order = Order.objects.create(plane_name=plane_name, user=user,
+                                     order_amount=amount, expiry_date=expiry_date,
+                                     order_payment_id=payment['id'])
+        serializer = OrderSerializer(order)
+        data = {
+            "payment": payment,
+            "order": serializer.data,
+        }
+        return Response(data)
 
-    serializer = OrderSerializer(order)
+    if plane_name.types == 'onetime':
+        expiry_date = datetime.now() + timedelta(days=30)
 
-    data = {
-        "payment": payment,
-        "order": serializer.data
-    }
-    return Response(data)
+        order = Order.objects.create(plane_name=plane_name,  user=user,
+                                     order_amount=amount, expiry_date=expiry_date,
+                                     order_payment_id=payment['id'])
+        serializer = OrderSerializer(order)
+        data = {
+            "payment": payment,
+            "order": serializer.data,
+        }
+        return Response(data)
+
+    elif plane_name.types == 'yearly':
+        expiry_date = datetime.now() + timedelta(days=365)
+
+        order = Order.objects.create(plane_name=plane_name, user=user,
+                                     order_amount=amount, expiry_date=expiry_date,
+                                     order_payment_id=payment['id'])
+
+        serializer = OrderSerializer(order)
+        data = {
+            "payment": payment,
+            "order": serializer.data,
+        }
+        return Response(data)
+    return Response({"status": False}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
