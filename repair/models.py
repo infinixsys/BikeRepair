@@ -166,13 +166,7 @@ def update_active(sender, instance, *args, **kwargs):
 
 
 class Service(models.Model):
-    STATUS = (
-        ('onetime', 'onetime'),
-        ('yearly', 'yearly'),
-        ('monthly', 'monthly'),
-    )
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    service_type = models.CharField(max_length=20, choices=STATUS)
     order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True)
     date = models.DateField(blank=True, null=True)
     time = models.TimeField(blank=True, null=True)

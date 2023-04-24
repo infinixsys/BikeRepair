@@ -168,22 +168,25 @@ class SuppportAPIView(ListCreateAPIView):
     serializer_class = SupportSerializer
 
 
-class ServiceList(ListCreateAPIView):
-    queryset = Service.objects.all()
-    serializer_class = ServiceSerializer
-
-    def perform_create(self, serializer):
-        if serializer.validated_data.get('service_type') == 'one-time':
-            serializer.save(completed=False)
-        else:
-            serializer.save()
 
 
-class ServiceDetail(RetrieveUpdateDestroyAPIView):
-    queryset = Service.objects.all()
-    serializer_class = ServiceSerializer
 
-    def perform_update(self, serializer):
-        if serializer.validated_data.get('completed') and serializer.validated_data['service_type'] == 'one-time':
-            serializer.validated_data['expires'] = None
-        serializer.save()
+# class ServiceList(ListCreateAPIView):
+#     queryset = Service.objects.all()
+#     serializer_class = ServiceSerializer
+#
+#     def perform_create(self, serializer):
+#         if serializer.validated_data.get('service_type') == 'one-time':
+#             serializer.save(completed=False)
+#         else:
+#             serializer.save()
+#
+#
+# class ServiceDetail(RetrieveUpdateDestroyAPIView):
+#     queryset = Service.objects.all()
+#     serializer_class = ServiceSerializer
+#
+#     def perform_update(self, serializer):
+#         if serializer.validated_data.get('completed') and serializer.validated_data['service_type'] == 'one-time':
+#             serializer.validated_data['expires'] = None
+#         serializer.save()
