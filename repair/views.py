@@ -108,19 +108,25 @@ def start_payment(request, pk):
 @api_view(['POST'])
 def handle_payment_success(request):
     # request.data is coming from frontend
-    res = json.loads(request.data["response"])
+    # print("response", " ===========================")
+    # res = json.loads(request.data["response"])
+    # print(res, "======================")
+    # ord_id = ""
+    # raz_pay_id = ""
+    # raz_signature = ""
+    #
+    # for key in res.keys():
+    #     if key == 'razorpay_order_id':
+    #         ord_id = res[key]
+    #     elif key == 'razorpay_payment_id':
+    #         raz_pay_id = res[key]
+    #     elif key == 'razorpay_signature':
+    #         raz_signature = res[key]
 
-    ord_id = ""
-    raz_pay_id = ""
-    raz_signature = ""
-
-    for key in res.keys():
-        if key == 'razorpay_order_id':
-            ord_id = res[key]
-        elif key == 'razorpay_payment_id':
-            raz_pay_id = res[key]
-        elif key == 'razorpay_signature':
-            raz_signature = res[key]
+    # if request.method == 'POST':
+    ord_id = request.data["razorpay_order_id"]
+    raz_pay_id = request.data["razorpay_payment_id"]
+    raz_signature = request.data["razorpay_signature"]
 
     order = Order.objects.get(order_payment_id=ord_id)
 
@@ -129,7 +135,6 @@ def handle_payment_success(request):
         'razorpay_payment_id': raz_pay_id,
         'razorpay_signature': raz_signature
     }
-
     client = razorpay.Client(auth=(settings.PUBLIC_KEY, settings.RAZOR_SECRET_KEY))
 
     check = client.utility.verify_payment_signature(data)

@@ -13,7 +13,11 @@ User = get_user_model()
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
+<<<<<<< HEAD
         fields = ["id", "fname", "phone", "email", "address", "image"]
+=======
+        fields = ["id", "fname", "phone", "email", "address"]
+>>>>>>> 1c3d9e14c5cff89632adf52911c18296eaf27921
         extra_kwargs = {
             "id": {"read_only": True},
             # "fname": {"required": True},
@@ -48,7 +52,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ("id", 'phone', "fname", "image", "email", "address", "verified")
+        fields = ("id", 'phone', "fname", "email", "address", "verified")
 
 
 class UpdateUserSerializer(serializers.ModelSerializer):

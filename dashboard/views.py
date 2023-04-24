@@ -1,6 +1,6 @@
 from unicodedata import decimal
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from main.models import *
@@ -9,6 +9,27 @@ from .models import *
 
 
 # Create your views here.
+
+def login_attempt(request):
+#    if not request.user.is_superuser:
+#        return redirect('login_attempt')
+    if request.method == 'POST':
+        phone = request.POST.get('phone')
+        password = request.POST.get('password')
+        user = authenticate(request, phone=phone, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('adminpanel')
+        else:
+            msg = "Invalid Credential please check phone no. or password !!"
+            return render(request, 'login_attempt.html', {'msg':msg})
+    return render(request, 'login_attempt.html')
+
+def logout_view(request):
+    logout(request)
+    return render(request, 'login_attempt.html')
+
+
 def adminpanel(request):
     if not request.user.is_superuser:
         return redirect('login_attempt')
@@ -249,17 +270,4 @@ def delete_offer_banner(request, pk):
     return render(request, 'offer-banner.html', {'msg': msg})
 
 
-def login_attempt(request):
-    if not request.user.is_superuser:
-        return redirect('login_attempt')
-    if request.method == 'POST':
-        phone = request.POST.get('phone')
-        password = request.POST.get('password')
-        user = authenticate(request, phone=phone, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('adminpanel')
-        else:
-            msg = "Invalid Credential please check phone no. or password !!"
-            return render(request, 'login_attempt.html', {'msg':msg})
-    return render(request, 'login_attempt.html')
+
