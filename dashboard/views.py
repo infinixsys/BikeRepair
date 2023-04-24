@@ -1,6 +1,6 @@
 from unicodedata import decimal
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from main.models import *
@@ -23,6 +23,10 @@ def login_attempt(request):
         else:
             msg = "Invalid Credential please check phone no. or password !!"
             return render(request, 'login_attempt.html', {'msg':msg})
+    return render(request, 'login_attempt.html')
+
+def logout_view(request):
+    logout(request)
     return render(request, 'login_attempt.html')
 
 
