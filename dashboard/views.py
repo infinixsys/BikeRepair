@@ -11,8 +11,8 @@ from .models import *
 # Create your views here.
 
 def login_attempt(request):
-    if not request.user.is_superuser:
-        return redirect('login_attempt')
+#    if not request.user.is_superuser:
+#        return redirect('login_attempt')
     if request.method == 'POST':
         phone = request.POST.get('phone')
         password = request.POST.get('password')
