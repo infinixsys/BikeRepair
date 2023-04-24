@@ -27,7 +27,7 @@ def login_attempt(request):
 
 def logout_view(request):
     logout(request)
-    return render(request, 'login_attempt.html')
+    return redirect('login_attempt')
 
 
 def adminpanel(request):

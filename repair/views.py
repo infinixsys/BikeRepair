@@ -79,7 +79,7 @@ def start_payment(request, pk):
     if plane_name.types == 'onetime':
         expiry_date = datetime.now() + timedelta(days=30)
 
-        order = Order.objects.create(plane_name=plane_name,  user=user,
+        order = Order.objects.create(plane_name=plane_name, user=user,
                                      order_amount=amount, expiry_date=expiry_date,
                                      order_payment_id=payment['id'])
         serializer = OrderSerializer(order)
