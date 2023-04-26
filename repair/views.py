@@ -55,7 +55,7 @@ class BookingDeleteUpdateAPI(RetrieveDestroyAPIView, RetrieveUpdateAPIView):
 @api_view(['POST'])
 def start_payment(request, pk):
     plane_name = get_object_or_404(PlanName, pk=pk)
-    user = request.user
+#    user = request.user
     amount = plane_name.pricing
 
     client = razorpay.Client(auth=(settings.PUBLIC_KEY, settings.RAZOR_SECRET_KEY))
@@ -66,7 +66,7 @@ def start_payment(request, pk):
 
     if plane_name.types == 'monthly':
         expiry_date = datetime.now() + timedelta(days=30)
-        order = Order.objects.create(plane_name=plane_name, user=user,
+        order = Order.objects.create(plane_name=plane_name, 
                                      order_amount=amount, expiry_date=expiry_date,
                                      order_payment_id=payment['id'])
         serializer = OrderSerializer(order)
@@ -79,7 +79,7 @@ def start_payment(request, pk):
     if plane_name.types == 'onetime':
         expiry_date = datetime.now() + timedelta(days=30)
 
-        order = Order.objects.create(plane_name=plane_name, user=user,
+        order = Order.objects.create(plane_name=plane_name,
                                      order_amount=amount, expiry_date=expiry_date,
                                      order_payment_id=payment['id'])
         serializer = OrderSerializer(order)
@@ -92,7 +92,7 @@ def start_payment(request, pk):
     elif plane_name.types == 'yearly':
         expiry_date = datetime.now() + timedelta(days=365)
 
-        order = Order.objects.create(plane_name=plane_name, user=user,
+        order = Order.objects.create(plane_name=plane_name, 
                                      order_amount=amount, expiry_date=expiry_date,
                                      order_payment_id=payment['id'])
 
