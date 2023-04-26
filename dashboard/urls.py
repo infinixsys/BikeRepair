@@ -28,9 +28,11 @@ urlpatterns = [
     path('add/offer/banner', add_offer_banner, name='add_offer_banner'),
     path('delete/offer/banner/<int:pk>', delete_offer_banner, name="delete_offer_banner"),
 
+    path('mechanice', mechanice, name='mechanice'),
+    path('mechanic/list', mechanic_list, name='mechanic_list'),
+
     path('faq', faq, name='faq'),
     path('support', support, name='support'),
-    path('mechanice', mechanice, name='mechanice'),
     path('review', review, name='review'),
 
 ]

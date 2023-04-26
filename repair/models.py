@@ -140,6 +140,11 @@ class Mechanic(models.Model):
     experiance = models.CharField(max_length=200, blank=True, null=True)
     number = models.CharField(max_length=200, blank=True, null=True)
     img = models.ImageField(upload_to="mechanic/", blank=True, null=True)
+    aadhar = models.IntegerField(blank=True, null=True)
+    upload_aadhar = models.FileField(upload_to="aadhar/", blank=True, null=True)
+    resume = models.FileField(upload_to="resume/", blank=True, null=True)
+    qualifications = models.CharField(max_length=200, blank=True, null=True)
+    skills = models.CharField(max_length=200, blank=True, null=True)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 

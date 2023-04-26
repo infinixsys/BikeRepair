@@ -11,8 +11,8 @@ from .models import *
 # Create your views here.
 
 def login_attempt(request):
-#    if not request.user.is_superuser:
-#        return redirect('login_attempt')
+    #    if not request.user.is_superuser:
+    #        return redirect('login_attempt')
     if request.method == 'POST':
         phone = request.POST.get('phone')
         password = request.POST.get('password')
@@ -22,8 +22,9 @@ def login_attempt(request):
             return redirect('adminpanel')
         else:
             msg = "Invalid Credential please check phone no. or password !!"
-            return render(request, 'login_attempt.html', {'msg':msg})
+            return render(request, 'login_attempt.html', {'msg': msg})
     return render(request, 'login_attempt.html')
+
 
 def logout_view(request):
     logout(request)
@@ -123,6 +124,11 @@ def review(request):
     return render(request, 'review.html', {'rev': rev})
 
 
+def mechanic_list(request):
+    ml = Mechanic.objects.all()
+    return render(request, 'mechanic_list.html', {'ml': ml})
+
+
 def mechanice(request):
     if not request.user.is_superuser:
         return redirect('login_attempt')
@@ -133,8 +139,16 @@ def mechanice(request):
         price = request.POST.get('price')
         experiance = request.POST.get('experiance')
         number = request.POST.get('number')
-        img = request.POST.get('img')
+        img = request.FILES['img']
+        aadhar = request.POST.get('aadhar')
+        upload_aadhar = request.FILES['upload_aadhar']
+        resume = request.FILES['resume']
+        qualifications = request.POST.get('qualifications')
+        skills = request.POST.get('skills')
+
         data = Mechanic.objects.create(name=name, profile=profile, email=email, price=price, experiance=experiance,
+                                       aadhar=aadhar, upload_aadhar=upload_aadhar, resume=resume, qualifications=qualifications,
+                                       skills=skills,
                                        number=number, img=img)
         data.save()
         msg = "Your Detail Has Been Submitted !!"
@@ -240,11 +254,11 @@ def delete_banner(request, pk):
     return render(request, 'banner.html', {'msg': msg})
 
 
-def offer_banner(reqeust):
+def offer_banner(request):
     if not request.user.is_superuser:
         return redirect('login_attempt')
     offban = AddOfferBanner.objects.all()
-    return render(reqeust, 'offer-banner.html', {'offban': offban})
+    return render(request, 'offer-banner.html', {'offban': offban})
 
 
 def add_offer_banner(request):
@@ -268,6 +282,3 @@ def delete_offer_banner(request, pk):
     instance.delete()
     msg = "Your Images is Deleted !"
     return render(request, 'offer-banner.html', {'msg': msg})
-
-
-
