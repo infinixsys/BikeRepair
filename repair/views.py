@@ -212,7 +212,7 @@ class ServiceAPIView(APIView):
         try:
             user = request.user
             order_id = request.data['order_id']
-            order = Service.objects.get(id=order_id)
+            order = Order.objects.get(id=order_id)
             booking_id = request.data['booking_id']
             booking = BookingDetails.objects.get(id=booking_id)
             if user != booking.user:
@@ -229,7 +229,8 @@ class ServiceAPIView(APIView):
                     data.save()
                     return Response({'success': "First Time Are Completed!"}, status=status.HTTP_200_OK)
             else:
-                return Response({"error":"First completed your Payment", "order_id":order.isPaid}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"error": "First completed your Payment", "order_id": order.isPaid},
+                                status=status.HTTP_400_BAD_REQUEST)
 
         except Exception as E:
-            return Response({"Error":"Something Went Wrong! Please Login"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"Error": "Something Went Wrong! Please Login"}, status=status.HTTP_400_BAD_REQUEST)
