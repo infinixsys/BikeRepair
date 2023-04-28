@@ -18,6 +18,7 @@ from repair.models import PlanUpdate
 
 from datetime import datetime, timedelta
 
+
 # Create your views here.
 
 
@@ -78,6 +79,7 @@ def start_payment(request, pk):
 
     if plane_name.types == 'onetime':
         expiry_date = datetime.now() + timedelta(days=30)
+
 
         order = Order.objects.create(plane_name=plane_name,
                                      order_amount=amount, expiry_date=expiry_date,
@@ -171,10 +173,6 @@ class PlanUpdateAPIView(ListCreateAPIView):
 class SuppportAPIView(ListCreateAPIView):
     queryset = Support.objects.all()
     serializer_class = SupportSerializer
-
-
-
-
 
 # class ServiceList(ListCreateAPIView):
 #     queryset = Service.objects.all()
