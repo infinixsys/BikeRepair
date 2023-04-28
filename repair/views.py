@@ -57,7 +57,7 @@ class BookingDeleteUpdateAPI(RetrieveDestroyAPIView, RetrieveUpdateAPIView):
 @api_view(['POST'])
 def start_payment(request, pk):
     plane_name = get_object_or_404(PlanName, pk=pk)
-#    user = request.user
+    user = request.user
     amount = plane_name.pricing
 
     client = razorpay.Client(auth=(settings.PUBLIC_KEY, settings.RAZOR_SECRET_KEY))
@@ -80,7 +80,6 @@ def start_payment(request, pk):
 
     if plane_name.types == 'onetime':
         expiry_date = datetime.now() + timedelta(days=30)
-
 
         order = Order.objects.create(plane_name=plane_name, user=user, service_types='onetime',
                                      order_amount=amount, expiry_date=expiry_date, count=1,
