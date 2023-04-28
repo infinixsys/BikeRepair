@@ -68,13 +68,8 @@ def start_payment(request, pk):
 
     if plane_name.types == 'monthly':
         expiry_date = datetime.now() + timedelta(days=30)
-<<<<<<< HEAD
-        order = Order.objects.create(plane_name=plane_name, 
-                                     order_amount=amount, expiry_date=expiry_date,
-=======
         order = Order.objects.create(plane_name=plane_name, user=user, service_types='monthly',
                                      order_amount=amount, expiry_date=expiry_date, count=1,
->>>>>>> 8186b8539befa1dac56aff971e3fff203386d3ab
                                      order_payment_id=payment['id'])
         serializer = OrderSerializer(order)
         data = {
@@ -86,14 +81,9 @@ def start_payment(request, pk):
     if plane_name.types == 'onetime':
         expiry_date = datetime.now() + timedelta(days=30)
 
-<<<<<<< HEAD
 
-        order = Order.objects.create(plane_name=plane_name,
-                                     order_amount=amount, expiry_date=expiry_date,
-=======
         order = Order.objects.create(plane_name=plane_name, user=user, service_types='onetime',
                                      order_amount=amount, expiry_date=expiry_date, count=1,
->>>>>>> 8186b8539befa1dac56aff971e3fff203386d3ab
                                      order_payment_id=payment['id'])
         serializer = OrderSerializer(order)
         data = {
@@ -105,13 +95,8 @@ def start_payment(request, pk):
     elif plane_name.types == 'yearly':
         expiry_date = datetime.now() + timedelta(days=365)
 
-<<<<<<< HEAD
-        order = Order.objects.create(plane_name=plane_name, 
-                                     order_amount=amount, expiry_date=expiry_date,
-=======
         order = Order.objects.create(plane_name=plane_name, user=user, service_types='yearly',
                                      order_amount=amount, expiry_date=expiry_date, count=4,
->>>>>>> 8186b8539befa1dac56aff971e3fff203386d3ab
                                      order_payment_id=payment['id'])
 
         serializer = OrderSerializer(order)
