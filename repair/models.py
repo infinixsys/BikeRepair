@@ -150,10 +150,17 @@ class Mechanic(models.Model):
 
 
 class Order(models.Model):
+    STATUS = (
+        ('onetime', 'onetime'),
+        ('yearly', 'yearly'),
+        ('monthly', 'monthly'),
+    )
     plane_name = models.ForeignKey(PlanName, on_delete=models.CASCADE, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     order_amount = models.CharField(max_length=25)
     order_payment_id = models.CharField(max_length=100)
+    service_types = models.CharField(max_length=200, blank=True, null=True, choices=STATUS)
+    count = models.IntegerField(blank=True, null=True)
     isPaid = models.BooleanField(default=False)
     order_date = models.DateTimeField(auto_now=True)
     expiry_date = models.DateTimeField(blank=True, null=True)
@@ -173,22 +180,19 @@ def update_active(sender, instance, *args, **kwargs):
 class Service(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
-    time = models.TimeField(blank=True, null=True)
+    date = models.DateTimeField(blank=True, null=True)
     bike = models.ForeignKey(BookingDetails, on_delete=models.CASCADE, blank=True, null=True)
-    expires = models.DateField(null=True, blank=True)
-    completed = models.BooleanField(default=False)
-
-    def save(self, *args, **kwargs):
-        if self.service_type == 'onetime':
-            self.expires = timezone.now() + timezone.timedelta(days=30)
-        elif self.service_type == 'yearly':
-            self.expires = timezone.now() + timezone.timedelta(days=365)
-
-        super().save(*args, **kwargs)
-
-    def remaining_services(self, *args, **kwargs):
-        if self.service_type == 'yearly':
-            count = Service.objects.filter(bike=self.bike, service_type='yearly', completed=False).count()
-            return 4 - count
-        return None
+    create_at = models.DateTimeField(auto_now_add=True)
+    # def save(self, *args, **kwargs):
+    #     if self.service_type == 'onetime':
+    #         self.expires = timezone.now() + timezone.timedelta(days=30)
+    #     elif self.service_type == 'yearly':
+    #         self.expires = timezone.now() + timezone.timedelta(days=365)
+    #
+    #     super().save(*args, **kwargs)
+    #
+    # def remaining_services(self, *args, **kwargs):
+    #     if self.service_type == 'yearly':
+    #         count = Service.objects.filter(bike=self.bike, service_type='yearly', completed=False).count()
+    #         return 4 - count
+    #     return None

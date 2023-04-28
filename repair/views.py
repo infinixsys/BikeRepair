@@ -5,6 +5,7 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from main.models import User
 from .models import AboutUs, Services, PlanName, Notification, Order, ClientReview, BookingDetails, Support, Service
@@ -67,8 +68,13 @@ def start_payment(request, pk):
 
     if plane_name.types == 'monthly':
         expiry_date = datetime.now() + timedelta(days=30)
+<<<<<<< HEAD
         order = Order.objects.create(plane_name=plane_name, 
                                      order_amount=amount, expiry_date=expiry_date,
+=======
+        order = Order.objects.create(plane_name=plane_name, user=user, service_types='monthly',
+                                     order_amount=amount, expiry_date=expiry_date, count=1,
+>>>>>>> 8186b8539befa1dac56aff971e3fff203386d3ab
                                      order_payment_id=payment['id'])
         serializer = OrderSerializer(order)
         data = {
@@ -80,9 +86,14 @@ def start_payment(request, pk):
     if plane_name.types == 'onetime':
         expiry_date = datetime.now() + timedelta(days=30)
 
+<<<<<<< HEAD
 
         order = Order.objects.create(plane_name=plane_name,
                                      order_amount=amount, expiry_date=expiry_date,
+=======
+        order = Order.objects.create(plane_name=plane_name, user=user, service_types='onetime',
+                                     order_amount=amount, expiry_date=expiry_date, count=1,
+>>>>>>> 8186b8539befa1dac56aff971e3fff203386d3ab
                                      order_payment_id=payment['id'])
         serializer = OrderSerializer(order)
         data = {
@@ -94,8 +105,13 @@ def start_payment(request, pk):
     elif plane_name.types == 'yearly':
         expiry_date = datetime.now() + timedelta(days=365)
 
+<<<<<<< HEAD
         order = Order.objects.create(plane_name=plane_name, 
                                      order_amount=amount, expiry_date=expiry_date,
+=======
+        order = Order.objects.create(plane_name=plane_name, user=user, service_types='yearly',
+                                     order_amount=amount, expiry_date=expiry_date, count=4,
+>>>>>>> 8186b8539befa1dac56aff971e3fff203386d3ab
                                      order_payment_id=payment['id'])
 
         serializer = OrderSerializer(order)
@@ -174,6 +190,7 @@ class SuppportAPIView(ListCreateAPIView):
     queryset = Support.objects.all()
     serializer_class = SupportSerializer
 
+
 # class ServiceList(ListCreateAPIView):
 #     queryset = Service.objects.all()
 #     serializer_class = ServiceSerializer
@@ -193,3 +210,42 @@ class SuppportAPIView(ListCreateAPIView):
 #         if serializer.validated_data.get('completed') and serializer.validated_data['service_type'] == 'one-time':
 #             serializer.validated_data['expires'] = None
 #         serializer.save()
+
+
+class ServiceAPIView(APIView):
+
+    def get(self, request):
+        service = Service.objects.filter(user__id=request.user.id)
+        serializer = ServiceDataSerializer(service, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, formate=None):
+        # serializer = ServiceDataSerializer(data=request.data)
+        # if serializer.is_valid():
+        #     serializer.save()
+        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            user = request.user
+            order_id = request.data['order_id']
+            order = Service.objects.get(id=order_id)
+            booking_id = request.data['booking_id']
+            booking = BookingDetails.objects.get(id=booking_id)
+            if user != booking.user:
+                return Response({'error': "user or booking Id Not Valid !"}, status=status.HTTP_400_BAD_REQUEST)
+            if user != order.user:
+                return Response({'error': "user or Order Id Not Valid !"}, status=status.HTTP_400_BAD_REQUEST)
+            if order.isPaid:
+                if order.service_types == 'onetime' or order.service_types == 'monthly':
+                    data = Service.objects.create(user=user, order=order, bike=booking)
+                    data.save()
+                    return Response({'success': "One Time Are Completed!"}, status=status.HTTP_200_OK)
+                if order.service_types == "yearly":
+                    data = Service.objects.create(user=user, order=order, bike=booking)
+                    data.save()
+                    return Response({'success': "First Time Are Completed!"}, status=status.HTTP_200_OK)
+            else:
+                return Response({"error":"First completed your Payment", "order_id":order.isPaid}, status=status.HTTP_400_BAD_REQUEST)
+
+        except Exception as E:
+            return Response({"Error":"Something Went Wrong! Please Login"}, status=status.HTTP_400_BAD_REQUEST)
