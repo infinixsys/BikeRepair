@@ -141,9 +141,8 @@ def handle_payment_success(request):
     client = razorpay.Client(auth=(settings.PUBLIC_KEY, settings.RAZOR_SECRET_KEY))
 
     check = client.utility.verify_payment_signature(data)
-    print(check, "=====================================")
+
     if check is None:
-        print("Redirect to error url or error page")
         return Response({'error': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
 
     order.isPaid = True
