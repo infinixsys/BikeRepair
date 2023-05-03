@@ -57,7 +57,8 @@ class BookingDeleteUpdateAPI(RetrieveDestroyAPIView, RetrieveUpdateAPIView):
 @api_view(['POST'])
 def start_payment(request, pk):
     plane_name = get_object_or_404(PlanName, pk=pk)
-    user = request.data['user']
+    user_id = request.data['user']
+    user = User.objects.get(id=user_id)
     amount = plane_name.pricing
 
     client = razorpay.Client(auth=(settings.PUBLIC_KEY, settings.RAZOR_SECRET_KEY))
