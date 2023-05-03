@@ -234,3 +234,10 @@ class ServiceAPIView(APIView):
 
         except Exception as E:
             return Response({"Error": "Something Went Wrong! Please Login"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class OrderGetAPIView(APIView):
+    def get(self, request, *args, **kwargs):
+        ord = Order.objects.filter(user__id=request.user.id)
+        serializer = OrderSerializer(ord, many=True)
+        return Response(serializer.data)
