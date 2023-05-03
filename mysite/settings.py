@@ -145,8 +145,8 @@ AUTH_USER_MODEL = 'main.User'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 
-PUBLIC_KEY = "rzp_live_XcmT7UqtKory3a"
-RAZOR_SECRET_KEY = "P3uCR1tywrV8IKdVCtyhQdWq"
+PUBLIC_KEY = "rzp_test_TPT9JtYqBlDifL"
+RAZOR_SECRET_KEY = "LLL9UCA2zPzKd1NhxSS5aK1S"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
