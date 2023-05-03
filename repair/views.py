@@ -127,6 +127,12 @@ def handle_payment_success(request):
     #         raz_signature = res[key]
 
     # if request.method == 'POST':
+    # import pdb;
+    # pdb.set_trace()
+
+    user_id = request.data['user']
+    user = User.objects.get(id=user_id)
+
     ord_id = request.data["razorpay_order_id"]
     raz_pay_id = request.data["razorpay_payment_id"]
     raz_signature = request.data["razorpay_signature"]
@@ -148,8 +154,11 @@ def handle_payment_success(request):
     order.isPaid = True
     order.save()
 
+    booking = BookingDetails.objects.filter(user__id=user_id)
+    serializer = BookingDetailsSerializer(booking, many=True)
     res_data = {
-        'message': 'payment successfully received!'
+        'message': 'payment successfully received!',
+        'booking': serializer.data
     }
 
     return Response(res_data, status=status.HTTP_200_OK)
@@ -210,11 +219,12 @@ class ServiceAPIView(APIView):
         #     return Response(serializer.data, status=status.HTTP_201_CREATED)
         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         try:
-            user = request.user
+            user_id = request.data['user']
             order_id = request.data['order_id']
             order = Order.objects.get(id=order_id)
             booking_id = request.data['booking_id']
             booking = BookingDetails.objects.get(id=booking_id)
+            user = User.objects.get(id=user_id)
             if user != booking.user:
                 return Response({'error': "user or booking Id Not Valid !"}, status=status.HTTP_400_BAD_REQUEST)
             if user != order.user:
