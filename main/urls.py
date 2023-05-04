@@ -19,4 +19,6 @@ urlpatterns = [
     path('api/user/update/<int:user_id>', UserRetrieveUpdateAPIView.as_view(), name='user_update'),
     # path('api/user/profile/', UserProfile.as_view(), name="user_profile"),
     path('api/update/profile/<int:pk>/', UpdateProfileView.as_view(), name='auth_update_profile'),
+
+    path('api/razorpay/view/', RazorPayAPIVIEW.as_view(), name='RazorPayAPIVIEW'),
 ]

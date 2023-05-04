@@ -1,6 +1,6 @@
 import imp
 from rest_framework import serializers
-from .models import Profile, User, Role
+from .models import Profile, User, Role, RazorPay
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
@@ -84,3 +84,9 @@ class UpdateUserSerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
+
+
+class RazorPaySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RazorPay
+        fields = "__all__"

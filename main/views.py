@@ -3,9 +3,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from django.contrib.auth import get_user_model
-
+from main.models import RazorPay
 from main.serializers import RegisterSerializer, UserUpdateSerializer, UserSerializer, ProfileSerializer, \
-    UserProfileSerializer, UpdateUserSerializer
+    UserProfileSerializer, UpdateUserSerializer, RazorPaySerializer
 from main.utils import otp_generator
 from knox.models import AuthToken
 from django.contrib.auth import login
@@ -268,7 +268,7 @@ class UserRetrieveUpdateAPIView(APIView):
 #         serializer = UserProfileSerializer(self.request.user)
 #         return Response(serializer.data)
 #     # queryset = User.objects.all()
-    # serializer_class = UserProfileSerializer
+# serializer_class = UserProfileSerializer
 
 class UserProfile(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -287,3 +287,8 @@ class UpdateProfileView(UpdateAPIView, ListAPIView):
     queryset = User.objects.all()
     # permission_classes = (IsAuthenticated,)
     serializer_class = UpdateUserSerializer
+
+
+class RazorPayAPIVIEW(ListAPIView):
+    queryset = RazorPay.objects.all()
+    serializer_class = RazorPaySerializer
