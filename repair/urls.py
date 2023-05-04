@@ -20,5 +20,6 @@ urlpatterns = [
     path('api/update/delete/booking/bikes/<int:pk>', BookingDeleteUpdateAPI.as_view(), name='BookingDeleteUpdateAPI'),
 
     path('api/service/data/', ServiceAPIView.as_view(), name='ServiceAPIView'),
+    path('api/service/data/filter/<int:user_id>/', ServiceListAPIFilter.as_view(), name='ServiceListAPIFilter'),
     # path('api/service/details/<int:pk>', ServiceDetail.as_view(), name='ServiceDetail')
 ]

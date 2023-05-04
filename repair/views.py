@@ -275,3 +275,12 @@ class OrderGetAPIView(APIView):
         ord = Order.objects.filter(user__id=request.user.id)
         serializer = OrderSerializer(ord, many=True)
         return Response(serializer.data)
+
+
+class ServiceListAPIFilter(APIView):
+    def get(self, request, user_id, *args, **kwargs):
+        # user_id = request.data['user']
+        # user = User.objects.get(id=user_id)
+        srv = Service.objects.filter(user__id=user_id)
+        serializer = ServiceDataSerializer(srv, many=True)
+        return Response(serializer.data)
