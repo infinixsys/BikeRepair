@@ -179,6 +179,9 @@ def update_active(sender, instance, *args, **kwargs):
 
 class Service(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    name = models.CharField(max_length=200, blank=True, null=True)
+    username= models.CharField(max_length=200, blank=True, null=True)
+    plan_title = models.CharField(max_length=200, blank=True, null=True)
     order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True)
     date = models.DateTimeField(blank=True, null=True)
     bike = models.ForeignKey(BookingDetails, on_delete=models.CASCADE, blank=True, null=True)

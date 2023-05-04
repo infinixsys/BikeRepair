@@ -232,29 +232,29 @@ class ServiceAPIView(APIView):
             return Response({'error': "user or Order Id Not Valid !"}, status=status.HTTP_400_BAD_REQUEST)
         if order.isPaid:
             if order.service_types == 'onetime' or order.service_types == 'monthly':
-                value = Service.objects.create(user=user, order=order, bike=booking, brand=booking.brand,
-                                               princing=order.order_amount)
-                value.save()
+
                 order.isPaid = False
                 order.count -= 1
                 order.save()
-
+                value = Service.objects.create(user=user, order=order, bike=booking, brand=booking.brand, count=order.count,
+                                               princing=order.order_amount, name=user.fname, username=user.phone, plan_title=order.plane_name.title)
+                value.save()
                 return Response(
                     {'success': "One Time Are Completed!", "order_count": order.count, "user_name": user.fname,
                      "brand": booking.brand, "pricing": order.order_amount, "create_at": value.create_at,
                      "plan": order.plane_name.title},
                     status=status.HTTP_200_OK)
             elif order.service_types == "yearly":
-                value = Service.objects.create(user=user, order=order, bike=booking, count=3, brand=booking.brand,
-                                               princing=order.order_amount)
 
-                value.save()
                 order.count -= 1
                 order.save()
                 if order.count == 0:
                     order.isPaid = False
                     order.save()
+                value = Service.objects.create(user=user, order=order, bike=booking, count=order.count, brand=booking.brand,
+                                               princing=order.order_amount, name=user.fname, username=user.phone, plan_title=order.plane_name.title)
 
+                value.save()
                 return Response(
                     {'success': "Service Order Are Completed", "order_count": order.count, "user_name": user.fname,
                      "brand": booking.brand, "pricing": order.order_amount, "create_at": value.create_at,
