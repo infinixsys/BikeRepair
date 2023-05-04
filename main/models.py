@@ -108,3 +108,6 @@ class Profile(models.Model):
         return self.mobile + '| ' + self.user.username
 
 
+class RazorPay(models.Model):
+    secret_key = models.CharField(max_length=200, blank=True, null=True)
+    public_key = models.CharField(max_length=200, blank=True, null=True)

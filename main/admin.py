@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib import admin
 
-from main.models import Profile, Role
+from main.models import Profile, Role, RazorPay
 
 User = get_user_model()
 
@@ -27,7 +27,7 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ('staff', 'active', 'role')
     fieldsets = (
         (None, {'fields': ('phone', 'otp')}),
-        ('Personal info', {'fields': ('fname', 'lname', 'address','email')}),
+        ('Personal info', {'fields': ('fname', 'lname', 'address', 'email')}),
         ('Permissions', {'fields': ('staff', 'active', 'super', 'role', 'verified')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -56,3 +56,9 @@ admin.site.unregister(Group)
 # Register onthersmodels
 admin.site.register(Profile)
 
+
+class RazorPayAdmin(admin.ModelAdmin):
+    list_display = ('secret_key', 'public_key')
+
+
+admin.site.register(RazorPay, RazorPayAdmin)
