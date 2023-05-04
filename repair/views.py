@@ -218,32 +218,56 @@ class ServiceAPIView(APIView):
         #     serializer.save()
         #     return Response(serializer.data, status=status.HTTP_201_CREATED)
         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        try:
-            user_id = request.data['user']
-            order_id = request.data['order_id']
-            order = Order.objects.get(id=order_id)
-            booking_id = request.data['booking_id']
-            booking = BookingDetails.objects.get(id=booking_id)
-            user = User.objects.get(id=user_id)
-            if user != booking.user:
-                return Response({'error': "user or booking Id Not Valid !"}, status=status.HTTP_400_BAD_REQUEST)
-            if user != order.user:
-                return Response({'error': "user or Order Id Not Valid !"}, status=status.HTTP_400_BAD_REQUEST)
-            if order.isPaid:
-                if order.service_types == 'onetime' or order.service_types == 'monthly':
-                    data = Service.objects.create(user=user, order=order, bike=booking)
-                    data.save()
-                    return Response({'success': "One Time Are Completed!"}, status=status.HTTP_200_OK)
-                if order.service_types == "yearly":
-                    data = Service.objects.create(user=user, order=order, bike=booking)
-                    data.save()
-                    return Response({'success': "First Time Are Completed!"}, status=status.HTTP_200_OK)
-            else:
-                return Response({"error": "First completed your Payment", "order_id": order.isPaid},
-                                status=status.HTTP_400_BAD_REQUEST)
+        # try:
+        user_id = request.data['user']
+        order_id = request.data['order_id']
+        order = Order.objects.get(id=order_id)
+        booking_id = request.data['booking_id']
+        booking = BookingDetails.objects.get(id=booking_id)
+        user = User.objects.get(id=user_id)
 
-        except Exception as E:
-            return Response({"Error": "Something Went Wrong! Please Login"}, status=status.HTTP_400_BAD_REQUEST)
+        if user != booking.user:
+            return Response({'error': "user or booking Id Not Valid !"}, status=status.HTTP_400_BAD_REQUEST)
+        if user != order.user:
+            return Response({'error': "user or Order Id Not Valid !"}, status=status.HTTP_400_BAD_REQUEST)
+        if order.isPaid:
+            if order.service_types == 'onetime' or order.service_types == 'monthly':
+                value = Service.objects.create(user=user, order=order, bike=booking, brand=booking.brand,
+                                               princing=order.order_amount)
+                value.save()
+                order.isPaid = False
+                order.count -= 1
+                order.save()
+
+                return Response(
+                    {'success': "One Time Are Completed!", "order_count": order.count, "user_name": user.fname,
+                     "brand": booking.brand, "pricing": order.order_amount, "create_at": value.create_at,
+                     "plan": order.plane_name.title},
+                    status=status.HTTP_200_OK)
+            elif order.service_types == "yearly":
+                value = Service.objects.create(user=user, order=order, bike=booking, count=3, brand=booking.brand,
+                                               princing=order.order_amount)
+
+                value.save()
+                order.count -= 1
+                order.save()
+                if order.count == 0:
+                    order.isPaid = False
+                    order.save()
+
+                return Response(
+                    {'success': "Service Order Are Completed", "order_count": order.count, "user_name": user.fname,
+                     "brand": booking.brand, "pricing": order.order_amount, "create_at": value.create_at,
+                     "plan": order.plane_name.title},
+                    status=status.HTTP_200_OK)
+
+
+        else:
+            return Response({"error": "Not Valid your Service ! Repayment Booking", "order_status": order.isPaid},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        # except Exception as E:
+        #     return Response({"Error": "Something Went Wrong! Please Login"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class OrderGetAPIView(APIView):

@@ -182,7 +182,11 @@ class Service(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True)
     date = models.DateTimeField(blank=True, null=True)
     bike = models.ForeignKey(BookingDetails, on_delete=models.CASCADE, blank=True, null=True)
+    brand = models.CharField(max_length=200, blank=True, null=True)
+    princing = models.CharField(max_length=200, blank=True, null=True)
+    count = models.IntegerField(blank=True, null=True)
     create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateField(auto_now=True, blank=True, null=True)
     # def save(self, *args, **kwargs):
     #     if self.service_type == 'onetime':
     #         self.expires = timezone.now() + timezone.timedelta(days=30)
