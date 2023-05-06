@@ -30,7 +30,7 @@ class BookingDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookingDetails
         fields = ("id", "user", "model", "vehicle_number", "year_of_purchase", "odometer_reading", "rc_number",
-                  "owner_name", "pin_code", "location", "Vehicle_issues", "brand")
+                  "owner_name", "pin_code", "location", "Vehicle_issues", "brand", "front_image", "back_image", "left_image", "right_image")
 
 
 class ClientReviewSerializer(serializers.ModelSerializer):
