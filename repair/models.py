@@ -82,6 +82,10 @@ class BookingDetails(models.Model):
     location = models.CharField(max_length=300, blank=True, null=True)
     brand = models.CharField(max_length=200, blank=True, null=True)
     Vehicle_issues = models.TextField(default=None)
+    front_image = models.ImageField(upload_to="img/", blank=True, null=True)
+    back_image = models.ImageField(upload_to="img/", blank=True, null=True)
+    left_image = models.ImageField(upload_to="img/", blank=True, null=True)
+    right_image = models.ImageField(upload_to="img/", blank=True, null=True)
     create_at = models.DateField(auto_now_add=True)
     update_at = models.DateField(auto_now=True)
 
