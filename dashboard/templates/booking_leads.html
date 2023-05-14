@@ -27,23 +27,26 @@
                         <th scope="col">Location</th>
                         <th scope="col">Service type</th>
                         <th scope="col">Brand Name</th>
+                        <th scope="col">Date</th>
                         <th scope="col">action</th>
                     </tr>
                 </thead>
                 <tbody>
-
+                    {% for p in plane %}
                     <tr>
-                        <th scope="row" class="table-secondary">1</th>
-                        <td class="table-info">Amit Kumar</td>
-                        <td class="table-warning">8700282172</td>
-                        <td class="table-primary">Delhi</td>
-                        <td class="table-success">One Time / Annually</td>
-                        <td class="table-primary">Hero</td>
+                        <th scope="row" class="table-secondary">{{ p.id }}</th>
+                        <td class="table-info">{{ p.user.fname }}</td>
+                        <td class="table-warning">{{ p.user.phone }}</td>
+                        <td class="table-primary">{{ p.bike.location }}</td>
+                        <td class="table-success">{{ p.order.count }} / {{ p.plan_title }}</td>
+                        <td class="table-primary">{{ p.bike.brand }}</td>
+                        <td class="table-primary">{{ p.create_at }}</td>
                         <td class="table-warning">
-                           <a href="{% url 'booking_details' %}"><i class="bi bi-eye fs-4 text-success"></i></a>
-                            <i class="bi bi-archive text-danger fs-4"></i>
+                           <a href="{% url 'booking_details' p.id %}"><i class="bi bi-eye fs-4 text-success"></i></a>
+<!--                            <i class="bi bi-archive text-danger fs-4"></i>-->
                         </td>
                     </tr>
+                {% endfor %}
 
                 </tbody>
             </table>

@@ -49,9 +49,9 @@
                             <div style="cursor:pointer;">
 
                                 <div>
-                                <i class="bi bi-pencil-square text-warning fs-4 mx-2"></i>
-                                    <i class="bi bi-archive text-danger fs-4 mx-2"></i>
-                                    <a href="mechanicProfile.php"><i class="bi bi-eye text-success fs-4 mx-2"></i></a>
+                               <a href="{% url 'updatemechanic' m.id %}">  <i class="bi bi-pencil-square text-warning fs-4 mx-2"></i></a>
+                                   <a href="{% url 'deletemechanic' m.id %}">  <i class="bi bi-archive text-danger fs-4 mx-2"></i></a>
+                                    <a href="{% url 'viewmechanic' m.id %}"><i class="bi bi-eye text-success fs-4 mx-2"></i></a>
                                 </div>
                             </div>
                         </div>

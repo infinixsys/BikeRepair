@@ -7,7 +7,7 @@
         <!---<?php include 'sidemenu.php' ?>--->
         <div class="col-lg-10  border p-4">
             <div class="d-flex justify-content-between p-3">
-                <h4>Services</h4>
+                <h4>Add Plan</h4>
             </div>
             <div class="row justify-content-evenly">
                 <div class="col-md-8">
@@ -31,7 +31,7 @@
                         </div>
                         <div class="text-center my-2">
                         <a href="{% url 'editplan' i.id %}"><i class="bi bi-pencil-square fs-4 text-warning"></i></a>
-                            <i class="bi bi-archive text-danger fs-4"></i>
+                            <a href="{% url 'deleteplan' i.id  %}"> <i class="bi bi-archive text-danger fs-4"></i></a>
                         </div>
                     </div>
                 </div>

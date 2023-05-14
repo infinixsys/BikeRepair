@@ -8,8 +8,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from main.models import User
-from .models import AboutUs, Services, PlanName, Notification, Order, ClientReview, BookingDetails, Support, Service
-from .serializers import AboutUsSerializer, ServiceSerializer, PlanNameSerializer, \
+from .models import AboutUs, PlanName, Notification, Order, ClientReview, BookingDetails, Support, Service
+from .serializers import AboutUsSerializer, PlanNameSerializer, \
     NotificationSerializer, OrderSerializer, ClientReviewSerializer, BookingDetailsSerializer, PlanUpdateSerializer, \
     SupportSerializer, ServiceDataSerializer
 from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView, \
@@ -28,9 +28,9 @@ class AboutUsListView(ListAPIView):
     serializer_class = AboutUsSerializer
 
 
-class ServiceListAPI(ListCreateAPIView):
-    queryset = Services.objects.all()
-    serializer_class = ServiceSerializer
+# class ServiceListAPI(ListCreateAPIView):
+#     queryset = Services.objects.all()
+#     serializer_class = ServiceSerializer
 
 
 class PlanNameListAPI(ListAPIView):

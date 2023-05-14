@@ -26,17 +26,17 @@ class AboutUs(models.Model):
         return self.title
 
 
-class Services(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    title = models.CharField(max_length=400, blank=True, null=True)
-    img = models.ImageField(upload_to="service/", blank=True, null=True)
-    date = models.CharField(max_length=12, blank=True, null=True)
-    order_id = models.CharField(max_length=200, default=uuid.uuid4, blank=True, unique=True)
-    create_at = models.DateField(auto_now_add=True)
-    update_at = models.DateField(auto_now=True)
-
-    def __str__(self):
-        return self.title
+# class Services(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+#     title = models.CharField(max_length=400, blank=True, null=True)
+#     img = models.ImageField(upload_to="service/", blank=True, null=True)
+#     date = models.CharField(max_length=12, blank=True, null=True)
+#     order_id = models.CharField(max_length=200, default=uuid.uuid4, blank=True, unique=True)
+#     create_at = models.DateField(auto_now_add=True)
+#     update_at = models.DateField(auto_now=True)
+#
+#     def __str__(self):
+#         return self.title
 
 
 class PlanName(models.Model):
@@ -97,7 +97,7 @@ class ClientReview(models.Model):
     name = models.CharField(max_length=300, blank=True, null=True)
     img = models.ImageField(upload_to="img/", blank=True, null=True)
     txt = models.TextField(default=None)
-    status = models.CharField(max_length=200, blank=True, null=True, choices=STATUS)
+    status = models.CharField(max_length=200, blank=True, null=True, choices=STATUS, default="disapproved")
 
     def __str__(self):
         return self.name
@@ -136,11 +136,11 @@ class Mechanic(models.Model):
     name = models.CharField(max_length=200, blank=True, null=True)
     profile = models.CharField(max_length=200, blank=True, null=True)
     email = models.CharField(max_length=200, blank=True, null=True)
-    price = models.CharField(max_length=200, blank=True, null=True)
+    price = models.CharField(max_length=200, blank=True, null=True, default=0)
     experiance = models.CharField(max_length=200, blank=True, null=True)
     number = models.CharField(max_length=200, blank=True, null=True)
     img = models.ImageField(upload_to="mechanic/", blank=True, null=True)
-    aadhar = models.IntegerField(blank=True, null=True)
+    aadhar = models.CharField(max_length=20, blank=True, null=True, default=0)
     upload_aadhar = models.FileField(upload_to="aadhar/", blank=True, null=True)
     resume = models.FileField(upload_to="resume/", blank=True, null=True)
     qualifications = models.CharField(max_length=200, blank=True, null=True)
@@ -180,7 +180,7 @@ def update_active(sender, instance, *args, **kwargs):
 class Service(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     name = models.CharField(max_length=200, blank=True, null=True)
-    username= models.CharField(max_length=200, blank=True, null=True)
+    username = models.CharField(max_length=200, blank=True, null=True)
     plan_title = models.CharField(max_length=200, blank=True, null=True)
     order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True)
     date = models.DateTimeField(blank=True, null=True)
@@ -190,16 +190,3 @@ class Service(models.Model):
     count = models.IntegerField(blank=True, null=True)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateField(auto_now=True, blank=True, null=True)
-    # def save(self, *args, **kwargs):
-    #     if self.service_type == 'onetime':
-    #         self.expires = timezone.now() + timezone.timedelta(days=30)
-    #     elif self.service_type == 'yearly':
-    #         self.expires = timezone.now() + timezone.timedelta(days=365)
-    #
-    #     super().save(*args, **kwargs)
-    #
-    # def remaining_services(self, *args, **kwargs):
-    #     if self.service_type == 'yearly':
-    #         count = Service.objects.filter(bike=self.bike, service_type='yearly', completed=False).count()
-    #         return 4 - count
-    #     return None

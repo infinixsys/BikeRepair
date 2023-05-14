@@ -16,57 +16,57 @@
                 <!-- <div class="col-md-5 p-3 border"> -->
                 <div class="col-md-6 mt-2">
                     <label for="name" class="form-label">Mechanic Name</label>
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Enter  Name" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" value="{{instance.name}}" name="name" id="name" placeholder="Enter  Name" aria-describedby="emailHelp">
                 </div>
                 <div class="col-md-6 mt-2">
                     <label for="name" class="form-label">Mechanic Profile</label>
-                    <input type="text" class="form-control" name="profile" id="name" placeholder="Enter  Profile" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" value="{{ instance.profile }}" name="profile" id="name" placeholder="Enter  Profile" aria-describedby="emailHelp">
                 </div>
                 <div class="col-md-6 mt-2">
                     <label for="name" class="form-label">Mechanic Email</label>
-                    <input type="email" class="form-control" name="email" id="name" placeholder="Enter Email" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" value="{{ instance.email }}" name="email" id="name" placeholder="Enter Email" aria-describedby="emailHelp">
                 </div>
                 <div class="col-md-6 mt-2">
                     <label for="name" class="form-label">Mechanic Price</label>
-                    <input type="number" class="form-control" name="price" id="name" placeholder="Enter  Price" aria-describedby="emailHelp">
+                    <input type="number" class="form-control" value="{{ instance.price }}" name="price" id="name" placeholder="Enter  Price" aria-describedby="emailHelp">
                 </div>
                 <div class="col-md-6 mt-2">
                     <label for="name" class="form-label">Mechanic Experience</label>
-                    <input type="text" class="form-control" name="experiance" id="name" placeholder="Enter Experience" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" value="{{ instance.experiance }}" name="experiance" id="name" placeholder="Enter Experience" aria-describedby="emailHelp">
                 </div>
                 <div class="col-md-6 mt-2">
                     <label for="name" class="form-label">Mechanic Number</label>
-                    <input type="number" class="form-control" name="number" id="name" placeholder="Enter Number" aria-describedby="emailHelp">
+                    <input type="number" class="form-control" value="{{ instance.number }}" name="number" id="name" placeholder="Enter Number" aria-describedby="emailHelp">
                 </div>
 
                 <div class="col-md-6 mt-2">
                     <label for="name" class="form-label">Mechanic Image</label>
-                    <input type="file" class="form-control" name="img" id="name" placeholder="Enter Category Name" aria-describedby="emailHelp">
+                    <input type="file" class="form-control" value="{{ instance.img }}" name="img" id="name" placeholder="Enter Category Name" aria-describedby="emailHelp">
                 </div>
 
                 <div class="col-md-6 mt-2">
                     <label for="name" class="form-label">Aadhar Card</label>
-                    <input type="number" class="form-control" name="aadhar" id="aadhar" placeholder="Enter Aadhar Name" aria-describedby="emailHelp">
+                    <input type="number" class="form-control" value="{{ instance.aadhar }}" name="aadhar" id="aadhar" placeholder="Enter Aadhar Name" aria-describedby="emailHelp">
                 </div>
 
                 <div class="col-md-6 mt-2">
                     <label for="name" class="form-label">Upload Aadhar</label>
-                    <input type="file" class="form-control" name="upload_aadhar" id="name" placeholder="Upload Aadhar" aria-describedby="emailHelp">
+                    <input type="file" class="form-control" value="{{ instance.upload_aadhar }}" name="upload_aadhar" id="name" placeholder="Upload Aadhar" aria-describedby="emailHelp">
                 </div>
 
                 <div class="col-md-6 mt-2">
                     <label for="name" class="form-label">Resume </label>
-                    <input type="file" class="form-control" name="resume" id="name" placeholder="Upload Resume" aria-describedby="emailHelp">
+                    <input type="file" class="form-control" value="{{ instance.resume }}" name="resume" id="name" placeholder="Upload Resume" aria-describedby="emailHelp">
                 </div>
 
                 <div class="col-md-6 mt-2">
                     <label for="name" class="form-label">Qualifications</label>
-                    <input type="text" class="form-control" name="qualifications" id="name" placeholder="Enter qualifications " aria-describedby="emailHelp">
+                    <input type="text" class="form-control" value="{{ instance.qualifications }}" name="qualifications" id="name" placeholder="Enter qualifications " aria-describedby="emailHelp">
                 </div>
 
                 <div class="col-md-6 mt-2">
                     <label for="name" class="form-label">Skills</label>
-                    <input type="text" class="form-control" name="skills" id="name" placeholder="Enter skills " aria-describedby="emailHelp">
+                    <input type="text" class="form-control" value="{{ instance.skills }}" name="skills" id="name" placeholder="Enter skills " aria-describedby="emailHelp">
                 </div>
 
                 <!-- <div class="col-md-12 mt-2">
@@ -75,7 +75,7 @@
 
                     </div> -->
                     <div class="col-md-7  d-grid gap-2 my-3">
-                <button class="btn color d-grid gap-2">Add</button>
+                <button class="btn color d-grid gap-2">Submit</button>
                 </div>
             </div>
                 </form>

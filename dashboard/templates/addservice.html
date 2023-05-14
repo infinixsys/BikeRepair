@@ -9,16 +9,35 @@
     <div class="row justify-content-end">
         <!---<?php include 'sidemenu.php' ?>--->
         <div class="col-lg-10 border">
-            <h4 class="text-center fw-bold mt-3">Add Plan</h4>
+            <h4 class="text-center fw-bold mt-3">Add Service</h4>
             <hr>
             {{ msg }}
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
             <div class="row px-4">
                 <!-- <div class="col-md-5 p-3 border"> -->
+
                 <div class="col-md-6 mt-2">
-                    <label for="name" class="form-label">Plan Name</label>
-                    <input type="text" name="title" value="{{ plans.title }}" class="form-control" id="name" placeholder="Enter Service Name" aria-describedby="emailHelp" required>
+                    <label for="exampleInputEmail1" class="form-label">Select Category</label>
+                    <div class="border rounded">
+                        <select class="form-select" name="types" aria-label="Default select example" required>
+                            <option selected>Plan Category</option>
+                            <option value="yearly">Annually</option>
+                            <option value="onetime">One Time</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 mt-2">
+                    <label for="exampleInputEmail1" class="form-label">Select Category</label>
+                    <div class="border rounded">
+                        <select class="form-select" name="types" aria-label="Default select example" required>
+                            <option selected>Plan Category</option>
+                            <option value="yearly">Annually</option>
+                            <option value="onetime">One Time</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="col-md-6 mt-2">
@@ -28,24 +47,11 @@
                             <option selected>Plan Category</option>
                             <option value="yearly">Annually</option>
                             <option value="onetime">One Time</option>
-                            <option value="monthly">Monthly</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="col-md-6 mt-2">
-                    <label for="name" class="form-label">Plan Price</label>
-                    <input type="number" name="pricing" value="{{ plans.pricing }}" class="form-control" id="name" placeholder="Enter Category Name" aria-describedby="emailHelp" required>
-                </div>
-                <div class="col-md-6 mt-2">
-                    <label for="name" class="form-label">Service Image</label>
-                    <input type="file" name="img" class="form-control" id="name" value="{{ i.img.url }}" placeholder="Enter Category Name" aria-describedby="emailHelp",>
-                </div>
-                <div class="col-md-12 mt-2">
-                        <label for="">Description</label>
-                        <textarea name="details" id="editor" required>{{ plans.details }}</textarea>
 
-                    </div>
                     <div class="col-md-6  d-grid gap-2 my-3">
                 <button class="btn color d-grid gap-2">Submit</button>
                 </div>

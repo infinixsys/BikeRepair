@@ -9,12 +9,14 @@ urlpatterns = [
     path('addplan/', addplan, name='addplan'),
     path('plan', plan, name='plan'),
     path('editplan/<int:id>/', editplan, name='editplan'),
+    path('deleteplan/<int:id>/', deleteplan, name='deleteplan'),
 
     path('booking/leads', booking_leads, name='booking_leads'),
-    path('booking/details', booking_details, name='booking_details'),
+    path('booking/details/<int:id>', booking_details, name='booking_details'),
 
     path('user/profile', user_profile, name='user_profile'),
     path('user/history/<int:id>', user_history, name='user_history'),
+    path('add/service/', addservice, name='addservice'),
 
     path('account', account, name='account'),
     path('bill/create', create_bill, name='create_bill'),
@@ -30,9 +32,16 @@ urlpatterns = [
 
     path('mechanice', mechanice, name='mechanice'),
     path('mechanic/list', mechanic_list, name='mechanic_list'),
+    path('mechanic/delete/<int:id>/', deletemechanic, name='deletemechanic'),
+    path('mechanic/update/<int:id>/', updatemechanic, name='updatemechanic'),
+    path('mechanic/view/<int:id>/', viewmechanic, name='viewmechanic'),
 
     path('faq', faq, name='faq'),
     path('support', support, name='support'),
+
     path('review', review, name='review'),
+    path('update/review/<int:id>/', approvedreview, name='approvedreview'),
+    path('delete/review/<int:id>/', deletereview, name='deletereview'),
+
 
 ]

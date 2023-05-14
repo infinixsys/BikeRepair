@@ -8,10 +8,10 @@ class AboutUsSerializer(serializers.ModelSerializer):
         fields = ('id', "title", 'img', 'short', 'details')
 
 
-class ServiceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Services
-        fields = ('id', 'user', 'title', 'img', 'date', 'order_id')
+# class ServiceSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Services
+#         fields = ('id', 'user', 'title', 'img', 'date', 'order_id')
 
 
 class PlanNameSerializer(serializers.ModelSerializer):

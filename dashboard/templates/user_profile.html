@@ -13,8 +13,9 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <span class="input-group-text" id="basic-addon2"> <i class="bi bi-search"></i> </span>
+                        <div class="col-md-8">
+                            <a href="{% url 'addservice' %}"><button class="btn btn-success"> <i class="bi bi-plus text-white"></i> Add Service </button></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -41,7 +42,6 @@
                         <td class="table-success">{{ i.user.email }}</td>
                         <td class="table-warning">
                            <a href="{% url 'user_history' i.id %}"><i class="bi bi-eye fs-4 text-success"></i></a>
-                            <i class="bi bi-archive text-danger fs-4"></i>
                         </td>
                     </tr>
                 {% endfor %}

@@ -14,59 +14,59 @@
                 <table class="table">
                     <tr class="">
                         <th scope="col">Name</th>
-                        <td class="">Amit Kumar</td>
+                        <td class="">{{ service.user.fname }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Mobile Number</th>
-                        <td class="">8700282172</td>
+                        <td class="">{{ service.user.phone }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Residence Address</th>
-                        <td class="">H.551 , Baprola , New Delhi-110043</td>
+                        <td class="">{{ service.bike.location }}</td>
                     </tr>
-                    <tr class="">
-                        <th scope="col">Current Location</th>
-                        <td class="">Vaishali</td>
-                    </tr>
+<!--                    <tr class="">-->
+<!--                        <th scope="col">Current Location</th>-->
+<!--                        <td class="">{{ service.bike.pin_code }}</td>-->
+<!--                    </tr>-->
                     <tr class="">
                         <th scope="col">Bike Brand Name</th>
-                        <td class="">Hero</td>
+                        <td class="">{{ service.bike.brand }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Model Number</th>
-                        <td class="">12345</td>
+                        <td class="">{{ service.bike.model }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Bike Number</th>
-                        <td class="">DL0445</td>
+                        <td class="">{{ service.bike.vehicle_number }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Year of Purchased</th>
-                        <td class="">2000</td>
+                        <td class="">{{ service.bike.year_of_purchase }}</td>
                     </tr>
-                    <tr class="">
-                        <th scope="col">Odometer Reading</th>
-                        <td class="">2220</td>
-                    </tr>
-                    <tr class="">
-                        <th scope="col">RC Number</th>
-                        <td class="">1234589</td>
-                    </tr>
+<!--                    <tr class="">-->
+<!--                        <th scope="col">Odometer Reading</th>-->
+<!--                        <td class="">2220</td>-->
+<!--                    </tr>-->
+<!--                    <tr class="">-->
+<!--                        <th scope="col">RC Number</th>-->
+<!--                        <td class="">1234589</td>-->
+<!--                    </tr>-->
                     <tr class="">
                         <th scope="col">Owner Name</th>
-                        <td class="">Amit Singh</td>
+                        <td class="">{{ service.bike.owner_name }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Pin Code</th>
-                        <td class="">110043</td>
+                        <td class="">{{ service.bike.pin_code }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Type Of issue </th>
-                        <td class="">Full Bike Repairing</td>
+                        <td class="">{{ service.bike.Vehicle_issues }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Payment Details</th>
-                        <td class="text-success">2000Rs. / Phone pay</td>
+                        <td class="text-success">Rs. {{ service.order.order_amount }} /-</td>
                     </tr>
                 </table>
                 <!-- Button trigger modal -->
@@ -88,15 +88,19 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+
+                {% for m in mechnic %}
                 <div class="col-lg-12 my-2">
                     <div class="bg-light shadow-sm rounded p-2 border-style">
                         <div class="d-flex justify-content-between">
                             <div>
                                 <div class="d-flex">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Userimage.png" height="50" width="50" class="rounded-circle me-2" alt="">
+                                    {% if m.img %}
+                                    <img src="{{ m.img.url }}" height="50" width="50" class="rounded-circle me-2" alt="">
+                                    {% endif %}
                                     <div>
-                                        <h6 class="text-danger">Amit Kumar</h6>
-                                        <div class="fw-bold text-secondary">Profile</div>
+                                        <h6 class="text-danger">{{ m.name }}</h6>
+                                        <div class="fw-bold text-secondary">{{ m.profile }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -107,25 +111,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-12 my-2">
-                    <div class="bg-light shadow-sm rounded p-2 border-style">
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <div class="d-flex">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Userimage.png" height="50" width="50" class="rounded-circle me-2" alt="">
-                                    <div>
-                                        <h6 class="text-danger">Amit Kumar</h6>
-                                        <div class="fw-bold text-secondary">Profile</div>
-                                    </div>
-                                </div>
-                            </div>
+                {% endfor %}
 
-                            <div>
-                                <button class="btn btn-success btn-sm mt-2">Share</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

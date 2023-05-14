@@ -11,8 +11,6 @@ from .models import *
 # Create your views here.
 
 def login_attempt(request):
-    #    if not request.user.is_superuser:
-    #        return redirect('login_attempt')
     if request.method == 'POST':
         phone = request.POST.get('phone')
         password = request.POST.get('password')
@@ -34,7 +32,20 @@ def logout_view(request):
 def adminpanel(request):
     if not request.user.is_superuser:
         return redirect('login_attempt')
-    return render(request, 'adminpanel.html')
+    total_service = Service.objects.all().count()
+    annul_service = Service.objects.filter(plan_title="annual").count()
+    onetime_service = Service.objects.filter(plan_title="monthly").count()
+    today_total_service = Service.objects.all().filter(create_at=datetime.datetime.today()).count()
+    today_annul_service = Service.objects.filter(plan_title="annual").filter(
+        create_at=datetime.datetime.today()).count()
+    today_onetime_service = Service.objects.filter(plan_title="monthly").filter(
+        create_at=datetime.datetime.today()).count()
+    print(total_service)
+    return render(request, 'adminpanel.html', {'total_service': total_service, 'annul_service': annul_service,
+                                               'onetime_service': onetime_service,
+                                               'today_total_service': today_total_service,
+                                               'today_annul_service': today_annul_service,
+                                               'today_onetime_service': today_onetime_service})
 
 
 def addplan(request):
@@ -46,7 +57,7 @@ def addplan(request):
             pricing_add = request.POST.get('pricing')
             types = request.POST.get('types')
             details = request.POST.get('details')
-            img = request.FILES['img']
+            img = request.FILES.get('img')
             pricing = int(pricing_add)
             if types == 'yearly':
                 data = PlanName.objects.create(title=title, pricing=pricing, types=types, details=details, img=img,
@@ -54,7 +65,7 @@ def addplan(request):
                 data.save()
                 msg = "Your Plane Has Been Created !"
                 return render(request, 'addplan.html', {'msg': msg})
-            elif types == 'onetime':
+            elif types == 'onetime' or types == 'monthly':
                 data = PlanName.objects.create(title=title, pricing=pricing, types=types, details=details, img=img,
                                                services="onetime")
                 data.save()
@@ -63,8 +74,8 @@ def addplan(request):
             else:
                 msg = "Something Went Wrong Please Select Correct Plan Name !"
                 return render(request, 'addplan.html', {'msg': msg})
-    except Exception as e:
-        msg = "Something Went Wrong !"
+    except Exception as E:
+        msg = E
         return render(request, 'addplan.html', {'msg': msg})
     return render(request, 'addplan.html')
 
@@ -86,7 +97,7 @@ def editplan(request, id):
             pricing_add = request.POST.get('pricing')
             types = request.POST.get('types')
             details = request.POST.get('details')
-            img = request.FILES['img']
+            img = request.FILES.get('img')
             pricing = int(pricing_add)
             if types == 'yearly':
                 data = PlanName.objects.get(id=id)
@@ -98,7 +109,7 @@ def editplan(request, id):
                 data.save()
                 msg = "Your Plane Has Been Updated !"
                 return render(request, 'addplan.html', {'msg': msg})
-            elif types == 'onetime':
+            elif types == 'onetime' or types == 'monthly':
                 data = PlanName.objects.get(id=id)
                 data.title = title
                 data.pricing = pricing
@@ -111,10 +122,16 @@ def editplan(request, id):
             else:
                 msg = "Something Went Wrong Please Select Correct Plan Name !"
                 return render(request, 'addplan.html', {'msg': msg})
-    except Exception as e:
-        msg = "Something Went Wrong !"
+    except Exception as E:
+        msg = E
         return render(request, 'addplan.html', {'msg': msg})
     return render(request, 'addplan.html', {'plans': plans})
+
+
+def deleteplan(request, id):
+    instance = get_object_or_404(PlanName, id=id)
+    instance.delete()
+    return redirect('plan')
 
 
 def review(request):
@@ -124,7 +141,28 @@ def review(request):
     return render(request, 'review.html', {'rev': rev})
 
 
+def approvedreview(request, id):
+    if not request.user.is_superuser:
+        return redirect('login_attempt')
+    update = get_object_or_404(ClientReview, id=id)
+    status = "approved"
+    instance = ClientReview.objects.get(id=id)
+    instance.status = status
+    instance.save()
+    return redirect('review')
+
+
+def deletereview(request, id):
+    if not request.user.is_superuser:
+        return redirect('login_attempt')
+    instance = get_object_or_404(ClientReview, id=id)
+    instance.delete()
+    return redirect('review')
+
+
 def mechanic_list(request):
+    if not request.user.is_superuser:
+        return redirect('login_attempt')
     ml = Mechanic.objects.all()
     return render(request, 'mechanic_list.html', {'ml': ml})
 
@@ -133,21 +171,22 @@ def mechanice(request):
     if not request.user.is_superuser:
         return redirect('login_attempt')
     if request.method == 'POST':
-        name = request.POST.get('name')
-        profile = request.POST.get('profile')
-        email = request.POST.get('email')
-        price = request.POST.get('price')
-        experiance = request.POST.get('experiance')
-        number = request.POST.get('number')
-        img = request.FILES['img']
-        aadhar = request.POST.get('aadhar')
-        upload_aadhar = request.FILES['upload_aadhar']
-        resume = request.FILES['resume']
-        qualifications = request.POST.get('qualifications')
-        skills = request.POST.get('skills')
+        name = request.POST.get('name', None)
+        profile = request.POST.get('profile', None)
+        email = request.POST.get('email', None)
+        price = request.POST.get('price', None)
+        experiance = request.POST.get('experiance', None)
+        number = request.POST.get('number', None)
+        img = request.FILES.get('img', None)
+        aadhar = request.POST.get('aadhar', None)
+        upload_aadhar = request.FILES.get('upload_aadhar', None)
+        resume = request.FILES.get('resume', None)
+        qualifications = request.POST.get('qualifications', None)
+        skills = request.POST.get('skills', None)
 
         data = Mechanic.objects.create(name=name, profile=profile, email=email, price=price, experiance=experiance,
-                                       aadhar=aadhar, upload_aadhar=upload_aadhar, resume=resume, qualifications=qualifications,
+                                       aadhar=aadhar, upload_aadhar=upload_aadhar, resume=resume,
+                                       qualifications=qualifications,
                                        skills=skills,
                                        number=number, img=img)
         data.save()
@@ -156,33 +195,82 @@ def mechanice(request):
     return render(request, 'addmechanic.html')
 
 
+def deletemechanic(request, id):
+    instance = get_object_or_404(Mechanic, id=id)
+    instance.delete()
+    return redirect('mechanic_list')
+
+
+def updatemechanic(request, id):
+    instance = get_object_or_404(Mechanic, id=id)
+    if request.method == 'POST':
+        name = request.POST.get('name', None)
+        profile = request.POST.get('profile', None)
+        email = request.POST.get('email', None)
+        price = request.POST.get('price', None)
+        experiance = request.POST.get('experiance', None)
+        number = request.POST.get('number', None)
+        img = request.FILES.get('img', None)
+        aadhar = request.POST.get('aadhar', None)
+        upload_aadhar = request.FILES.get('upload_aadhar', None)
+        resume = request.FILES.get('resume', None)
+        qualifications = request.POST.get('qualifications', None)
+        skills = request.POST.get('skills', None)
+        data = Mechanic.objects.get(id=id)
+        data.name = name
+        data.profile = profile
+        data.email = email
+        data.price = price
+        data.experiance = experiance
+        data.number = number
+        data.img = img
+        data.aadhar = aadhar
+        data.upload_aadhar = upload_aadhar
+        data.resume = resume
+        data.qualifications = qualifications
+        data.skills = skills
+        data.save()
+        return redirect('mechanic_list')
+    return render(request, 'addmechanic.html', {'instance': instance})
+
+
+def viewmechanic(request, id):
+    instance = get_object_or_404(Mechanic, id=id)
+    return render(request, 'mechanic.html', {'instance': instance})
+
+
 def booking_leads(request):
     if not request.user.is_superuser:
         return redirect('login_attempt')
-    plane = PlanUpdate.objects.all()
+    plane = Service.objects.all().order_by('-id')
     return render(request, 'booking_leads.html', {'plane': plane})
 
 
-def booking_details(request):
+def booking_details(request, id):
     if not request.user.is_superuser:
         return redirect('login_attempt')
-    # plane = PlanUpdate.objects.get(id=id)
-    return render(request, 'booking-details.html')
+    service = Service.objects.get(id=id)
+    mechnic = Mechanic.objects.all()
+    return render(request, 'booking-details.html', {'service': service, 'mechnic': mechnic})
 
 
 def user_profile(request):
     if not request.user.is_superuser:
         return redirect('login_attempt')
-    plane = PlanUpdate.objects.all()
+    plane = User.objects.all()
     # for i in plane:
     #     print(i.user.)
     return render(request, 'user_profile.html', {'plane': plane})
 
 
+def addservice(request):
+    return render(request, 'addservice.html')
+
+
 def user_history(request, id):
     if not request.user.is_superuser:
         return redirect('login_attempt')
-    plane = PlanUpdate.objects.get(id=id)
+    plane = User.objects.get(id=id)
     return render(request, 'user-history.html', {'plane': plane})
 
 
