@@ -14,7 +14,7 @@ urlpatterns = [
     path('order/details/', OrderAPIView.as_view(), name='OrderAPIView'),
     path('api/client/review', ClientReviewAPIView.as_view(), name='client_review'),
     path('api/user/plan/update/', PlanUpdateAPIView.as_view(), name='PlanUpdateAPIView'),
-    path('api/order/details/', OrderGetAPIView.as_view(), name='OrderGetAPIView'),
+    path('api/order/details/<int:id>/', OrderGetAPIView.as_view(), name='OrderGetAPIView'),
 
     path('api/support/', SuppportAPIView.as_view(), name='SuppportAPIView'),
     path('api/update/delete/booking/bikes/<int:pk>', BookingDeleteUpdateAPI.as_view(), name='BookingDeleteUpdateAPI'),

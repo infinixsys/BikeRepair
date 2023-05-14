@@ -271,8 +271,8 @@ class ServiceAPIView(APIView):
 
 
 class OrderGetAPIView(APIView):
-    def get(self, request, *args, **kwargs):
-        ord = Order.objects.filter(user__id=request.user.id)
+    def get(self, request, id,*args, **kwargs):
+        ord = Order.objects.filter(user__id=id)
         serializer = OrderSerializer(ord, many=True)
         return Response(serializer.data)
 
