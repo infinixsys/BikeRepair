@@ -193,7 +193,7 @@ def mechanice(request):
                                        number=number, img=img)
         data.save()
         msg = "Your Detail Has Been Submitted !!"
-        return render(request, 'addmechanic.html', {'msg': msg})
+        return redirect('mechanic_list')
     return render(request, 'addmechanic.html')
 
 
