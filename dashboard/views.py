@@ -48,6 +48,12 @@ def adminpanel(request):
                                                'today_onetime_service': today_onetime_service})
 
 
+def plan(request):
+    if not request.user.is_superuser:
+        return redirect('login_attempt')
+    plans = PlanName.objects.all()
+    return render(request, 'plan.html', {'plans': plans})
+
 def addplan(request):
     if not request.user.is_superuser:
         return redirect('login_attempt')
@@ -73,18 +79,14 @@ def addplan(request):
                 return render(request, 'addplan.html', {'msg': msg})
             else:
                 msg = "Something Went Wrong Please Select Correct Plan Name !"
-                return render(request, 'addplan.html', {'msg': msg})
+                return redirect('plan')
     except Exception as E:
         msg = E
         return render(request, 'addplan.html', {'msg': msg})
     return render(request, 'addplan.html')
 
 
-def plan(request):
-    if not request.user.is_superuser:
-        return redirect('login_attempt')
-    plans = PlanName.objects.all()
-    return render(request, 'plan.html', {'plans': plans})
+
 
 
 def editplan(request, id):
