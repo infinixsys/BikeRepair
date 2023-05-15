@@ -70,7 +70,7 @@ def addplan(request):
                                                services='yearly')
                 data.save()
                 msg = "Your Plane Has Been Created !"
-                return render(request, 'addplan.html', {'msg': msg})
+                return redirect('plan')
             elif types == 'onetime' or types == 'monthly':
                 data = PlanName.objects.create(title=title, pricing=pricing, types=types, details=details, img=img,
                                                services="onetime")
@@ -79,7 +79,7 @@ def addplan(request):
                 return render(request, 'addplan.html', {'msg': msg})
             else:
                 msg = "Something Went Wrong Please Select Correct Plan Name !"
-                return redirect('plan')
+                return render(request, 'addplan.html', {'msg': msg})
     except Exception as E:
         msg = E
         return render(request, 'addplan.html', {'msg': msg})
