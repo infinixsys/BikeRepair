@@ -9,7 +9,7 @@
     <div class="row justify-content-end">
         <!---<?php include 'sidemenu.php' ?>--->
         <div class="col-lg-10 border">
-            <h4 class="text-center fw-bold mt-3">Add Service</h4>
+            <h4 class="text-center fw-bold mt-3">Update/Create Service</h4>
             <hr>
             {{ msg }}
             <form method="post" enctype="multipart/form-data">
@@ -18,35 +18,36 @@
                 <!-- <div class="col-md-5 p-3 border"> -->
 
                 <div class="col-md-6 mt-2">
-                    <label for="exampleInputEmail1" class="form-label">Select User</label>
+                    <label for="exampleInputEmail1" class="form-label">Select User/Customer</label>
                     <div class="border rounded">
-                        <select class="form-select" name="types" aria-label="Default select example" required>
-                            <option selected>user</option>
-                            <option value="yearly">user1</option>
-                            <option value="onetime">user2</option>
+                        <select class="form-select" name="user" aria-label="Default select example" required>
+                            {% for v in var %}
+                            <option value="{{ v.id }}" selected>{{ v.fname }} {{ v.phone }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
 
 
                 <div class="col-md-6 mt-2">
-                    <label for="exampleInputEmail1" class="form-label">Select Plan</label>
+                    <label for="exampleInputEmail1" class="form-label">Select Order</label>
                     <div class="border rounded">
-                        <select class="form-select" name="types" aria-label="Default select example" required>
-                            <option selected>Plan Category</option>
-                            <option value="yearly">Annually</option>
-                            <option value="onetime">One Time</option>
-                        </select>
+                        <select class="form-select" name="order" aria-label="Default select example" required>
+                            {% for p in plan %}
+                            <option value="{{ p.id }}">{{ p.plane_name.title }} {{ p.user.fname }}</option>
+                            {% endfor %}
+\                        </select>
                     </div>
                 </div>
 
                 <div class="col-md-6 mt-2">
-                    <label for="exampleInputEmail1" class="form-label">Select Vehicle</label>
+                    <label for="exampleInputEmail1" class="form-label">Select Booking Details/Vehicle</label>
                     <div class="border rounded">
-                        <select class="form-select" name="types" aria-label="Default select example" required>
-                            <option selected>Vehicles</option>
-                            <option value="yearly">splender</option>
-                            <option value="onetime">Hero</option>
+                        <select class="form-select" name="booking" aria-label="Default select example" required>
+                            {% for s in book %}
+                            <option value="{{ s.id }}" selected>{{ s.model }} {{ s.user.name }}</option>
+                            {% endfor %}
+
                         </select>
                     </div>
                 </div>

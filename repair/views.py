@@ -132,7 +132,8 @@ def handle_payment_success(request):
 
     user_id = request.data['user']
     user = User.objects.get(id=user_id)
-
+    booking_id = request.data['booking']
+    bookingdetails = BookingDetails.objects.get(id=booking_id)
     ord_id = request.data["razorpay_order_id"]
     raz_pay_id = request.data["razorpay_payment_id"]
     raz_signature = request.data["razorpay_signature"]
@@ -152,6 +153,7 @@ def handle_payment_success(request):
         return Response({'error': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
 
     order.isPaid = True
+    order.bookingdetails= bookingdetails
     order.save()
 
     booking = BookingDetails.objects.filter(user__id=user_id)

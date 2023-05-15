@@ -161,6 +161,7 @@ class Order(models.Model):
     )
     plane_name = models.ForeignKey(PlanName, on_delete=models.CASCADE, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    bookingdetails = models.ForeignKey(BookingDetails, on_delete=models.CASCADE, blank=True, null=True)
     order_amount = models.CharField(max_length=25)
     order_payment_id = models.CharField(max_length=100)
     service_types = models.CharField(max_length=200, blank=True, null=True, choices=STATUS)
