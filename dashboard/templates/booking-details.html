@@ -14,15 +14,15 @@
                 <table class="table">
                     <tr class="">
                         <th scope="col">Name</th>
-                        <td class="">{{ service.user.fname }}</td>
+                        <td class="">{{ order.user.fname }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Mobile Number</th>
-                        <td class="">{{ service.user.phone }}</td>
+                        <td class="">{{ order.user.phone }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Residence Address</th>
-                        <td class="">{{ service.bike.location }}</td>
+                        <td class="">{{ order.bookingdetails.location }}</td>
                     </tr>
 <!--                    <tr class="">-->
 <!--                        <th scope="col">Current Location</th>-->
@@ -30,19 +30,19 @@
 <!--                    </tr>-->
                     <tr class="">
                         <th scope="col">Bike Brand Name</th>
-                        <td class="">{{ service.bike.brand }}</td>
+                        <td class="">{{ order.bookingdetails.brand }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Model Number</th>
-                        <td class="">{{ service.bike.model }}</td>
+                        <td class="">{{ order.bookingdetails.model }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Bike Number</th>
-                        <td class="">{{ service.bike.vehicle_number }}</td>
+                        <td class="">{{ order.bookingdetails.vehicle_number }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Year of Purchased</th>
-                        <td class="">{{ service.bike.year_of_purchase }}</td>
+                        <td class="">{{ order.bookingdetails.year_of_purchase }}</td>
                     </tr>
 <!--                    <tr class="">-->
 <!--                        <th scope="col">Odometer Reading</th>-->
@@ -54,19 +54,19 @@
 <!--                    </tr>-->
                     <tr class="">
                         <th scope="col">Owner Name</th>
-                        <td class="">{{ service.bike.owner_name }}</td>
+                        <td class="">{{ order.bookingdetails.owner_name }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Pin Code</th>
-                        <td class="">{{ service.bike.pin_code }}</td>
+                        <td class="">{{ order.bookingdetails.pin_code }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Type Of issue </th>
-                        <td class="">{{ service.bike.Vehicle_issues }}</td>
+                        <td class="">{{ order.bookingdetails.Vehicle_issues }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Payment Details</th>
-                        <td class="text-success">Rs. {{ service.order.order_amount }} /-</td>
+                        <td class="text-success">Rs. {{ order.order_amount }} /-</td>
                     </tr>
                 </table>
                 <!-- Button trigger modal -->

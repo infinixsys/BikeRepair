@@ -14,7 +14,7 @@
                 <div class="col-md-4">
                     <div class="input-group mb-3">
                         <div class="col-md-8">
-                            <a href="{% url 'addservice' %}"><button class="btn btn-success"> <i class="bi bi-plus text-white"></i> Create/Update Service </button></a>
+                            <h1>{{ msg }}</h1>
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         <td class="table-primary">{{ i.location }}</td>
                         <td class="table-success">{{ i.email }}</td>
                         <td class="table-warning">
-                           <a href="{% url 'user_history' i.id %}"><i class="bi bi-eye fs-4 text-success"></i></a>
+                           <a href="{% url 'user_history' i.id %}"><i class="bi bi-eye fs-4 text-success"></i></a> &nbsp; &nbsp; &nbsp;
                         </td>
                     </tr>
                 {% endfor %}

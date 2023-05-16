@@ -16,7 +16,7 @@ urlpatterns = [
 
     path('user/profile', user_profile, name='user_profile'),
     path('user/history/<int:id>', user_history, name='user_history'),
-    path('add/service/', addservice, name='addservice'),
+    path('add/service/<int:id>', addservice, name='addservice'),
 
     path('account', account, name='account'),
     path('bill/create', create_bill, name='create_bill'),

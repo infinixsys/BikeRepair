@@ -242,16 +242,57 @@ def viewmechanic(request, id):
 def booking_leads(request):
     if not request.user.is_superuser:
         return redirect('login_attempt')
-    plane = Service.objects.all().order_by('-id')
+    plane = Order.objects.all().order_by('-id')
     return render(request, 'booking_leads.html', {'plane': plane})
 
 
 def booking_details(request, id):
     if not request.user.is_superuser:
         return redirect('login_attempt')
-    service = Service.objects.get(id=id)
+    order = Order.objects.get(id=id)
     mechnic = Mechanic.objects.all()
-    return render(request, 'booking-details.html', {'service': service, 'mechnic': mechnic})
+    return render(request, 'booking-details.html', {'order': order, 'mechnic': mechnic})
+
+
+def addservice(request, id):
+    order = Order.objects.get(id=id)
+    if order.isPaid:
+        if order.service_types == 'onetime' or order.service_types == 'monthly':
+            order.isPaid = False
+            order.count -= 1
+            order.save()
+            value = Service.objects.create(user=order.user, order=order, bike=order.bookingdetails,
+                                           brand=order.bookingdetails.brand,
+                                           count=order.count,
+                                           princing=order.order_amount, name=order.user.fname,
+                                           username=order.user.phone,
+                                           plan_title=order.plane_name.title)
+            value.save()
+            msg = "One Time Are Completed!"
+            return redirect('booking_leads')
+        elif order.service_types == "yearly":
+
+            order.count -= 1
+            order.save()
+            if order.count == 0:
+                order.isPaid = False
+                order.save()
+            value = Service.objects.create(user=order.user, order=order, bike=order.bookingdetails,
+                                           brand=order.bookingdetails.brand,
+                                           count=order.count,
+                                           princing=order.order_amount, name=order.user.fname,
+                                           username=order.user.phone,
+                                           plan_title=order.plane_name.title)
+
+            value.save()
+            msg = "Service Order Are Completed"
+            return redirect('booking_leads')
+        else:
+            msg = "Something Went Wrong"
+            return render(request, 'booking_leads.html', {'msg': msg})
+    else:
+        msg = "Not Valid your Service ! Repayment Booking"
+        return render(request, 'booking_leads.html', {'msg': msg})
 
 
 def user_profile(request):
@@ -261,57 +302,6 @@ def user_profile(request):
     # for i in plane:
     #     print(i.user.)
     return render(request, 'user_profile.html', {'plane': plane})
-
-
-def addservice(request):
-    var = User.objects.all()
-    plan = Order.objects.all()
-    book = BookingDetails.objects.all()
-    if request.method == 'POST':
-        user_id = request.POST.get('user')
-        booking_id = request.POST.get('booking')
-        order_id = request.POST.get('order')
-        user = User.objects.get(id=user_id)
-        booking = BookingDetails.objects.get(id=booking_id)
-        order = Order.objects.get(id=order_id)
-        if user != booking.user:
-            msg = "user or booking Id Not Valid ! "
-            return render(request, 'addservice.html', {'msg': msg})
-        if user != order.user:
-            msg = "user or Order Id Not Valid ! "
-            return render(request, 'addservice.html', {'msg': msg})
-        if order.isPaid:
-            if order.service_types == 'onetime' or order.service_types == 'monthly':
-                order.isPaid = False
-                order.count -= 1
-                order.save()
-                value = Service.objects.create(user=user, order=order, bike=booking, brand=booking.brand,
-                                               count=order.count,
-                                               princing=order.order_amount, name=user.fname, username=user.phone,
-                                               plan_title=order.plane_name.title)
-                value.save()
-                msg = "One Time Are Completed!"
-                return render(request, 'addservice.html', {'msg':msg})
-            elif order.service_types == "yearly":
-
-                order.count -= 1
-                order.save()
-                if order.count == 0:
-                    order.isPaid = False
-                    order.save()
-                value = Service.objects.create(user=user, order=order, bike=booking, count=order.count, brand=booking.brand,
-                                               princing=order.order_amount, name=user.fname, username=user.phone, plan_title=order.plane_name.title)
-
-                value.save()
-                msg = "Service Order Are Completed"
-                return render(request, 'addservice.html', {'msg':msg})
-            else:
-                msg = "Something Went Wrong"
-                return render(request, 'addservice.html', {'msg': msg})
-        else:
-            msg = "Not Valid your Service ! Repayment Booking"
-            return render(request, 'addservice.html', {'msg': msg})
-    return render(request, 'addservice.html', {'var':var, 'plan':plan, 'book':book})
 
 
 def user_history(request, id):
