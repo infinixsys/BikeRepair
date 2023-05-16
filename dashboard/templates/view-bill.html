@@ -1,11 +1,31 @@
-{% extends 'base.html' %}
+
+<!doctype html>
+<html lang="en">
 {% load static %}
 
-{% block content %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DR. AUTO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- style -->
+    <link rel="stylesheet" href="{% static 'assets/css//style.css' %}">
+    <!-- ICONS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <!-- editor -->
+    <script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
+    <!--  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+     <!--  -->
 
+<!--  -->
+<script src="{% static 'assets/js//script.js' %}"></script>
 
+</head>
 
-<!-- <?php include 'header.php'; ?> -->
+<body>
+
+<?php include 'header.html'; ?>
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-lg-10 p-4">
@@ -104,7 +124,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                            </tr>
+                            </tr>    
                         </tbody>
                     </table>
                     <hr>
@@ -166,7 +186,7 @@
                               special Notes And instructions
                             </div>
                             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore, impedit.
-
+                                
                             </p>
                             </div>
                             <div>
@@ -213,6 +233,3 @@
         }, "1000")
     })
 </script>
-
-
-{% endblock %}

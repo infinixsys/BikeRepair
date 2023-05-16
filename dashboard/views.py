@@ -1,11 +1,11 @@
 from unicodedata import decimal
-
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from main.models import *
 from repair.models import *
 from .models import *
+from django.db.models import Q
 
 
 # Create your views here.
@@ -137,7 +137,13 @@ def deleteplan(request, id):
 def review(request):
     if not request.user.is_superuser:
         return redirect('login_attempt')
+
     rev = ClientReview.objects.all()
+    data = request.GET.get('data')
+    if data == "approved":
+        rev = rev.filter(status=data)
+    if data == "disapproved":
+        rev = rev.filter(status=data)
     return render(request, 'review.html', {'rev': rev})
 
 
@@ -243,6 +249,10 @@ def booking_leads(request):
     if not request.user.is_superuser:
         return redirect('login_attempt')
     plane = Order.objects.all().order_by('-id')
+    if request.method == 'POST':
+        data =request.POST.get('data')
+        plane = Order.objects.filter(Q(user__phone__icontains=data) | Q(user__email__icontains=data) | Q(user__fname__icontains=data))
+        return render(request, 'booking_leads.html', {'plane': plane})
     return render(request, 'booking_leads.html', {'plane': plane})
 
 
@@ -299,8 +309,10 @@ def user_profile(request):
     if not request.user.is_superuser:
         return redirect('login_attempt')
     plane = User.objects.all()
-    # for i in plane:
-    #     print(i.user.)
+    if request.method == 'POST':
+        data = request.POST.get('data')
+        plane = User.objects.filter(Q(phone__icontains=data) | Q(fname__icontains=data) | Q(email__icontains=data))
+        return render(request, 'user_profile.html', {'plane': plane})
     return render(request, 'user_profile.html', {'plane': plane})
 
 

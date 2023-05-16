@@ -12,8 +12,8 @@
                     <h4>Customer Review</h4>
                 </div>
                 <div>
-                 <a href="review.php"><button class="btn btn-danger">Not Approved</button></a>
-               <a href="approvedreview.php"><button class="btn btn-success">Approved</button></a>
+                 <a href="{% url 'review' %}?data=disapproved"><button class="btn btn-danger">Not Approved</button></a>
+               <a href="{% url 'review' %}?data=approved"><button class="btn btn-success">Approved</button></a>
                  </div>
             </div>
             {% for i in rev %}
@@ -28,7 +28,7 @@
                           <button class="btn btn-danger">{{ i.status }}</button>
                           {% endif %}
                       <div style="cursor:pointer;">
-                      <a href="{% url 'deletereview' i.id %}"><i class="bi bi-archive text-danger"></i></a>
+                      <a href="{% url 'deletereview' i.id %}"><i class="bi bi-archive text-danger"></i></a> &nbsp; &nbsp; &nbsp; &nbsp;
                       <a href="{% url 'approvedreview' i.id %}"><i class="bi bi-check-circle text-success"></i></a>
                       </div>
                       </div>

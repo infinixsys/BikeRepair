@@ -15,3 +15,6 @@ class AddOfferBanner(models.Model):
     img = models.ImageField(upload_to="img/", blank=True, null=True)
     create_at = models.DateTimeField(auto_now_add=True)
 
+
+class BillCreate(models.Model):
+    pass
