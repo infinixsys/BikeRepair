@@ -8,10 +8,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from main.models import User
-from .models import AboutUs, PlanName, Notification, Order, ClientReview, BookingDetails, Support, Service
+from .models import AboutUs, PlanName, Notification, Order, ClientReview, BookingDetails, Support, Service, \
+    ClientSupport
 from .serializers import AboutUsSerializer, PlanNameSerializer, \
     NotificationSerializer, OrderSerializer, ClientReviewSerializer, BookingDetailsSerializer, PlanUpdateSerializer, \
-    SupportSerializer, ServiceDataSerializer
+    SupportSerializer, ServiceDataSerializer, ClientSupportSerializer
+
 from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView, \
     RetrieveDestroyAPIView, RetrieveUpdateAPIView, RetrieveUpdateDestroyAPIView, get_object_or_404
 from django.conf import settings
@@ -153,7 +155,7 @@ def handle_payment_success(request):
         return Response({'error': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
 
     order.isPaid = True
-    order.bookingdetails= bookingdetails
+    order.bookingdetails = bookingdetails
     order.save()
 
     booking = BookingDetails.objects.filter(user__id=user_id)
@@ -184,6 +186,11 @@ class PlanUpdateAPIView(ListCreateAPIView):
 class SuppportAPIView(ListCreateAPIView):
     queryset = Support.objects.all()
     serializer_class = SupportSerializer
+
+
+class ClientSupportAPIView(ListAPIView):
+    queryset = ClientSupport.objects.all()
+    serializer_class = ClientSupportSerializer
 
 
 # class ServiceList(ListCreateAPIView):
@@ -238,8 +245,10 @@ class ServiceAPIView(APIView):
                 order.isPaid = False
                 order.count -= 1
                 order.save()
-                value = Service.objects.create(user=user, order=order, bike=booking, brand=booking.brand, count=order.count,
-                                               princing=order.order_amount, name=user.fname, username=user.phone, plan_title=order.plane_name.title)
+                value = Service.objects.create(user=user, order=order, bike=booking, brand=booking.brand,
+                                               count=order.count,
+                                               princing=order.order_amount, name=user.fname, username=user.phone,
+                                               plan_title=order.plane_name.title)
                 value.save()
                 return Response(
                     {'success': "One Time Are Completed!", "order_count": order.count, "user_name": user.fname,
@@ -253,8 +262,10 @@ class ServiceAPIView(APIView):
                 if order.count == 0:
                     order.isPaid = False
                     order.save()
-                value = Service.objects.create(user=user, order=order, bike=booking, count=order.count, brand=booking.brand,
-                                               princing=order.order_amount, name=user.fname, username=user.phone, plan_title=order.plane_name.title)
+                value = Service.objects.create(user=user, order=order, bike=booking, count=order.count,
+                                               brand=booking.brand,
+                                               princing=order.order_amount, name=user.fname, username=user.phone,
+                                               plan_title=order.plane_name.title)
 
                 value.save()
                 return Response(
@@ -273,7 +284,7 @@ class ServiceAPIView(APIView):
 
 
 class OrderGetAPIView(APIView):
-    def get(self, request, id,*args, **kwargs):
+    def get(self, request, id, *args, **kwargs):
         ord = Order.objects.filter(user__id=id)
         serializer = OrderSerializer(ord, many=True)
         return Response(serializer.data)

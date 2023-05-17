@@ -128,6 +128,12 @@ class Support(models.Model):
         return self.name
 
 
+class ClientSupport(models.Model):
+    name = models.CharField(max_length=500, blank=True, null=True)
+    contact = models.CharField(max_length=200, blank=True, null=True)
+    txt = models.TextField(default=None, blank=True, null=True)
+
+
 class FQA(models.Model):
     question = models.CharField(max_length=500, blank=True, null=True)
     answer = RichTextField(default=None, blank=True, null=True)

@@ -30,7 +30,8 @@ class BookingDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookingDetails
         fields = ("id", "user", "model", "vehicle_number", "year_of_purchase", "odometer_reading", "rc_number",
-                  "owner_name", "pin_code", "location", "Vehicle_issues", "brand", "front_image", "back_image", "left_image", "right_image")
+                  "owner_name", "pin_code", "location", "Vehicle_issues", "brand", "front_image", "back_image",
+                  "left_image", "right_image")
 
 
 class ClientReviewSerializer(serializers.ModelSerializer):
@@ -48,6 +49,12 @@ class PlanUpdateSerializer(serializers.ModelSerializer):
 class SupportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Support
+        fields = "__all__"
+
+
+class ClientSupportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClientSupport
         fields = "__all__"
 
 

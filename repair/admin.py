@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from repair.models import PlanName, AboutUs, Notification, BookingDetails, Order, ClientReview, PlanUpdate, \
-    Support, FQA, Mechanic, Service
+    Support, FQA, Mechanic, Service, ClientSupport
 
 # Register your models here.
 
@@ -13,6 +13,7 @@ admin.site.register(Order)
 admin.site.register(ClientReview)
 admin.site.register(PlanUpdate)
 admin.site.register(Support)
+admin.site.register(ClientSupport)
 admin.site.register(FQA)
 admin.site.register(Mechanic)
 admin.site.register(Service)
