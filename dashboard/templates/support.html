@@ -12,8 +12,30 @@
                     <h4>User Support</h4>
                 </div>
             </div>
-            {% for i in sup %}
+            {% for i in cls %}
             {% if forloop.counter == 1 %}
+            <div class="row justify-content-center">
+                <div class="col-lg-12 my-2">
+                    <div class="bg-white shadow-sm rounded p-2 border-style">
+                    <h6 class="fw-bold text-danger">{{ i.name }}</h6>
+                     <h6>{{ i.contact }}</h6>
+                        <p>{{ i.txt }}</p>
+                        <a href="{% url 'editsupport' i.id %}"><span style="font:blue;">Edit Support</span></a>
+                    </div>
+
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="col-lg-10 p-5">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h4>User Submit Support</h4>
+                </div>
+            </div>
+            {% for i in sup %}
             <div class="row justify-content-center">
                 <div class="col-lg-12 my-2">
                     <div class="bg-white shadow-sm rounded p-2 border-style">
@@ -23,7 +45,6 @@
                     </div>
                 </div>
             </div>
-            {% endif %}
             {% endfor %}
         </div>
     </div>

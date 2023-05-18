@@ -250,8 +250,9 @@ def booking_leads(request):
         return redirect('login_attempt')
     plane = Order.objects.all().order_by('-id')
     if request.method == 'POST':
-        data =request.POST.get('data')
-        plane = Order.objects.filter(Q(user__phone__icontains=data) | Q(user__email__icontains=data) | Q(user__fname__icontains=data))
+        data = request.POST.get('data')
+        plane = Order.objects.filter(
+            Q(user__phone__icontains=data) | Q(user__email__icontains=data) | Q(user__fname__icontains=data))
         return render(request, 'booking_leads.html', {'plane': plane})
     return render(request, 'booking_leads.html', {'plane': plane})
 
@@ -278,6 +279,7 @@ def addservice(request, id):
                                            username=order.user.phone,
                                            plan_title=order.plane_name.title)
             value.save()
+
             msg = "One Time Are Completed!"
             return redirect('booking_leads')
         elif order.service_types == "yearly":
@@ -327,25 +329,68 @@ def support(request):
     if not request.user.is_superuser:
         return redirect('login_attempt')
     sup = Support.objects.all()
-    return render(request, 'support.html', {'sup': sup})
+    cls = ClientSupport.objects.all()
+    return render(request, 'support.html', {'sup': sup, 'cls': cls})
+
+
+def editsupport(request, id):
+    cls = get_object_or_404(ClientSupport, id=id)
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        contact = request.POST.get('contact')
+        txt = request.POST.get('txt')
+        cls = ClientSupport.objects.get(id=id)
+        cls.name = name
+        cls.contact = contact
+        cls.txt = txt
+        cls.save()
+        return redirect('support')
+    return render(request, 'editsupport.html', {'cls': cls})
 
 
 def account(request):
     if not request.user.is_superuser:
         return redirect('login_attempt')
-    return render(request, 'account.html')
+    bc = BillCreate.objects.all().order_by('-id')
+    if request.method == 'POST':
+        pass
+    return render(request, 'account.html', {'ords': bc})
 
 
 def create_bill(request):
     if not request.user.is_superuser:
         return redirect('login_attempt')
-    return render(request, 'create-bill.html')
+    ords = Order.objects.all()
+    if request.method == 'POST':
+        order_id = request.POST.get('order')
+        order = Order.objects.get(id=order_id)
+        bill_name = request.POST.get("bill_name", None)
+        bill_company = request.POST.get("bill_company", None)
+        bill_address = request.POST.get("bill_address", None)
+        bill_pincode = request.POST.get("bill_pincode", None)
+        bill_phone = request.POST.get("bill_phone", None)
+        total_service = request.POST.get("total_service", None)
+        tax = request.POST.get("tax", None)
+        igst = request.POST.get("igst", None)
+        sgst = request.POST.get("sgst", None)
+        cgst = request.POST.get("cgst", None)
+        total = request.POST.get("total", None)
+        txt = request.POST.get("txt", None)
+        data = BillCreate.objects.create(order=order, bill_name=bill_name, bill_company=bill_company,
+                                         bill_address=bill_address
+                                         , bill_pincode=bill_pincode, bill_phone=bill_phone,
+                                         total_service=total_service,
+                                         tax=tax, igst=igst, sgst=sgst, cgst=cgst, total=total, txt=txt)
+        data.save()
+        return redirect('account')
+    return render(request, 'create-bill.html', {'ords': ords})
 
 
-def view_bill(request):
+def view_bill(request, id):
     if not request.user.is_superuser:
         return redirect('login_attempt')
-    return render(request, 'view-bill.html')
+    invoice = BillCreate.objects.get(id=id)
+    return render(request, 'view-bill.html', {'invoice':invoice})
 
 
 def faq(request):
@@ -419,3 +464,31 @@ def delete_offer_banner(request, pk):
     instance.delete()
     msg = "Your Images is Deleted !"
     return render(request, 'offer-banner.html', {'msg': msg})
+
+
+def changeusername(request):
+    if not request.user.is_superuser:
+        return redirect('login_attempt')
+    if request.method == 'POST':
+        old_phone = request.POST.get('old_phone')
+        new_phone = request.POST.get('new_phone')
+        user = User.objects.get(phone=request.user.phone)
+        if user.phone == old_phone:
+            user.phone = new_phone
+            user.save()
+            return redirect('login_attempt')
+    return render(request, 'changeusername.html')
+
+
+def changepassword(request):
+    if not request.user.is_superuser:
+        return redirect('login_attempt')
+    if request.method == 'POST':
+        old_password = request.POST.get('old_password')
+        new_password = request.POST.get('new_password')
+        user = User.objects.get(phone=request.user.phone)
+        if user.check_password(old_password):
+            user.set_password(new_password)
+            user.save()
+            return redirect('login_attempt')
+    return render(request, 'changepassword.html')

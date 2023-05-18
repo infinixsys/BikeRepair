@@ -20,7 +20,7 @@ urlpatterns = [
 
     path('account', account, name='account'),
     path('bill/create', create_bill, name='create_bill'),
-    path('bill/view', view_bill, name='view_bill'),
+    path('bill/view/<int:id>/', view_bill, name='view_bill'),
 
     path('banner', banner, name='banner'),
     path('add/banner', add_banner, name='add_banner'),
@@ -43,5 +43,9 @@ urlpatterns = [
     path('update/review/<int:id>/', approvedreview, name='approvedreview'),
     path('delete/review/<int:id>/', deletereview, name='deletereview'),
 
+    path('editsupport/<int:id>/', editsupport, name='editsupport'),
+
+    path('change/password/', changepassword, name='changepassword'),
+    path('change/username/', changeusername, name='changeusername'),
 
 ]

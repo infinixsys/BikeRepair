@@ -8,57 +8,80 @@
         <div class="col-lg-10 border">
             <h4 class="text-center fw-bold mt-3">Create Bill</h4>
             <hr>
+            <form method="post">
+                {% csrf_token %}
+
             <div class="row px-4">
                 <!-- <div class="col-md-5 p-3 border"> -->
                 <div class="col-md-6 mt-2">
-                    <label for="name" class="form-label">Bike number</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter Bike Number" aria-describedby="emailHelp">
+                    <label for="name" class="form-label">Bill Name</label>
+                    <input type="text" class="form-control" name="bill_name" id="name" placeholder="Enter Bill Name" aria-describedby="emailHelp">
                 </div>
                 <div class="col-md-6 mt-2">
-                    <label for="name" class="form-label">Service number</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter service Number" aria-describedby="emailHelp">
+                    <label for="name" class="form-label">Bill Company</label>
+                    <input type="text" class="form-control" name="bill_company" id="name" placeholder="Enter Company Name" aria-describedby="emailHelp">
                 </div>
                 <div class="col-md-6 mt-2">
-                    <label for="name" class="form-label">Customer Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="emailHelp">
+                    <label for="name" class="form-label">Bill Address</label>
+                    <input type="text" class="form-control" name="bill_address" id="name" placeholder="" aria-describedby="emailHelp">
                 </div>
                 <div class="col-md-6 mt-2">
-                    <label for="name" class="form-label">Model Number</label>
-                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="emailHelp">
+                    <label for="name" class="form-label">Bill Pincode</label>
+                    <input type="text" class="form-control" name="bill_pincode" id="name" placeholder="" aria-describedby="emailHelp">
                 </div>
                 <div class="col-md-6 mt-2">
-                    <label for="name" class="form-label">Rc Number</label>
-                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="emailHelp">
+                    <label for="name" class="form-label">Bill Phone</label>
+                    <input type="text" class="form-control" name="bill_phone" id="name" placeholder="" aria-describedby="emailHelp">
                 </div>
                 <div class="col-md-6 mt-2">
-                    <label for="name" class="form-label">Units</label>
-                    <input type="text" class="form-control" id="name" placeholder="" aria-describedby="emailHelp">
+                    <label for="name" class="form-label">Total Service Amount</label>
+                    <input type="text" class="form-control" name="total_service" id="name" placeholder="" aria-describedby="emailHelp">
                 </div>
                 <div class="col-md-6 mt-2">
-                    <label for="exampleInputEmail1" class="form-label">Select Category</label>
+                    <label for="name" class="form-label">IGST</label>
+                    <input type="text" class="form-control" name="igst" id="name" placeholder="" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">SGST</label>
+                    <input type="text" class="form-control" name="sgst" id="name" placeholder="" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">CGST</label>
+                    <input type="text" class="form-control" name="cgst" id="name" placeholder="" aria-describedby="emailHelp">
+                </div>
+
+                 <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">TAX</label>
+                    <input type="text" class="form-control" name="tax" id="name" placeholder="" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="exampleInputEmail1" class="form-label">Select Orders</label>
                     <div class="border rounded">
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Service Category</option>
-                            <option value="1">Annually</option>
-                            <option value="2">One Type</option>
+                        <select class="form-select" name="order" aria-label="Default select example">
+                            {% for o in ords %}
+                            {% if o.isPaid %}
+                            <option value="{{ o.id }}">{{ o.id }} | {{ o.user.phone }} | {{ o.user.fname }}</option>
+                            {% endif %}
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
 
                 <div class="col-md-6 mt-2">
-                    <label for="name" class="form-label">Service Price</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter Price" aria-describedby="emailHelp">
+                    <label for="name" class="form-label">Final Price</label>
+                    <input type="text" class="form-control" name="total" id="name" placeholder="Enter Price" aria-describedby="emailHelp">
                 </div>
 
                 <div class="col-md-12 mt-2">
                     <label for="">Description</label>
-                    <textarea name="editor"></textarea>
+                    <textarea name="txt" id="editor"></textarea>
 
                 </div>
                 <div class="col-md-6  d-grid gap-2 my-3">
                     <button class="btn color d-grid gap-2">Add</button>
                 </div>
             </div>
+                </form>
         </div>
     </div>
 </div>

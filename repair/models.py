@@ -165,9 +165,9 @@ class Order(models.Model):
         ('yearly', 'yearly'),
         ('monthly', 'monthly'),
     )
-    plane_name = models.ForeignKey(PlanName, on_delete=models.CASCADE, blank=True, null=True)
+    plane_name = models.ForeignKey(PlanName, on_delete=models.SET_NULL, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    bookingdetails = models.ForeignKey(BookingDetails, on_delete=models.CASCADE, blank=True, null=True)
+    bookingdetails = models.ForeignKey(BookingDetails, on_delete=models.SET_NULL, blank=True, null=True)
     order_amount = models.CharField(max_length=25)
     order_payment_id = models.CharField(max_length=100)
     service_types = models.CharField(max_length=200, blank=True, null=True, choices=STATUS)
@@ -200,4 +200,7 @@ class Service(models.Model):
     princing = models.CharField(max_length=200, blank=True, null=True)
     count = models.IntegerField(blank=True, null=True)
     create_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateField(auto_now=True, blank=True, null=True)
+    update_at = models.DateField(auto_now=True)
+
+    class Meta:
+        ordering = ('-id',)

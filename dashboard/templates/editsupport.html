@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- <?php include 'header.php'; ?> -->
+<div class="container-fluid">
+    <div class="row justify-content-end">
+        <!---<?php include 'sidemenu.php' ?>--->
+        <div class="col-lg-10 border">
+            <h4 class="text-center fw-bold mt-3">Edit Support</h4>
+            <hr>
+          <form method="post">
+            {% csrf_token %}
+
+            <div class="row px-4">
+                <!-- <div class="col-md-5 p-3 border"> -->
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" value="{{ cls.name }}" name="name" id="name" placeholder="Enter Name" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Contact</label>
+                    <input type="text" class="form-control" value="{{ cls.contact }}" id="name" name="contact" placeholder="Enter Contact" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Description</label>
+                    <input type="text" class="form-control" value="{{ cls.txt }}" name="txt" id="name" placeholder="Enter Text" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6  d-grid gap-2 my-3">
+                    <button class="btn color d-grid gap-2">Edit Support</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    CKEDITOR.replace('editor');
+</script>
+{% endblock %}

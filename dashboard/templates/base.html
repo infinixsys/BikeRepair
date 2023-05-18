@@ -36,15 +36,15 @@
             Dashboard
          </a>
       </li>
-<!--      <li class="mt-1">-->
-<!--         <button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse" aria-controls="contents-collapse">-->
-<!--            <i class="bi bi-grid-fill mx-1"></i>Category</button>-->
-<!--         <ul class="list-unstyled bg-white ps-1 collapse shadow-sm rounded" id="contents-collapse">-->
-<!--            <li><a class="d-inline-flex align-items-center rounded" href="category.php">Category</a>-->
-<!--            <li>-->
-<!--            <li><a class="d-inline-flex align-items-center rounded" href="subcategoryadd.php">Sub Category</a></li>-->
-<!--         </ul>-->
-<!--      </li>-->
+      <li class="mt-1">
+         <button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse" aria-controls="contents-collapse">
+            <i class="bi bi-grid-fill mx-1"></i>User Details</button>
+         <ul class="list-unstyled bg-white ps-1 collapse shadow-sm rounded" id="contents-collapse">
+            <li><a class="d-inline-flex align-items-center rounded" href="{% url 'changepassword' %}">Change Password</a>
+            <li>
+            <li><a class="d-inline-flex align-items-center rounded" href="{% url 'changeusername' %}">Change Username</a></li>
+         </ul>
+      </li>
 
       <li class="mt-1">
          <a href="{% url 'plan' %}"><button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse2" aria-controls="contents-collapse2">

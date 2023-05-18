@@ -156,3 +156,5 @@ REST_KNOX = {
     'USER_SERIALIZER': 'accounts.serializers.UserSerializer',
     'TOKEN_TTL': timedelta(days=1),
 }
+
+

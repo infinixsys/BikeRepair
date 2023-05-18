@@ -92,3 +92,8 @@ db.sqlite3
 /.idea
 /media
 media
+
+migrations
+.migrations
+/migrations
+migrations/

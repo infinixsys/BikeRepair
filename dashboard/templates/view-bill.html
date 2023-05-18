@@ -34,7 +34,7 @@
                         <div style="display: flex;justify-content:space-between">
                             <div>
                                 <h2>Dr.Auto</h2>
-                                <img src="assets/img//drlogo.png" width="150px" alt="">
+                                <img src="{% static 'assets/img//drlogo.png' %}" width="150px" alt="">
                             </div>
                             <div>
                                 <h4 style="color: #e5383b;">Invoice</h4>
@@ -47,11 +47,11 @@
                                         <div><b>Payment Due by:&nbsp;</b></div>
                                     </div>
                                     <div>
-                                        <div style="border:1px solid black; padding-right:10px;padding-left:10px">&nbsp; Amit KUmar</div>
-                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; 8700282172</div>
-                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; 12</div>
-                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; 12/12/2023</div>
-                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; 12</div>
+                                        <div style="border:1px solid black; padding-right:10px;padding-left:10px">&nbsp; {{ invoice.create_at | date }}</div>
+                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; {{ invoice.invoice }}</div>
+                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; {{ invoice.order.user.id }}</div>
+                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; {{ invoice.order.order_date | date }}</div>
+                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; {{ invoice.order.count }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -69,11 +69,11 @@
                                         <div><b>[Phone]&nbsp;</b></div>
                                     </div>
                                     <div>
-                                        <div>Amit KUmar</div>
-                                        <div>8700282172</div>
-                                        <div>12</div>
-                                        <div>12/12/2023</div>
-                                        <div>12</div>
+                                        <div>{{ invoice.bill_name }}</div>
+                                        <div>{{invoice.bill_company}}</div>
+                                        <div>{{invoice.bill_address }}</div>
+                                        <div>{{invoice.bill_pincode}}</div>
+                                        <div>{{invoice.bill_phone}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -88,11 +88,11 @@
                                         <div><b>[Phone]&nbsp;</b></div>
                                     </div>
                                     <div>
-                                        <div> &nbsp; Amit KUmar</div>
-                                        <div>&nbsp; 8700282172</div>
-                                        <div>&nbsp; 12</div>
-                                        <div>&nbsp; 12/12/2023</div>
-                                        <div>&nbsp; 12</div>
+                                        <div> &nbsp; {{ invoice.order.user.fname }}</div>
+                                        <div>&nbsp; None</div>
+                                        <div>&nbsp; {{ invoice.order.bookingdetails.location }}</div>
+                                        <div>&nbsp; {{ invoice.order.bookingdetails.pin_code }}</div>
+                                        <div>&nbsp; {{ invoice.order.user.phone }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -129,54 +129,7 @@
                     <hr>
                                 </div>
                 <d class="col-md-11">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr class="">
-                                <th scope="col">Item#</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Qty</th>
-                                <th scope="col">Unit Price</th>
-                                <th scope="col">Line Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>oil change</td>
-                                <td>1</td>
-                                <td>units</td>
-                                <td>1500 Rs.</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>oil change</td>
-                                <td>1</td>
-                                <td>units</td>
-                                <td>1500 Rs.</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>oil change</td>
-                                <td>1</td>
-                                <td>units</td>
-                                <td>1500 Rs.</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>oil change</td>
-                                <td>1</td>
-                                <td>units</td>
-                                <td>1500 Rs.</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>oil change</td>
-                                <td>1</td>
-                                <td>units</td>
-                                <td>1500 Rs.</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    {{ invoice.txt | safe }}
                     <hr>
                     <!--  -->
                     <div style="display: flex;justify-content:space-between">
@@ -202,12 +155,12 @@
                                         <div><b>TOTAL:&nbsp;</b></div>
                                     </div>
                                     <div>
-                                        <div style="border:1px solid black; padding-right:10px;padding-left:10px">&nbsp;1000</div>
-                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp;1000</div>
-                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp;1000</div>
-                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp;1000</div>
-                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp;1000</div>
-                                        <div style="padding-right:10px;padding-left:10px;font-weight:bold">&nbsp;1000</div>
+                                        <div style="border:1px solid black; padding-right:10px;padding-left:10px">&nbsp;{{ invoice.total_service }}</div>
+                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp;{{ invoice.tax }}</div>
+                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp;{{ invoice.igst }}</div>
+                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp;{{ invoice.sgst }}</div>
+                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp;{{ invoice.cgst }}</div>
+                                        <div style="padding-right:10px;padding-left:10px;font-weight:bold">&nbsp;{{ invoice.total }}</div>
                                     </div>
                                 </div>
                             </div>

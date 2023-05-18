@@ -28,24 +28,25 @@
                         <th scope="col">Name</th>
                         <th scope="col">Service Name</th>
                         <th scope="col">bike Number</th>
-                        <th scope="col">Units</th>
+                        <th scope="col">Brand</th>
                         <th scope="col">Amount</th>
                         <th scope="col">action</th>
                     </tr>
                 </thead>
                 <tbody>
+                {% for i in ords %}
                     <tr>
-                        <th scope="row" class="table-secondary">1</th>
-                        <td class="table-info">Amit Kumar</td>
-                        <td class="table-warning">123</td>
-                        <td class="table-primary">DL1304</td>
-                        <td class="table-success">23246</td>
-                        <td class="table-success">1000rs.</td>
+                        <td scope="row" class="table-secondary">{{ i.id }}</td>
+                        <td class="table-info">{{ i.order.user.fname }}</td>
+                        <td class="table-warning">{{ i.order.count }}/{{ i.order.plane_name.title }}</td>
+                        <td class="table-primary">{{ i.order.bookingdetails.vehicle_number }}</td>
+                        <td class="table-success">{{ i.order.bookingdetails.brand }}</td>
+                        <td class="table-success">{{ i.order.plane_name.pricing }}</td>
                         <td class="table-warning">
-                           <a href="{% url 'view_bill' %}"><i class="bi bi-eye fs-4 text-success"></i></a>
-                            <i class="bi bi-archive text-danger fs-4"></i>
+                           <a href="{% url 'view_bill' i.id %}"><i class="bi bi-eye fs-4 text-success"></i></a>
                         </td>
                     </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
