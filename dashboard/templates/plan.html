@@ -24,14 +24,14 @@
                 <div class="col-md-5">
                     <div class="p-3 bg-light shadow-sm rounded">
                         <h1 class="text-center text-success">{{ i.pricing }} /-</h1>
-                        <h2 class="text-center">{{ i.services }}</h2>
+                        <h2 class="text-center">{{ i.types }}</h2>
 <!--                        <h5 class="text-center text-secondary">1 Time service</h5>-->
                         <div class="">
                             <p>{{ i.details | safe }}</p>
                         </div>
                         <div class="text-center my-2">
                         <a href="{% url 'editplan' i.id %}"><i class="bi bi-pencil-square fs-4 text-warning"></i></a>
-                            <a href="{% url 'deleteplan' i.id  %}"> <i class="bi bi-archive text-danger fs-4"></i></a>
+<!--                            <a href="{% url 'deleteplan' i.id  %}"> <i class="bi bi-archive text-danger fs-4"></i></a>-->
                         </div>
                     </div>
                 </div>
