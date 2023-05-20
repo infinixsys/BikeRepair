@@ -26,9 +26,9 @@
                     <tr class="bg-dark text-white">
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Service Name</th>
-                        <th scope="col">bike Number</th>
-                        <th scope="col">Brand</th>
+                        <th scope="col">Item Name</th>
+                        <th scope="col">Unit</th>
+                        <th scope="col">Quality</th>
                         <th scope="col">Amount</th>
                         <th scope="col">action</th>
                     </tr>
@@ -37,11 +37,11 @@
                 {% for i in ords %}
                     <tr>
                         <td scope="row" class="table-secondary">{{ i.id }}</td>
-                        <td class="table-info">{{ i.order.user.fname }}</td>
-                        <td class="table-warning">{{ i.order.count }}/{{ i.order.plane_name.title }}</td>
-                        <td class="table-primary">{{ i.order.bookingdetails.vehicle_number }}</td>
-                        <td class="table-success">{{ i.order.bookingdetails.brand }}</td>
-                        <td class="table-success">{{ i.order.plane_name.pricing }}</td>
+                        <td class="table-info">{{ i.ship_name }}</td>
+                        <td class="table-warning">{{ i.item_name }}</td>
+                        <td class="table-primary">{{ i.item_unit }}</td>
+                        <td class="table-success">{{ i.item_quantity }}</td>
+                        <td class="table-success">{{ i.total }}</td>
                         <td class="table-warning">
                            <a href="{% url 'view_bill' i.id %}"><i class="bi bi-eye fs-4 text-success"></i></a>
                         </td>

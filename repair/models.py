@@ -45,6 +45,10 @@ class PlanName(models.Model):
         ('yearly', 'yearly'),
         ('monthly', 'monthly'),
     )
+    ACTIVATIONS = (
+        ('active', 'active'),
+        ('inactive', 'inactive')
+    )
     title = models.CharField(max_length=200, blank=True, null=True)
     pricing = models.IntegerField(blank=True, null=True)
     types = models.CharField(max_length=200, blank=True, null=True, choices=STATUS)
@@ -53,6 +57,7 @@ class PlanName(models.Model):
     services = models.CharField(max_length=200, blank=True, null=True)
     card_details = models.CharField(max_length=200, blank=True, null=True)
     line_price = models.IntegerField(blank=True, null=True)
+    status = models.CharField(max_length=200, blank=True, null=True, choices=ACTIVATIONS, default='inactive')
     create_at = models.DateField(auto_now_add=True)
     update_at = models.DateField(auto_now=True)
 

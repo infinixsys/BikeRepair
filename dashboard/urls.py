@@ -48,4 +48,7 @@ urlpatterns = [
     path('change/password/', changepassword, name='changepassword'),
     path('change/username/', changeusername, name='changeusername'),
 
+    path('updateactive/<int:id>/', updateactive, name='updateactive'),
+    path('updateinactive/<int:id>/', updateinactive, name='updateinactive'),
+
 ]

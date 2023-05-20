@@ -17,7 +17,7 @@ class AboutUsSerializer(serializers.ModelSerializer):
 class PlanNameSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlanName
-        fields = ('id', 'title', 'pricing', 'types', 'details', 'card_details', 'img', 'line_price')
+        fields = ('id', 'title', 'pricing', 'types', 'details', 'card_details', 'img', 'status', 'line_price')
 
 
 class NotificationSerializer(serializers.ModelSerializer):

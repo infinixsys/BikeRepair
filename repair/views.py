@@ -35,9 +35,11 @@ class AboutUsListView(ListAPIView):
 #     serializer_class = ServiceSerializer
 
 
-class PlanNameListAPI(ListAPIView):
-    queryset = PlanName.objects.all()
-    serializer_class = PlanNameSerializer
+class PlanNameListAPI(APIView):
+    def get(self, request):
+        queryset = PlanName.objects.filter(status='active')
+        serializer = PlanNameSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 class NotificationListAPI(ListAPIView):

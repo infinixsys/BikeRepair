@@ -77,7 +77,7 @@ def addplan(request):
                                                services="onetime")
                 data.save()
                 msg = "Your Plane Has Been Created !"
-                return render(request, 'addplan.html', {'msg': msg})
+                return redirect('plan')
             else:
                 msg = "Something Went Wrong Please Select Correct Plan Name !"
                 return render(request, 'addplan.html', {'msg': msg})
@@ -105,11 +105,19 @@ def editplan(request, id):
                 data.pricing = pricing
                 data.types = types
                 data.details = details
-                data.img = img
                 data.save()
                 msg = "Your Plane Has Been Updated !"
-                return render(request, 'addplan.html', {'msg': msg})
+                return redirect('plan')
             elif types == 'onetime' or types == 'monthly':
+                data = PlanName.objects.get(id=id)
+                data.title = title
+                data.pricing = pricing
+                data.types = types
+                data.details = details
+                data.save()
+                msg = "Your Plane Has Been Updated !"
+                return redirect('plan')
+            elif img != None:
                 data = PlanName.objects.get(id=id)
                 data.title = title
                 data.pricing = pricing
@@ -118,14 +126,38 @@ def editplan(request, id):
                 data.img = img
                 data.save()
                 msg = "Your Plane Has Been Updated !"
-                return render(request, 'addplan.html', {'msg': msg})
+                return redirect('plan')
             else:
-                msg = "Something Went Wrong Please Select Correct Plan Name !"
-                return render(request, 'addplan.html', {'msg': msg})
+                data = PlanName.objects.get(id=id)
+                data.title = title
+                data.pricing = pricing
+                data.details = details
+                data.save()
+                msg = "Your Plane Has Been Updated !"
+                return redirect('plan')
+
     except Exception as E:
         msg = E
         return render(request, 'addplan.html', {'msg': msg})
     return render(request, 'addplan.html', {'plans': plans})
+
+
+def updateactive(request, id):
+    plans = get_object_or_404(PlanName, id=id)
+    status = "inactive"
+    data = PlanName.objects.get(id=id)
+    data.status = status
+    data.save()
+    return redirect('plan')
+
+
+def updateinactive(request, id):
+    plans = get_object_or_404(PlanName, id=id)
+    status = "active"
+    data = PlanName.objects.get(id=id)
+    data.status = status
+    data.save()
+    return redirect('plan')
 
 
 def deleteplan(request, id):
@@ -362,8 +394,8 @@ def create_bill(request):
         return redirect('login_attempt')
     ords = Order.objects.all()
     if request.method == 'POST':
-        order_id = request.POST.get('order')
-        order = Order.objects.get(id=order_id)
+        # order_id = request.POST.get('order')
+        # order = Order.objects.get(id=order_id)
         bill_name = request.POST.get("bill_name", None)
         bill_company = request.POST.get("bill_company", None)
         bill_address = request.POST.get("bill_address", None)
@@ -374,15 +406,43 @@ def create_bill(request):
         igst = request.POST.get("igst", None)
         sgst = request.POST.get("sgst", None)
         cgst = request.POST.get("cgst", None)
-        total = request.POST.get("total", None)
         txt = request.POST.get("txt", None)
-        data = BillCreate.objects.create(order=order, bill_name=bill_name, bill_company=bill_company,
-                                         bill_address=bill_address
-                                         , bill_pincode=bill_pincode, bill_phone=bill_phone,
-                                         total_service=total_service,
-                                         tax=tax, igst=igst, sgst=sgst, cgst=cgst, total=total, txt=txt)
-        data.save()
-        return redirect('account')
+        ship_name = request.POST.get('ship_name', None)
+        ship_address = request.POST.get('ship_address', None)
+        ship_pincode = request.POST.get('ship_pincode', None)
+        ship_phone = request.POST.get('ship_phone', None)
+        ship_gst = request.POST.get('ship_gst', None)
+        item_name = request.POST.get('item_name', None)
+        item_unit = request.POST.get('item_unit', None)
+        item_quantity = request.POST.get('item_quantity', None)
+        item_rate = request.POST.get('item_rate', None)
+        if ship_gst is not None:
+            ship = int(((int(item_unit)*int(item_quantity))*int(ship_gst))/100)
+            total = ship + int(total_service)
+            total = total
+            data = BillCreate.objects.create(bill_name=bill_name, bill_company=bill_company,
+                                             bill_address=bill_address
+                                             , bill_pincode=bill_pincode, bill_phone=bill_phone,
+                                             total_service=total_service,
+                                             tax=tax, igst=igst, sgst=sgst, cgst=cgst, total=total, txt=txt,
+                                             ship_name=ship_name, ship_address=ship_address, ship_pincode=ship_pincode,
+                                             ship_phone=ship_phone, ship_gst=ship_gst, item_name=item_name,
+                                             item_unit=item_unit, item_quantity=item_quantity, item_rate=item_rate)
+            data.save()
+            return redirect('account')
+        else:
+            total = total_service
+            data = BillCreate.objects.create(bill_name=bill_name, bill_company=bill_company,
+                                             bill_address=bill_address
+                                             , bill_pincode=bill_pincode, bill_phone=bill_phone,
+                                             total_service=total_service,
+                                             tax=tax, igst=igst, sgst=sgst, cgst=cgst, total=total, txt=txt,
+                                             ship_name=ship_name, ship_address=ship_address, ship_pincode=ship_pincode,
+                                             ship_phone=ship_phone, ship_gst=ship_gst, item_name=item_name,
+                                             item_unit=item_unit, item_quantity=item_quantity, item_rate=item_rate)
+            data.save()
+            return redirect('account')
+
     return render(request, 'create-bill.html', {'ords': ords})
 
 
@@ -390,7 +450,7 @@ def view_bill(request, id):
     if not request.user.is_superuser:
         return redirect('login_attempt')
     invoice = BillCreate.objects.get(id=id)
-    return render(request, 'view-bill.html', {'invoice':invoice})
+    return render(request, 'view-bill.html', {'invoice': invoice})
 
 
 def faq(request):

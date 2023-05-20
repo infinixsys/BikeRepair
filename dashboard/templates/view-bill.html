@@ -33,7 +33,7 @@
                     <div class="row bg-white" style="display: flex;justify-content:space-between">
                         <div style="display: flex;justify-content:space-between">
                             <div>
-                                <h2>Dr.Auto</h2>
+<!--                                <h2>Dr.Auto</h2>-->
                                 <img src="{% static 'assets/img//drlogo.png' %}" width="150px" alt="">
                             </div>
                             <div>
@@ -42,16 +42,16 @@
                                     <div>
                                         <div><b>Date &nbsp;</b></div>
                                         <div><b>Invoice #: &nbsp;</b></div>
-                                        <div><b>Customer ID:&nbsp;</b></div>
-                                        <div><b>Purchase Order&nbsp;</b></div>
-                                        <div><b>Payment Due by:&nbsp;</b></div>
+                                        <div><b>Billing ID:&nbsp;</b></div>
+<!--                                        <div><b>Purchase Order&nbsp;</b></div>-->
+<!--                                        <div><b>Payment Due by:&nbsp;</b></div>-->
                                     </div>
                                     <div>
                                         <div style="border:1px solid black; padding-right:10px;padding-left:10px">&nbsp; {{ invoice.create_at | date }}</div>
                                         <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; {{ invoice.invoice }}</div>
-                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; {{ invoice.order.user.id }}</div>
-                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; {{ invoice.order.order_date | date }}</div>
-                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; {{ invoice.order.count }}</div>
+                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; {{ invoice.id }}</div>
+<!--                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; {{ invoice.order.order_date | date }}</div>-->
+<!--                                        <div style="border-right:1px solid black;border-left:1px solid black;border-bottom:1px solid black; padding-right:10px;padding-left:10px">&nbsp; {{ invoice.order.count }}</div>-->
                                     </div>
                                 </div>
                             </div>
@@ -82,17 +82,17 @@
                                 <div style="display:flex;">
                                     <div>
                                         <div><b>[Name] &nbsp;</b></div>
-                                        <div><b>[Company Name] &nbsp;</b></div>
                                         <div><b>[Street Address] &nbsp;</b></div>
                                         <div><b>[City.ST Zip Code]&nbsp;</b></div>
                                         <div><b>[Phone]&nbsp;</b></div>
+                                        <div><b>[GST]&nbsp;</b></div>
                                     </div>
                                     <div>
-                                        <div> &nbsp; {{ invoice.order.user.fname }}</div>
-                                        <div>&nbsp; None</div>
-                                        <div>&nbsp; {{ invoice.order.bookingdetails.location }}</div>
-                                        <div>&nbsp; {{ invoice.order.bookingdetails.pin_code }}</div>
-                                        <div>&nbsp; {{ invoice.order.user.phone }}</div>
+                                        <div> &nbsp; {{ invoice.ship_name }}</div>
+                                        <div>&nbsp; {{ invoice.ship_address }}</div>
+                                        <div>&nbsp; {{ invoice.ship_pincode }}</div>
+                                        <div>&nbsp; {{ invoice.ship_phone }}</div>
+                                        <div>&nbsp; {{ invoice.ship_gst }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -104,32 +104,51 @@
             </div>
             <div class="row justify-content-center" style="margin-top:.5rem;">
                 <div class="col-md-11">
-                    <table class="table table-striped border">
+<!--                    <table class="table table-striped border">-->
+<!--                        <thead>-->
+<!--                            <tr class="">-->
+<!--                                <th scope="col">Salesperson</th>-->
+<!--                                <th scope="col">Shipping Method</th>-->
+<!--                                <th scope="col">Shipping Terms</th>-->
+<!--                                <th scope="col">Payment Terms </th>-->
+<!--                                <th scope="col">Due Date</th>-->
+<!--                                <th scope="col">Delivery Date</th>-->
+<!--                            </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                            <tr>-->
+<!--                                <td></td>-->
+<!--                                <td></td>-->
+<!--                                <td></td>-->
+<!--                                <td></td>-->
+<!--                                <td></td>-->
+<!--                                <td></td>-->
+<!--                            </tr>    -->
+<!--                        </tbody>-->
+<!--                    </table>-->
+                    <hr>
+                                </div>
+                <d class="col-md-11">
+                   <table class="table table-striped">
                         <thead>
                             <tr class="">
-                                <th scope="col">Salesperson</th>
-                                <th scope="col">Shipping Method</th>
-                                <th scope="col">Shipping Terms</th>
-                                <th scope="col">Payment Terms </th>
-                                <th scope="col">Due Date</th>
-                                <th scope="col">Delivery Date</th>
+                                <th scope="col">Item#</th>
+                                <th scope="col">Rate</th>
+                                <th scope="col">Qty</th>
+                                <th scope="col">Unit Price</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>    
+                                <td> {{ invoice.item_name }}</td>
+                                <td> {{ invoice.item_rate }}</td>
+                                <td> {{ invoice.ship_name }}</td>
+                                <td> {{ invoice.item_unit }}</td>
+                            </tr>
+
                         </tbody>
                     </table>
                     <hr>
-                                </div>
-                <d class="col-md-11">
-                    {{ invoice.txt | safe }}
                     <hr>
                     <!--  -->
                     <div style="display: flex;justify-content:space-between">
@@ -137,7 +156,7 @@
                               <div style="padding:5px;background-color:#e5383b;color:white;font-weight:bold">
                               special Notes And instructions
                             </div>
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore, impedit.
+                            <p>{{ invoice.txt | safe }}.
                                 
                             </p>
                             </div>
