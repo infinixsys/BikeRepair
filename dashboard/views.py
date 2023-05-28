@@ -65,16 +65,30 @@ def addplan(request):
             types = request.POST.get('types')
             details = request.POST.get('details')
             img = request.FILES.get('img')
+            offer_add = request.POST.get('offer')
+            main_price_add = request.POST.get('main_price')
+            count_add = request.POST.get('count')
+            card_details = request.POST.get('card_details')
+            line_price_add = request.POST.get('line_price')
+            offer = int(offer_add)
+            main_price = int(main_price_add)
+            count = int(count_add)
+            line_price = int(line_price_add)
+
             pricing = int(pricing_add)
             if types == 'yearly':
                 data = PlanName.objects.create(title=title, pricing=pricing, types=types, details=details, img=img,
-                                               services='yearly')
+                                               services='yearly', card_details=card_details, offer=offer,
+                                               main_price=main_price,
+                                               line_price=line_price, count=count)
                 data.save()
                 msg = "Your Plane Has Been Created !"
                 return redirect('plan')
             elif types == 'onetime' or types == 'monthly':
                 data = PlanName.objects.create(title=title, pricing=pricing, types=types, details=details, img=img,
-                                               services="onetime")
+                                               services='onetime', card_details=card_details, offer=offer,
+                                               main_price=main_price,
+                                               line_price=line_price, count=count)
                 data.save()
                 msg = "Your Plane Has Been Created !"
                 return redirect('plan')
@@ -98,6 +112,15 @@ def editplan(request, id):
             types = request.POST.get('types')
             details = request.POST.get('details')
             img = request.FILES.get('img')
+            offer_add = request.POST.get('offer')
+            main_price_add = request.POST.get('main_price')
+            count_add = request.POST.get('count')
+            card_details = request.POST.get('card_details')
+            line_price_add = request.POST.get('line_price')
+            offer = int(offer_add)
+            main_price = int(main_price_add)
+            count = int(count_add)
+            line_price = int(line_price_add)
             pricing = int(pricing_add)
             if types == 'yearly':
                 data = PlanName.objects.get(id=id)
@@ -105,6 +128,11 @@ def editplan(request, id):
                 data.pricing = pricing
                 data.types = types
                 data.details = details
+                data.card_details = card_details
+                data.offer = offer
+                data.main_price = main_price
+                data.line_price = line_price
+                data.count = count
                 data.save()
                 msg = "Your Plane Has Been Updated !"
                 return redirect('plan')
@@ -114,6 +142,11 @@ def editplan(request, id):
                 data.pricing = pricing
                 data.types = types
                 data.details = details
+                data.card_details = card_details
+                data.offer = offer
+                data.main_price = main_price
+                data.line_price = line_price
+                data.count = count
                 data.save()
                 msg = "Your Plane Has Been Updated !"
                 return redirect('plan')
@@ -124,6 +157,11 @@ def editplan(request, id):
                 data.types = types
                 data.details = details
                 data.img = img
+                data.card_details = card_details
+                data.offer = offer
+                data.main_price = main_price
+                data.line_price = line_price
+                data.count = count
                 data.save()
                 msg = "Your Plane Has Been Updated !"
                 return redirect('plan')
@@ -132,6 +170,11 @@ def editplan(request, id):
                 data.title = title
                 data.pricing = pricing
                 data.details = details
+                data.card_details = card_details
+                data.offer = offer
+                data.main_price = main_price
+                data.line_price = line_price
+                data.count = count
                 data.save()
                 msg = "Your Plane Has Been Updated !"
                 return redirect('plan')
@@ -417,7 +460,7 @@ def create_bill(request):
         item_quantity = request.POST.get('item_quantity', None)
         item_rate = request.POST.get('item_rate', None)
         if ship_gst is not None:
-            ship = int(((int(item_unit)*int(item_quantity))*int(ship_gst))/100)
+            ship = int(((int(item_unit) * int(item_quantity)) * int(ship_gst)) / 100)
             total = ship + int(total_service)
             total = total
             data = BillCreate.objects.create(bill_name=bill_name, bill_company=bill_company,

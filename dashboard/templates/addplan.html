@@ -37,15 +37,43 @@
                     <label for="name" class="form-label">Plan Price</label>
                     <input type="number" name="pricing" value="{{ plans.pricing }}" class="form-control" id="name" placeholder="Enter Category Name" aria-describedby="emailHelp" required>
                 </div>
+
+                   <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Offer</label>
+                    <input type="number" name="offer" value="{{ plans.offer }}" class="form-control" id="name" placeholder="Enter Offer" aria-describedby="emailHelp" required>
+                </div>
+
+                  <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Main Price</label>
+                    <input type="number" name="main_price" value="{{ plans.main_price }}" class="form-control" id="name" placeholder="Enter Main Price" aria-describedby="emailHelp" required>
+                </div>
+
+                   <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">services</label>
+                    <input type="number" name="count" value="{{ plans.count }}" class="form-control" id="name" placeholder="Enter Server" aria-describedby="emailHelp" required>
+                </div>
+
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Card Details</label>
+                    <input type="text" name="card_details" value="{{ plans.card_details }}" class="form-control" id="name" placeholder="Enter Card Details" aria-describedby="emailHelp" required>
+                </div>
+
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Line Price</label>
+                    <input type="number" name="line_price" value="{{ plans.line_price }}" class="form-control" id="name" placeholder="Enter Line Price" aria-describedby="emailHelp" required>
+                </div>
+
                 <div class="col-md-6 mt-2">
                     <label for="name" class="form-label">Service Image</label>
                     <input type="file" name="img" class="form-control" id="name" value="{{ i.img.url }}" placeholder="Enter Category Name" aria-describedby="emailHelp",>
                 </div>
+
                 <div class="col-md-12 mt-2">
                         <label for="">Description</label>
                         <textarea name="details" id="editor" required>{{ plans.details }}</textarea>
 
                     </div>
+
                     <div class="col-md-6  d-grid gap-2 my-3">
                 <button class="btn color d-grid gap-2">Submit</button>
                 </div>

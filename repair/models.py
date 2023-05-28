@@ -51,6 +51,8 @@ class PlanName(models.Model):
     )
     title = models.CharField(max_length=200, blank=True, null=True)
     pricing = models.IntegerField(blank=True, null=True)
+    offer = models.IntegerField(blank=True, null=True)
+    main_price = models.IntegerField(blank=True, null=True)
     types = models.CharField(max_length=200, blank=True, null=True, choices=STATUS)
     details = RichTextField(default=None)
     img = models.ImageField(upload_to="plan_name/", blank=True, null=True)
@@ -58,6 +60,7 @@ class PlanName(models.Model):
     card_details = models.CharField(max_length=200, blank=True, null=True)
     line_price = models.IntegerField(blank=True, null=True)
     status = models.CharField(max_length=200, blank=True, null=True, choices=ACTIVATIONS, default='inactive')
+    count = models.IntegerField(blank=True, null=True, default=0)
     create_at = models.DateField(auto_now_add=True)
     update_at = models.DateField(auto_now=True)
 

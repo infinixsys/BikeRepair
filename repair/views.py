@@ -74,7 +74,7 @@ def start_payment(request, pk):
     if plane_name.types == 'monthly':
         expiry_date = datetime.now() + timedelta(days=30)
         order = Order.objects.create(plane_name=plane_name, user=user, service_types='monthly',
-                                     order_amount=amount, expiry_date=expiry_date, count=1,
+                                     order_amount=amount, expiry_date=expiry_date, count=plane_name.count,
                                      order_payment_id=payment['id'])
         serializer = OrderSerializer(order)
         data = {
@@ -87,7 +87,7 @@ def start_payment(request, pk):
         expiry_date = datetime.now() + timedelta(days=30)
 
         order = Order.objects.create(plane_name=plane_name, user=user, service_types='onetime',
-                                     order_amount=amount, expiry_date=expiry_date, count=1,
+                                     order_amount=amount, expiry_date=expiry_date, count=plane_name.count,
                                      order_payment_id=payment['id'])
         serializer = OrderSerializer(order)
         data = {
