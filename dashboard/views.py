@@ -41,9 +41,9 @@ def adminpanel(request):
     data = User.objects.all().count()
     mechanic = Mechanic.objects.all().count()
     customer_review = ClientReview.objects.all().count()
-    today_service = Service.objects.filter(create_at=datetime.datetime.today())
-    today_leads = Order.objects.filter(create_at=datetime.datetime.today())
-    today_user = User.objects.filter(create_at=datetime.datetime.today())
+    today_service = Service.objects.filter(create_at=datetime.datetime.today()).count()
+    today_leads = Order.objects.filter(create_at=datetime.datetime.today()).count()
+    today_user = User.objects.filter(created_at=datetime.datetime.today()).count()
     return render(request, 'adminpanel.html', {'total_service': total_service, 'annul_service': annul_service,
                                                'onetime_service': onetime_service, 'total_order':total_order,
                                                'annul_order':annul_order, 'onetime_order':onetime_order, 'data':data,
