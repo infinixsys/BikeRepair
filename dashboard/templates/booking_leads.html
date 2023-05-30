@@ -28,6 +28,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Number</th>
                         <th scope="col">Location</th>
+                        <th scope="col">Bike No.</th>
                         <th scope="col">Service type</th>
                         <th scope="col">Brand Name</th>
                         <th scope="col">Order Date</th>
@@ -44,6 +45,7 @@
                         <td class="table-info">{{ p.user.fname }}</td>
                         <td class="table-warning">{{ p.user.phone }}</td>
                         <td class="table-primary">{{ p.bookingdetails.location }}</td>
+                        <td class="table-primary">{{ p.bookingdetails.vehicle_number }}</td>
                         <td class="table-success">{{ p.count }} / {{ p.plane_name.title }}</td>
                         <td class="table-primary">{{ p.bookingdetails.brand }}</td>
                         <td class="table-primary">{{ p.order_date |date}}</td>
