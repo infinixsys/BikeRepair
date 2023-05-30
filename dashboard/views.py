@@ -33,19 +33,22 @@ def adminpanel(request):
     if not request.user.is_superuser:
         return redirect('login_attempt')
     total_service = Service.objects.all().count()
-    annul_service = Service.objects.filter(plan_title="annual").count()
-    onetime_service = Service.objects.filter(plan_title="monthly").count()
-    today_total_service = Service.objects.all().filter(create_at=datetime.datetime.today()).count()
-    today_annul_service = Service.objects.filter(plan_title="annual").filter(
-        create_at=datetime.datetime.today()).count()
-    today_onetime_service = Service.objects.filter(plan_title="monthly").filter(
-        create_at=datetime.datetime.today()).count()
-    print(total_service)
+    annul_service = Service.objects.filter(plan_title="yearly").count()
+    onetime_service = Service.objects.filter(Q(plan_title="monthly") | Q(plan_title="onetime")).count()
+    total_order = Order.objects.all().count()
+    annul_order = Order.objects.filter(service_types="yearly").count()
+    onetime_order = Order.objects.filter(Q(service_types="monthly") | Q(service_types="onetime")).count()
+    data = User.objects.all().count()
+    mechanic = Mechanic.objects.all().count()
+    customer_review = ClientReview.objects.all().count()
+    today_service = Service.objects.filter(create_at=datetime.datetime.today())
+    today_leads = Order.objects.filter(create_at=datetime.datetime.today())
+    today_user = User.objects.filter(create_at=datetime.datetime.today())
     return render(request, 'adminpanel.html', {'total_service': total_service, 'annul_service': annul_service,
-                                               'onetime_service': onetime_service,
-                                               'today_total_service': today_total_service,
-                                               'today_annul_service': today_annul_service,
-                                               'today_onetime_service': today_onetime_service})
+                                               'onetime_service': onetime_service, 'total_order':total_order,
+                                               'annul_order':annul_order, 'onetime_order':onetime_order, 'data':data,
+                                               'mechanic':mechanic,'customer_review':customer_review,
+                                               'today_service':today_service, 'today_leads':today_leads, 'today_user':today_user})
 
 
 def plan(request):
@@ -65,30 +68,21 @@ def addplan(request):
             types = request.POST.get('types')
             details = request.POST.get('details')
             img = request.FILES.get('img')
-            offer_add = request.POST.get('offer')
-            main_price_add = request.POST.get('main_price')
             count_add = request.POST.get('count')
-            card_details = request.POST.get('card_details')
             line_price_add = request.POST.get('line_price')
-            offer = int(offer_add)
-            main_price = int(main_price_add)
             count = int(count_add)
             line_price = int(line_price_add)
 
             pricing = int(pricing_add)
             if types == 'yearly':
                 data = PlanName.objects.create(title=title, pricing=pricing, types=types, details=details, img=img,
-                                               services='yearly', card_details=card_details, offer=offer,
-                                               main_price=main_price,
-                                               line_price=line_price, count=count)
+                                               services='yearly', line_price=line_price, count=count)
                 data.save()
                 msg = "Your Plane Has Been Created !"
                 return redirect('plan')
             elif types == 'onetime' or types == 'monthly':
                 data = PlanName.objects.create(title=title, pricing=pricing, types=types, details=details, img=img,
-                                               services='onetime', card_details=card_details, offer=offer,
-                                               main_price=main_price,
-                                               line_price=line_price, count=count)
+                                               services='onetime', line_price=line_price, count=count)
                 data.save()
                 msg = "Your Plane Has Been Created !"
                 return redirect('plan')
@@ -112,25 +106,19 @@ def editplan(request, id):
             types = request.POST.get('types')
             details = request.POST.get('details')
             img = request.FILES.get('img')
-            offer_add = request.POST.get('offer')
-            main_price_add = request.POST.get('main_price')
             count_add = request.POST.get('count')
-            card_details = request.POST.get('card_details')
             line_price_add = request.POST.get('line_price')
-            offer = int(offer_add)
-            main_price = int(main_price_add)
+
             count = int(count_add)
             line_price = int(line_price_add)
             pricing = int(pricing_add)
+
             if types == 'yearly':
                 data = PlanName.objects.get(id=id)
                 data.title = title
                 data.pricing = pricing
                 data.types = types
                 data.details = details
-                data.card_details = card_details
-                data.offer = offer
-                data.main_price = main_price
                 data.line_price = line_price
                 data.count = count
                 data.save()
@@ -142,9 +130,6 @@ def editplan(request, id):
                 data.pricing = pricing
                 data.types = types
                 data.details = details
-                data.card_details = card_details
-                data.offer = offer
-                data.main_price = main_price
                 data.line_price = line_price
                 data.count = count
                 data.save()
@@ -157,9 +142,6 @@ def editplan(request, id):
                 data.types = types
                 data.details = details
                 data.img = img
-                data.card_details = card_details
-                data.offer = offer
-                data.main_price = main_price
                 data.line_price = line_price
                 data.count = count
                 data.save()
@@ -170,9 +152,6 @@ def editplan(request, id):
                 data.title = title
                 data.pricing = pricing
                 data.details = details
-                data.card_details = card_details
-                data.offer = offer
-                data.main_price = main_price
                 data.line_price = line_price
                 data.count = count
                 data.save()

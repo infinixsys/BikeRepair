@@ -19,8 +19,7 @@
                         <div>
                             <h2>{{total_service}}<span class="text-success">+</span></h2>
                             <h6>Total Service</h6>
-                            <p class="text-success"><span class="bi bi-arrow-up text-success">0.5%</span>
-                                <span class="text-dark">last month</span>
+                                <span class="text-dark">Total Service</span>
                             </p>
                         </div>
                         <div>
@@ -34,8 +33,7 @@
                         <div>
                             <h2>{{annul_service}}<span class="text-success">+</span></h2>
                             <h6>Annually Service</h6>
-                            <p class="text-success"><span class="bi bi-arrow-down">0.5%</span>
-                                <span class="text-dark">last month</span>
+                                <span class="text-dark">Yearly Total Service</span>
                             </p>
                         </div>
                         <div>
@@ -50,8 +48,7 @@
                         <div>
                             <h2>{{onetime_service}}<span class="text-success">+</span></h2>
                             <h6>One Time Service</h6>
-                            <p class="text-success"><span class="bi bi-arrow-up text-success">0.5%</span>
-                                <span class="text-dark">last month</span>
+                                <span class="text-dark">One Time/ Monthly Total Service</span>
                             </p>
                         </div>
                         <div>
@@ -60,6 +57,96 @@
                     </section>
                 </div>
                 <!--  -->
+
+
+                <div class="col-md-4">
+                    <section class="shadow-sm bg-white mt-1 p-3 rounded-4 d-flex justify-content-between">
+                        <div>
+                            <h2>{{total_order}}<span class="text-success">+</span></h2>
+                            <h6>Total Booking Leads</h6>
+                                <span class="text-dark">Total Lead</span>
+                            </p>
+                        </div>
+                        <div>
+                            <i class="bi bi-gear-fill fs-2"></i>
+                        </div>
+                    </section>
+                </div>
+                <!--  -->
+                <div class="col-md-4">
+                    <section class="shadow-sm mt-1 bg-white p-3 rounded-4 d-flex justify-content-between">
+                        <div>
+                            <h2>{{annul_order}}<span class="text-success">+</span></h2>
+                            <h6>Booking Leads</h6>
+                                <span class="text-dark">Annual Booking Leads </span>
+                            </p>
+                        </div>
+                        <div>
+                            <i class="bi bi-box-fill fs-2"></i>
+                        </div>
+                    </section>
+                </div>
+                <!--  -->
+                <!--  -->
+                <div class="col-md-4 mt-1">
+                    <section class="shadow-sm bg-white p-3 rounded-4 d-flex justify-content-between">
+                        <div>
+                            <h2>{{onetime_order}}<span class="text-success">+</span></h2>
+                            <h6>Total Booking Leads</h6>
+                                <span class="text-dark">onetime/monthly</span>
+                            </p>
+                        </div>
+                        <div>
+                        <i class="bi bi-1-circle fs-2"></i>
+                        </div>
+                    </section>
+                </div>
+                <!--  -->
+
+                <div class="col-md-4">
+                    <section class="shadow-sm bg-white mt-1 p-3 rounded-4 d-flex justify-content-between">
+                        <div>
+                            <h2>{{data}}<span class="text-success">+</span></h2>
+                            <h6>Total User</h6>
+                                <span class="text-dark">Total</span>
+                            </p>
+                        </div>
+                        <div>
+                            <i class="bi bi-gear-fill fs-2"></i>
+                        </div>
+                    </section>
+                </div>
+                <!--  -->
+                <div class="col-md-4">
+                    <section class="shadow-sm mt-1 bg-white p-3 rounded-4 d-flex justify-content-between">
+                        <div>
+                            <h2>{{mechanic}}<span class="text-success">+</span></h2>
+                            <h6>Total Mechanic</h6>
+                                <span class="text-dark">Total Mechanic </span>
+                            </p>
+                        </div>
+                        <div>
+                            <i class="bi bi-box-fill fs-2"></i>
+                        </div>
+                    </section>
+                </div>
+                <!--  -->
+                <!--  -->
+                <div class="col-md-4 mt-1">
+                    <section class="shadow-sm bg-white p-3 rounded-4 d-flex justify-content-between">
+                        <div>
+                            <h2>{{customer_review}}<span class="text-success">+</span></h2>
+                            <h6>Total Customer Review</h6>
+                                <span class="text-dark">Total</span>
+                            </p>
+                        </div>
+                        <div>
+                        <i class="bi bi-1-circle fs-2"></i>
+                        </div>
+                    </section>
+                </div>
+                <!--  -->
+
                 <div class="col-md-9 my-3">
                     <h5>Graph Chart</h5>
                     <canvas id="myChart"></canvas>
@@ -69,7 +156,7 @@
                         <h5 class="text-center"><span class="text-danger">Today</span>  Latest Data</h5>
                         <section class="shadow bg-white p-3 rounded-4 d-flex justify-content-between my-2">
                             <div>
-                                <h5>{{today_total_service}}<span class="text-success">+</span></h5>
+                                <h5>{{today_service}}<span class="text-success">+</span></h5>
                                 <h6>Total Service</h6>
                             </div>
                             <div>
@@ -78,8 +165,8 @@
                         </section>
                         <section class="shadow bg-white p-3 rounded-4 d-flex justify-content-between my-2">
                             <div>
-                                <h5>{{today_annul_service}}<span class="text-success">+</span></h5>
-                                <h6>Annually Service</h6>
+                                <h5>{{today_leads}}<span class="text-success">+</span></h5>
+                                <h6>Booking Leads </h6>
                             </div>
                             <div>
                                 <i class="bi bi-box fs-3"></i>
@@ -87,8 +174,8 @@
                         </section>
                         <section class="shadow bg-white p-3 rounded-4 d-flex justify-content-between my-2">
                             <div>
-                                <h5>{{today_onetime_service}}<span class="text-success">+</span></h5>
-                                <h6>One Time Service</h6>
+                                <h5>{{today_user}}<span class="text-success">+</span></h5>
+                                <h6>User</h6>
                             </div>
                             <div>
                                 <i class="bi bi-1-circle fs-3"></i>
