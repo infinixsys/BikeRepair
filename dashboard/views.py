@@ -45,10 +45,11 @@ def adminpanel(request):
     today_leads = Order.objects.filter(create_at=datetime.datetime.today()).count()
     today_user = User.objects.filter(created_at=datetime.datetime.today()).count()
     return render(request, 'adminpanel.html', {'total_service': total_service, 'annul_service': annul_service,
-                                               'onetime_service': onetime_service, 'total_order':total_order,
-                                               'annul_order':annul_order, 'onetime_order':onetime_order, 'data':data,
-                                               'mechanic':mechanic,'customer_review':customer_review,
-                                               'today_service':today_service, 'today_leads':today_leads, 'today_user':today_user})
+                                               'onetime_service': onetime_service, 'total_order': total_order,
+                                               'annul_order': annul_order, 'onetime_order': onetime_order, 'data': data,
+                                               'mechanic': mechanic, 'customer_review': customer_review,
+                                               'today_service': today_service, 'today_leads': today_leads,
+                                               'today_user': today_user})
 
 
 def plan(request):
@@ -574,3 +575,6 @@ def changepassword(request):
             user.save()
             return redirect('login_attempt')
     return render(request, 'changepassword.html')
+
+
+

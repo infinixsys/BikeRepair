@@ -292,3 +292,4 @@ class UpdateProfileView(UpdateAPIView, ListAPIView):
 class RazorPayAPIVIEW(ListAPIView):
     queryset = RazorPay.objects.all()
     serializer_class = RazorPaySerializer
+

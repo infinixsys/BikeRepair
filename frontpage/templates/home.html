@@ -1,0 +1,436 @@
+{% extends 'front.html' %}
+{% load static %}
+
+{% block frontbody %}
+
+
+<div class="container-fluid background-color-gradient">
+    <div class="row justify-content-center py-5">
+        <div class="col-lg-5 content-center">
+            <div>
+            <img src="{% static 'front/img/mock-4.png' %}" class="img-fluid" alt="">
+            </div>
+        </div>
+        <div class="col-lg-6 content-center">
+            <div>
+                <h1 class="display-3 fw-bold">Dr. Auto <span class="color">Bike</span> Service
+                    & Repair</h1>
+                <p>Get professional periodic two-wheeler service, doorstep bike repair, engine care services, and much more done at affordable prices in India.</p>
+                <div class="d-flex my-2">
+                    <a href="https://play.google.com/store/apps/details?id=com.drauto.name"><img src="{% static 'front/img//playstor.webp' %}" class="download-img" alt=""></a>
+                    <img src="{% static 'front/img/appstor.webp' %}" class="download-img mx-2" alt="">
+                </div>
+                <button class="btn btn-outline-dark btn-lg">Book Now</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row my-5">
+        <div class="col-lg-8">
+            <h2 class="fw-bold">Two Wheeler Services @ <span class="color">Home</span></h2>
+            <p>Get the best bike service center experience at the comfort of your home or office when using Dr.Auto app to book bike repair or service online. Choose from our vast bike service offerings and avail time & cost savings</p>
+            <div class="row py-2">
+                <div class="col-lg-3 col-6 my-2">
+                    <div class="bg-light shadow-sm rounded-3 text-center py-2">
+                        <img src="{% static 'front/img//icons//periodic-service.png.webp' %}" class="icons mt-3" alt="">
+                        <p class="fw-bold">Periodic Service</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6 my-2">
+                    <div class="bg-light shadow-sm rounded-3 text-center py-2">
+                        <img src="{% static 'front/img//icons//repairing-service.png.webp' %}" class="icons mt-3" alt="">
+                        <p class="fw-bold">General Repairs</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6 my-2">
+                    <div class="bg-light shadow-sm rounded-3 text-center py-2">
+                        <img src="{% static 'front/img//icons//battery.png.webp' %}" class="icons mt-3" alt="">
+                        <p class="fw-bold">Batteries</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6 my-2">
+                    <div class="bg-light shadow-sm rounded-3 text-center py-2">
+                        <img src="{% static 'front/img//icons//motorcycle-1.png.webp' %}" class="icons mt-3" alt="">
+                        <p class="fw-bold">Periodic Service</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6 my-2">
+                    <div class="bg-light shadow-sm rounded-3 text-center py-2">
+                        <img src="{% static 'front/img//icons//insurance.png.webp' %}" class="icons mt-3" alt="">
+                        <p class="fw-bold">Bike Insurance</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6 my-2">
+                    <div class="bg-light shadow-sm rounded-3 text-center py-2">
+                        <img src="{% static 'front/img//icons//road-side-assistance.png.webp' %}" class="icons mt-3" alt="">
+                        <p class="fw-bold">RSA Services</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6 my-2">
+                    <div class="bg-light shadow-sm rounded-3 text-center py-2">
+                        <img src="{% static 'front/img//icons//wheel.png.webp' %}" class="icons mt-3" alt="">
+                        <p class="fw-bold">Spare Parts</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6 my-2">
+                    <div class="bg-light shadow-sm rounded-3 text-center py-2">
+                        <img src="{% static 'front/img//icons//custom-repair.png.webp' %}" class="icons mt-3" alt="">
+                        <p class="fw-bold">Custom Services</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="bg-white rounded-3 p-2 shadow-sm">
+                <h4 class="text-center fw-bold">Book <span class="color">Bike</span> Service</h4>
+                {{ msg }}
+                <form method="post" >
+                    {% csrf_token %}
+                    <div class="mb-3 mt-3">
+                        <input type="text" name="name" class="form-control" placeholder="Name">
+                    </div>
+                    <div class="mb-3">
+                        <input type="number" name="phone" class="form-control" placeholder="Number">
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" name="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" name="city" class="form-control" placeholder="City">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" name="model" class="form-control" placeholder="model">
+                    </div>
+                    <div class="d-grid">
+                        <input type="submit" value="Book Now" class="btn btn-outline-dark">
+                        <button type="submit" class="btn btn-outline-success mt-2">Call Us</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid background-color-gradient py-5">
+    <div class="row justify-content-center text-center py-3">
+        <div class="col-lg-10">
+            <h1 class="text-center fw-bold">Book Dr.Auto - <span class="color">Dr.Auto</span> Bike Service App</h1>
+            <p>No time to go to a bike workshop? No worries! With one tap in the app, we bring the two wheeler workshop to you. Just choose the Doorstep Services option and select the package you require. Voila!
+            </p>
+        </div>
+        <div class="col-lg-3 my-3">
+            <img src="{% static 'front/img//time.png' %}" height="120px" width="auto" class="my-3" alt="">
+            <h5 class="fw-bold">Less Time Consuming</h5>
+            <p>Now, you will get your bike serviced/repaired in commenced time</p>
+        </div>
+        <div class="col-lg-3 my-3">
+            <img src="{% static 'front/img//calendar.webp' %}" height="120px" width="auto" class="my-3" alt="">
+            <h5 class="fw-bold">Easy Service Appointments</h5>
+            <p>You can book your bike service from home, office or anywhere on move</p>
+        </div>
+        <div class="col-lg-3 my-3">
+            <img src="{% static 'front/img//relax.webp' %}" height="120px" width="auto" class="my-3" alt="">
+            <h5 class="fw-bold">Sit & Relax</h5>
+            <p>While bike is being serviced/repaired, Sit back and relax at your place</p>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 content-center">
+            <img src="{% static 'front/img//bike-mechanic.webp' %}" class="img-fluid" alt="">
+        </div>
+        <div class="col-lg-6">
+            <div>
+                <h4 class="color fw-bold">About Dr.Auto</h4>
+                <h1 class="display-5 fw-bold">Experience the best <br>
+                    <span class="color">Two Wheeler</span> Service
+                </h1>
+                <p>Get access to experienced and certified professional bike mechanic, Bike Electrician to your doorstep with the required set of tools, genuine spare parts, and engine oil at a pocket-friendly price.</p>
+                <div><i class="bi bi-check color"></i>Get the best bike service from our experienced mechanics.</div>
+                <div><i class="bi bi-check color"></i>Book a two wheeler service directly from the App and track.</div>
+                <div><i class="bi bi-check color"></i>Choose from a variety of Engine Oils with free doorstep services</div>
+                <div><i class="bi bi-check color"></i>Order bike cleaning service in Delhi-NCR</div>
+                <button class="btn btn-dark my-2">Book Now</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid my-5 background-color-gradient">
+    <div class="row justify-content-center py-4">
+        <div class="col-lg-3 content-center">
+            <img src="{% static 'front/img//mock-3.png' %}" height="500px" width="auto" alt="">
+        </div>
+        <div class="col-lg-8 content-center">
+            <div class="row text-center">
+                <h1 class="fw-bold text-center"> How <span class="color">Dr.Auto</span> Works?
+                </h1>
+                <div class="col-lg-3 col-6">
+                    <div class="bg-white rounded-3 py-2 shadow-sm border-color"><img src="{% static 'front/img//location.png.webp' %}" height="120" width="auto" alt=""></div>
+                    <div class="bi bi-1-circle fs-3"></div>
+                    <span class="fw-bold">Choose your location</span>
+
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="bg-white rounded-3 py-2 shadow-sm border-color"><img src="{% static 'front/img//motor-sports.png.webp' %}" height="120" width="auto" alt=""></div>
+                    <div class="bi bi-2-circle fs-3"></div>
+                    <span class="fw-bold">Select Bike For Service/Repair</span>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="bg-white rounded-3 py-2 shadow-sm border-color"><img src="{% static 'front/img//mechanic.png.webp' %}" height="120" width="auto" alt=""></div>
+                    <div class="bi bi-3-circle fs-3"></div>
+                    <span class="fw-bold">Book a mechanic</span>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="bg-white rounded-3 py-2 shadow-sm border-color"><img src="{% static 'front/img//cash-payment.png.webp' %}" height="120" width="auto" alt=""></div>
+                    <div class="bi bi-4-circle fs-3"></div>
+                    <span class="fw-bold">Pay Online/Cash</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid my-5">
+    <div class="row justify-content-center">
+        <h1 class="text-center fw-bold py-3">Dr.<span class="color">Auto</span> Benefits</h1>
+        <div class="col-lg-3">
+            <div class="mt-3">
+                <p class="display-6 fw-bold">Get your bike serviced</p>
+                <p style="font-size: small;">Dr.Auto provides excellent bike repair services at home for motorcycles of all models and brands including Honda, Suzuki, Hero, Vespa, Yamaha, TVS, Bajaj, etc.</p>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="row">
+                <div class="col-lg-6 mt-3">
+                    <div class="border p-3 rounded-2 d-flex">
+                        <div class="content-center">
+                            <img src="{% static 'front/img//warranty.png.webp' %}" height="70px" width="auto" alt="">
+                        </div>
+                        <div>
+                            <h4 class="fw-bold">10 days Free Service Guarantee</h4>
+                            <span>10 days Unconditioned Warranty</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-3">
+                    <div class="border p-3 rounded-2 d-flex">
+                        <div class="content-center">
+                            <img src="{% static 'front/img//deal.png.webp' %}" height="70px" width="auto" alt="">
+                        </div>
+                        <div>
+                            <h4 class="fw-bold">Free Pickup & Drop <br> service</h4>
+                            <span>Real time service</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-3">
+                    <div class="border p-3 rounded-2 d-flex">
+                        <div class="content-center">
+                            <img src="{% static 'front/img//transparency.png.webp' %}" height="70px" width="auto" alt="">
+                        </div>
+                        <div>
+                            <h4 class="fw-bold">ransparent & Competitive Pricing</h4>
+                            <span>Save upto 40% on your bike service</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-3">
+                    <div class="border p-3 rounded-2 d-flex">
+                        <div class="content-center">
+                            <img src="{% static 'front/img//expert.png.webp' %}" height="70px" width="auto" alt="">
+                        </div>
+                        <div>
+                            <h4 class="fw-bold">Trained & Experts Mechanics</h4>
+                            <span>Only certified & trained mechanics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid background-color-gradient">
+    <div class="row content-center pt-5 pb-5">
+        <div class="col-lg-8">
+            <h1 class="fw-bold pt-2 pb-2">Why choose<span class="color"> Dr.Auto </span>for Bike Services?</h1>
+            <p class="t2-color">Two-Wheeler Repair/Service at Home</p>
+            <p class="t-color">At Dr.Auto, we offer a wide variety of best bike services like Periodic
+                Bike Services, Batteries Replacement, Two Wheeler Cleaning, Tyre Replacement,
+                Engine Oil Replacement and much more. Dr.Auto an Bike service startup aim
+                at providing a single call facility for any kind of motorcycle service, repair
+                problem or support with world-class modern maintenance services for two-wheelers
+                anywhere, anytime.</p>
+            <p class="pt-2 pb-2 t2-color">Why choose Dr.Auto for your bike service at home?</p>
+
+            <h6 class="fw-bold"><i class="bi bi-arrow-right-circle"></i>Doorstep Two-Wheeler Service & Repair</h6>
+            <div class="t-color">
+                Get doorstep bike service and repair be it at Home or Office or on the road.
+            </div>
+            <h6 class="fw-bold"><i class="bi bi-arrow-right-circle"></i>Doorstep Two-Wheeler Service & Repair</h6>
+            <div class="t-color">
+                Dr.Auto service prices are the most reasonable ones. You can save up to 40%.
+            </div>
+            <h6 class="fw-bold"><i class="bi bi-arrow-right-circle"></i>Doorstep Two-Wheeler Service & Repair</h6>
+            <div class="t-color">
+                Highly trained bike mechanic & Bike Electricians who offer you the best two wheeler services!
+            </div>
+            <h6 class="fw-bold"><i class="bi bi-arrow-right-circle"></i>Doorstep Two-Wheeler Service & Repair</h6>
+            <div class="t-color">
+                If you stuck just contact us our experiences bike mechanic will solve your query.
+            </div>
+        </div>
+        <div class="col-lg-3 content-center">
+            <div>
+            <img src="{% static 'front/img//mock-2.png' %}" height="500px" width="auto" alt="">
+            </{% static 'front/
+        </div>
+    </div>
+</div>
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="display-5 fw-bold content-center pt-5">Latest Post</h1>
+            <div class="content-center">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+            </div>
+            <p class="content-center">Stay updated with latest news and blogs related to two wheelers.</p>
+        </div>
+    </div>
+</div> -->
+<!-- <div class="conntainer-fluid ">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="amit2" class="owl-carousel owl-theme">
+                            <div class="item text-center riewsection1">
+                                <div class="border p-2 rounded shadow">
+                                    <img src="./assets/img/1.png" alt="">
+                                    <h5 class="color fw-bold">Best Scooter For Men</h5>
+
+                                </div>
+                            </div>
+                            <div class="item text-center riewsection1">
+                                <div class="p-2 border rounded shadow">
+                                    <img src="./assets/img/2.png" alt="">
+                                    <h5 class="color fw-bold">Bike Service & Repair Price List | Bike Maintainence Cost</h5>
+
+                                </div>
+                            </div>
+                            <div class="item text-center riewsection1">
+                                <div class="p-2 border rounded shadow">
+                                    <img src="./assets/img/3.png" alt="">
+                                    <h5 class="color fw-bold">10 Bike Maintainence Tips To Keep Bike In Good Condition </h5>
+
+                                </div>
+                            </div>
+                            <div class="item text-center riewsection1">
+                                <div class="p-2 border rounded shadow">
+                                    <img src="./assets/img/4.png" alt="">
+                                    <h5 class="color fw-bold">After How Many Kms Royal Enfield 350 Classic Oil Change??</h5>
+
+                                </div>
+                            </div>
+                            <div class="item text-center riewsection1">
+                                <div class="p-2 border rounded shadow ">
+                                    <img src="./assets/img/5.png" alt="">
+                                    <h5 class="color fw-bold">Five Things You Should Know If You Have Honda Activa</h5>
+
+                                </div>
+                            </div>
+                            <div class="item text-center riewsection1">
+                                <div class="p-2 border rounded shadow ">
+                                    <img src="./assets/img/6.png" alt="">
+                                    <h5 class="color fw-bold">Best Vehicles Sell in 2022</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div> -->
+<div class="container-fluid my-5">
+    <div class="row justify-content-center">
+        <!-- <div class="col-lg-2 content-center">
+            <div>
+                <img class="img-fluid" src="./assets/img/bike-service-app-511x1024.png.webp" alt="" width="250">
+                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                <lottie-player src="https://assets4.lottiefiles.com/private_files/lf30_5axgcyri.json" background="transparent" speed="1" style="width: 300px; height: 500px;" loop autoplay></lottie-player>
+            </div>
+        </div> -->
+        <div class="col-lg-6">
+            <div>
+                <h1 class="display-6 fw-bold">Download Dr.Auto App</h1>
+                <p class="">Download and book a seamless two wheeler service and repair at your doorstep and <span class="fw-bold">get Rs.100 off</span> with Dr.Auto bike service app.</p>
+            </div>
+            <div>
+                <a href="https://play.google.com/store/apps/details?id=com.drauto.name"><img class="" src="{% static 'front/img/playstor.webp' %}" alt="" width="200"></a>
+                <img src="{% static 'front/img/appstor.webp' %}" alt="" width="200">
+            </div>
+            <div>
+                <!-- <img src="./assets/img/qr-code.png" alt="" width="160"> -->
+                <div class="py-3">
+                    <p>SCAN QR CODE TO DOWNLOAD</p>
+                    <p>Download the Dr.Auto bike service app & up to 10% off on bike services.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div>
+                <h5 class="fw-bold content-center">We Look After All Brands</h5>
+                <div class="row">
+                    <div class="col-lg-4 col-6 my-2">
+                        <img class="border m-1 rounded-2 img-fluid" src="{% static 'front/img/bajaj.png' %}" alt="">
+                    </div>
+                    <div class="col-lg-4 col-6 my-2">
+                        <img class="border m-1 rounded-2 img-fluid" src="{% static 'front/img/honda.png' %}" alt="">
+                    </div>
+                    <div class="col-lg-4 col-6 my-2">
+                        <img class="border m-1 rounded-2 img-fluid" src="{% static 'front/img/jawa.png' %}" alt="">
+                    </div>
+                    <div class="col-lg-4 col-6 my-2">
+                        <img class="border m-1 rounded-2 img-fluid" src="{% static 'front/img/mahindra.png' %}" alt="">
+                    </div>
+                    <div class="col-lg-4 col-6 my-2">
+                        <img class="border m-1 rounded-2 img-fluid" src="{% static 'front/img/Royal-Enfield.png' %}" alt="">
+                    </div>
+                    <div class="col-lg-4 col-6 my-2">
+                        <img class="border m-1 rounded-2 img-fluid" src="{% static 'front/img/suzuki.png' %}" alt="">
+                    </div>
+                    <div class="col-lg-4 col-6 my-2">
+                        <img class="border m-1 rounded-2 img-fluid" src="{% static 'front/img/tvs.png' %}" alt="">
+                    </div>
+                    <div class="col-lg-4 col-6 my-2">
+                        <img class="border m-1 rounded-2 img-fluid" src="{% static 'front/img/vespa.png' %}" alt="">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}
+

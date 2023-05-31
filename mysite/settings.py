@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'repair',
     # 'rest_framework.authtoken',
     'dashboard',
-    'knox'
+    'knox',
+    'frontpage',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,121 @@
+{% extends 'front.html' %}
+{% load static %}
+
+{% block frontbody %}
+
+<?php include 'header.php'; ?>
+
+<div class="container-fluid background-color-gradient">
+    <div class="row">
+        <div class="col-sm-12 p-5 text-center">
+            <h1 class="banner-sec pb-0 fw-bold">Our <span class="color"> Services</span></h1>
+            <p class="banner-sec pt-2">Empowering millions of bike service professionals and making two-wheeler
+                maintenance simple, cost effective & stress-free.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-evenly mt-5">
+        <div class="col-md-5">
+            <div class="p-3 bg-light shadow-sm rounded">
+                <h1 class="text-center text-success">599 /-</h1>
+                <h2 class="text-center">One Time Plan</h2>
+                <h5 class="text-center text-secondary">1 Time service</h5>
+                <div class="">
+                    <div> <i class="bi bi-check-circle text-success"></i> Engine Oli Checkup</div>
+                    <div> <i class="bi bi-check-circle text-success"></i> Electrical Checkup</div>
+                    <div> <i class="bi bi-check-circle text-success"></i> Carburator /Battery / Spark / Plug Checkup</div>
+                    <div> <i class="bi bi-check-circle text-success"></i> Vehicle Fitness Report</div>
+                    <div> <i class="bi bi-check-circle text-success"></i> Eco Wash And POlish</div>
+                    <div> <i class="bi bi-x-circle text-danger"></i> RSA Roadside Assistance</div>
+                    <div> <i class="bi bi-x-circle text-danger"></i> Major Repairs </div>
+                    <div> <i class="bi bi-x-circle text-danger"></i> Parts Replacement </div>
+                </div>
+                <div class="text-center my-2">
+                    <a href="tel:8700282172"> <button class="btn btn-success"><i class="bi bi-telephone"></i> Call</button> </a>
+                    <a href=""> <button class="btn btn-danger"> Book</button> </a>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="p-3 bg-light shadow-sm rounded">
+                <h1 class="text-center text-success">1299 /-</h1>
+                <h2 class="text-center">Annual Plan</h2>
+                <h5 class="text-center text-secondary">4 Time service</h5>
+                <div class="">
+                    <div> <i class="bi bi-check-circle text-success"></i> Engine Oli Checkup</div>
+                    <div> <i class="bi bi-check-circle text-success"></i> Electrical Checkup</div>
+                    <div> <i class="bi bi-check-circle text-success"></i> Carburator /Battery / Spark / Plug Checkup</div>
+                    <div> <i class="bi bi-check-circle text-success"></i> Vehicle Fitness Report</div>
+                    <div> <i class="bi bi-check-circle text-success"></i> Eco Wash And POlish</div>
+                    <div> <i class="bi bi-check-circle text-success"></i> RSA Roadside Assistance</div>
+                    <div> <i class="bi bi-x-circle text-danger"></i> Major Repairs </div>
+                    <div> <i class="bi bi-x-circle text-danger"></i> Parts Replacement </div>
+                </div>
+                <div class="text-center my-2">
+                    <a href="tel:8700282172"> <button class="btn btn-success"><i class="bi bi-telephone"></i> Call</button> </a>
+                    <a href=""> <button class="btn btn-danger"> Book</button> </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row p-5">
+    <div class="col-lg-3 col-6 my-2">
+        <div class="bg-light shadow-sm rounded-3 text-center py-2">
+            <img src="{% static 'front/img//icons//periodic-service.png.webp' %}" class="icons mt-3" alt="">
+            <p class="fw-bold">Periodic Service</p>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6 my-2">
+        <div class="bg-light shadow-sm rounded-3 text-center py-2">
+            <img src="{% static 'front/img//icons//repairing-service.png.webp' %}" class="icons mt-3" alt="">
+            <p class="fw-bold">General Repairs</p>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6 my-2">
+        <div class="bg-light shadow-sm rounded-3 text-center py-2">
+            <img src="{% static 'front/img//icons//battery.png.webp' %}" class="icons mt-3" alt="">
+            <p class="fw-bold">Batteries</p>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6 my-2">
+        <div class="bg-light shadow-sm rounded-3 text-center py-2">
+            <img src="{% static 'front/img//icons//motorcycle-1.png.webp' %}" class="icons mt-3" alt="">
+            <p class="fw-bold">Periodic Service</p>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6 my-2">
+        <div class="bg-light shadow-sm rounded-3 text-center py-2">
+            <img src="{% static 'front/img//icons//insurance.png.webp' %}" class="icons mt-3" alt="">
+            <p class="fw-bold">Bike Insurance</p>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6 my-2">
+        <div class="bg-light shadow-sm rounded-3 text-center py-2">
+            <img src="{% static 'front/img//icons//road-side-assistance.png.webp' %}" class="icons mt-3" alt="">
+            <p class="fw-bold">RSA Services</p>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6 my-2">
+        <div class="bg-light shadow-sm rounded-3 text-center py-2">
+            <img src="{% static 'front/img//icons//wheel.png.webp' %}" class="icons mt-3" alt="">
+            <p class="fw-bold">Spare Parts</p>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6 my-2">
+        <div class="bg-light shadow-sm rounded-3 text-center py-2">
+            <img src="{% static 'front/img//icons//custom-repair.png.webp' %}" class="icons mt-3" alt="">
+            <p class="fw-bold">Custom Services</p>
+        </div>
+    </div>
+</div>
+
+<?php include 'footer.php'; ?>
+
+
+{% endblock %}

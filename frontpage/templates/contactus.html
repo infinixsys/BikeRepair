@@ -1,0 +1,132 @@
+{% extends 'front.html' %}
+{% load static %}
+
+{% block frontbody %}
+
+
+<?php include 'header.php'; ?>
+
+<div class="container-fluid background-color-gradient">
+    <div class="row">
+    <div class="col-sm-12 p-5 text-center">
+            <h1 class="banner-sec pb-0 fw-bold">Contact<span class="color"> Us</span></h1>
+            <p class="banner-sec pt-2">Empowering millions of bike service professionals and making two-wheeler
+                maintenance simple, cost effective & stress-free.</p>
+        </div>
+    </div>
+</div>
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-lg-12 pt-5 pb-2">
+            <h2 class="fw-bold content-center">Contact<span class="color">-us</span></h2>
+            <p class="fw-bold content-center">Empowering millions of bike service professionals and making two-wheeler maintenance simple, cost effective and stress-free.</p>
+        </div>
+    </div>
+</div> -->
+<div class="container pt-0 pb-5">
+    <div class="row my-5">
+        <div class="col-lg-6">
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<lottie-player src="https://assets4.lottiefiles.com/packages/lf20_isbiybfh.json"  background="transparent"  speed="1"  style="width: 100%; height: 80%;"  loop  autoplay></lottie-player>
+        </div>
+        <div class="col-lg-5">
+            <div class="bg-white rounded-3 p-2 shadow-sm">
+                <h4 class="text-center fw-bold">Book <span class="color">Bike</span> Service</h4>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3 mt-3">
+                        <input type="text" name="name" class="form-border" placeholder="Name">
+                    </div>
+                    <div class="mb-3">
+                        <input type="number" name="phone" class="form-border" placeholder="Number">
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" name="email" class="form-border" placeholder="Email">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" name="city" class="form-border" placeholder="City">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" name="model" class="form-border" placeholder="model">
+                    </div>
+                    <div class="d-grid">
+                        <input type="submit" class="btn btn-outline-dark" value="Book Now">
+                        <button type="submit" class="btn btn-outline-success mt-2">Call Us</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="container">
+    <div class="row m-4">
+        <div class="col-lg-1 p-4">
+            <img src="assets/img//icons//periodic-service.png.webp" class="icons" alt="">
+        </div>
+        <div class="col-lg-11 border shadow p-4">
+            <h4>Periodic Service</h4>
+        </div>
+    </div>
+    <div class="row m-4">
+        <div class="col-lg-11 border shadow p-4">
+            <h4>General Repairs</h4>
+        </div>
+        <div class="col-lg-1 p-4">
+        <img src="assets/img//icons//repairing-service.png.webp" class="icons alt="">
+        </div>
+    </div>
+    <div class="row m-4">
+        <div class="col-lg-1 p-4">
+        <img src="assets/img//icons//battery.png.webp" class="icons" alt="">
+        </div>
+        <div class="col-lg-11 border shadow p-4">
+            <h4>Batteries</h4>
+        </div>
+    </div>
+    <div class="row m-4">
+        <div class="col-lg-11 border shadow p-4">
+            <h4>Engine Work</h4>
+        </div>
+        <div class="col-lg-1 p-4">
+        <img src="assets/img//icons//motorcycle-1.png.webp" class="icons" alt="">
+        </div>
+    </div>
+    <div class="row m-4">
+        <div class="col-lg-1 p-4">
+        <img src="assets/img//icons//insurance.png.webp" class="icons" alt="">
+        </div>
+        <div class="col-lg-11 border shadow p-4">
+            <h4>Bike Insurance</h4>
+        </div>
+    </div>
+    <div class="row m-4">
+        <div class="col-lg-11 border shadow p-4">
+            <h4>RSA Services</h4>
+        </div>
+        <div class="col-lg-1 p-4">
+        <img src="assets/img//icons//road-side-assistance.png.webp" class="icons" alt="">
+        </div>
+    </div>
+    <div class="row m-4">
+        <div class="col-lg-1 p-4">
+        <img src="assets/img//icons//wheel.png.webp" class="icons" alt="">
+        </div>
+        <div class="col-lg-11 border shadow p-4">
+            <h4>Spare Parts</h4>
+        </div>
+    </div>
+    <div class="row m-4">
+        <div class="col-lg-11 border shadow p-4">
+            <h4>Custom Services</h4>
+        </div>
+        <div class="col-lg-1 p-4">
+        <img src="assets/img//icons//custom-repair.png.webp" class="icons" alt="">
+        </div>
+    </div>
+</div> -->
+
+
+<?php include 'footer.php'; ?>
+
+
+{% endblock %}

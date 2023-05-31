@@ -68,6 +68,31 @@
                         <th scope="col">Payment Details</th>
                         <td class="text-success">Rs. {{ order.order_amount }} /-</td>
                     </tr>
+
+                     <tr class="">
+                        <th scope="col">Front Image</th>
+                         {% if order.bookingdetails.front_image %}
+                        <td class="text-success"><img style="width:100px; height:100px;" src="{{ order.bookingdetails.front_image.url }}"> </td>
+                         {% endif %}
+                    </tr>
+                     <tr class="">
+                        <th scope="col">Back Image</th>
+                         {% if order.bookingdetails.back_image %}
+                        <td class="text-success"> <img style="width:100px; height:100px;" src="{{ order.bookingdetails.back_image.url }}"> </td>
+                         {% endif %}
+                    </tr>
+                     <tr class="">
+                        <th scope="col">Left Side Image</th>
+                         {% if order.bookingdetails.left_image %}
+                        <td class="text-success"><img style="width:100px; height:100px;" src="{{ order.bookingdetails.left_image.url }}"> </td>
+                         {% endif %}
+                    </tr>
+                     <tr class="">
+                        <th scope="col">Right Side Image</th>
+                         {% if order.bookingdetails.right_image %}
+                        <td class="text-success"><img style="width:100px; height:100px;" src="{{ order.bookingdetails.right_image.url }}"></td>
+                         {% endif %}
+                    </tr>
                 </table>
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -106,7 +131,7 @@
                             </div>
 
                             <div>
-                                <a href="https://api.whatsapp.com/send?phone=+91{{ m.number }}&text=Name:{{ order.user.fname }}, Mobile:{{order.user.phone}}, Location:{{ order.bookingdetails.location }}, Bike Number:{{ order.bookingdetails.vehicle_number }}, Area Pincode:{{ order.bookingdetails.pin_code }}, Issues:{{ order.bookingdetails.Vehicle_issues }}" class="whatsapp_float" target="_blank"  rel="noopener noreferrer">
+                                <a href="https://api.whatsapp.com/send?phone=+91{{ m.number }}&text=Name:{{ order.user.fname }}, Mobile:{{order.user.phone}}, Location:{{ order.bookingdetails.location }}, Bike Number:{{ order.bookingdetails.vehicle_number }}, Area Pincode:{{ order.bookingdetails.pin_code }}, Issues:{{ order.bookingdetails.Vehicle_issues }}, {% if order.bookingdetails.right_image or order.bookingdetails.back_image or order.bookingdetails.left_image or order.bookingdetails.right_image %} Front Image:http://doctorautobikeservice.com{{ order.bookingdetails.front_image.url }}, Back Image:http://doctorautobikeservice.com{{ order.bookingdetails.back_image.url }}, Left Image:http://doctorautobikeservice.com{{ order.bookingdetails.left_image.url }}, Right Image:http://doctorautobikeservice.com{{ order.bookingdetails.right_image.url }} {% endif %}+" class="whatsapp_float" target="_blank"  rel="noopener noreferrer">
                                 <button class="btn btn-success btn-sm mt-2">Share</button>
                                 </a>
 
