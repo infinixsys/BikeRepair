@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <!-- <?php include 'header.php'; ?> -->
 <div class="container-fluid">
@@ -9,8 +10,7 @@
             <div class="row px-5 py-1">
                 <div class="col-md-12  d-flex justify-content-between">
                     <div>
-                        <h2>Dashboard</h2>
-                        <p>Welcome to our Dashboard</p>
+                        <img style="height:auto; width:270px;" src="{% static 'front/img/logo.png' %}">
                     </div>
 
                 </div>
