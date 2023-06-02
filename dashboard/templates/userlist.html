@@ -24,6 +24,7 @@
 <!--                </div>-->
             </div>
             {% for u in user_list %}
+            {% if u.password %}
             <div class="row justify-content-center">
                 <div class="col-lg-12 my-2">
                     <div class="bg-light shadow-sm rounded p-2 border-style">
@@ -58,6 +59,7 @@
                 </div>
 
             </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>

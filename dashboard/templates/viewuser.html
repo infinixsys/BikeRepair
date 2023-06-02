@@ -18,64 +18,62 @@
                     </tr>
                     <tr class="">
                         <th scope="col">Name</th>
-                        <td class="">{{ instance.name }}</td>
+                        <td class="">{{ instance.fname }}</td>
                     </tr>
                     <tr class="">
-                        <th scope="col">Profile</th>
-                        <td class="">{{ instance.profile }}</td>
+                        <th scope="col">Email</th>
+                        <td class="">{{ instance.email }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Mobile Number</th>
-                        <td class="">{{ instance.number }}</td>
+                        <td class="">{{ instance.phone }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Email Address</th>
                         <td class="">{{ instance.email }}</td>
                     </tr>
                     <tr class="">
-                        <th scope="col">Profile Image</th>
-                        {% if instance.img %}
-                        <td class=""><img style="width:60px; height:50px;" src="{{ instance.img.url }}" alt="{{ instance.name }}"> </td>
-                        {% endif %}
+                        <th scope="col">Plan Authentication</th>
+                        <td class="">{{ instance.plan_user }}</td>
                     </tr>
                     <tr class="">
-                        <th scope="col">Experience</th>
-                        <td class="">{{ instance.experiance }}</td>
+                        <th scope="col">Booking Authentication</th>
+                        <td class="">{{ instance.booking_user }}</td>
                     </tr>
                     <tr class="">
-                        <th scope="col">Aadhar Number</th>
-                        <td class="">{{ instance.aadhar }}</td>
+                        <th scope="col">Service Authentication</th>
+                        <td class="">{{ instance.service_user }}</td>
                     </tr>
                     <tr class="">
-                        <th scope="col">Download Aadhar</th>
-                        {% if instance.upload_aadhar %}
-                        <td class=""><a href="{{ instance.upload_aadhar.url }}">Download</a></td>
-                        {% endif %}
+                        <th scope="col">Technician Authentication</th>
+                        <td class="">{{instance.mechanic_user}}</td>
                     </tr>
 
                     <tr class="">
-                        <th scope="col">Download Resume</th>
-                        {% if instance.resume %}
-                        <td class=""><a href="{{ instance.resume.url }}">Download</a></td>
-                        {% endif %}
+                        <th scope="col">Customer Review Authentication</th>
+                        <td class="">{{instance.customer_review_user}}</td>
                     </tr>
 
                     <tr class="">
-                        <th scope="col">Qualification</th>
-                        <td class="">{{ instance.qualifications }}</td>
+                        <th scope="col">FAQ Authentication</th>
+                        <td class="">{{ instance.faq_user }}</td>
                     </tr>
 
                     <tr class="">
-                        <th scope="col">Skills</th>
-                        <td class="">{{ instance.skills }}</td>
+                        <th scope="col">Support Authentication</th>
+                        <td class="">{{ instance.support_user }}</td>
                     </tr>
                     <tr class="">
+                        <th scope="col">Account/Billing Authentication</th>
+                        <td class="">{{ instance.account_user }}</td>
+                    </tr>
+                     <tr class="">
                         <th scope="col">New Registration</th>
-                        <td class="">{{ instance.create_at |date }}</td>
+                        <td class="">{{ instance.created_at |date }}</td>
                     </tr>
                     <tr class="">
                         <th scope="col">Last Update</th>
-                        <td class="">{{ instance.update_at |date }}</td>
+                        <td class="">{{ instance.updated_at |date }}</td>
                     </tr>
 
 

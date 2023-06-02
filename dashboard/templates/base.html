@@ -17,7 +17,7 @@
      <!--  -->
 
 <!--  -->
-<script src="assets/js//script.js"></script>
+<script src="{% static 'assets/js//script.js' %}"></script>
 
 </head>
 
@@ -28,7 +28,6 @@
       <img src="assets/img//drlogo.png" width="120px" alt="">
 
    </a>
-   <hr>
    <ul class="nav nav-pills flex-column mb-auto">
        <img style="height:auto; width:170px;" src="{% static 'front/img/logo.png' %}">
        <p></p>
@@ -55,14 +54,14 @@
                <i class="bi bi-box-fill mx-1"></i>Our Plan</button></a>
       </li>
 
-      <li class="mt-1">
-         <a href="{% url 'banner' %}"><button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse2" aria-controls="contents-collapse2">
-               <i class="bi bi-image-fill mx-1"></i>Banner</button></a>
-      </li>
-      <li class="mt-1">
-         <a href="{% url 'offer_banner' %}"><button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse2" aria-controls="contents-collapse2">
-               <i class="bi bi-images mx-1"></i>Offer Banner</button></a>
-      </li>
+<!--      <li class="mt-1">-->
+<!--         <a href="{% url 'banner' %}"><button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse2" aria-controls="contents-collapse2">-->
+<!--               <i class="bi bi-image-fill mx-1"></i>Banner</button></a>-->
+<!--      </li>-->
+<!--      <li class="mt-1">-->
+<!--         <a href="{% url 'offer_banner' %}"><button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse2" aria-controls="contents-collapse2">-->
+<!--               <i class="bi bi-images mx-1"></i>Offer Banner</button></a>-->
+<!--      </li>-->
 
         <li class="mt-1">
          <button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse" aria-controls="contents-collapse">
@@ -84,7 +83,7 @@
       </li>
       <li class="mt-1">
          <a href="{% url 'mechanic_list' %}"><button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse2" aria-controls="contents-collapse2">
-               <i class="bi bi-people-fill mx-1"></i>Mechanic</button></a>
+               <i class="bi bi-people-fill mx-1"></i>Technician</button></a>
       </li>
       <li class="mt-1">
          <a href="{% url 'review' %}"><button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse2" aria-controls="contents-collapse2">

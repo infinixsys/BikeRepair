@@ -661,8 +661,8 @@ def updateuser(request, id):
 def viewuser(request, id):
     if not request.user.is_superuser:
         return redirect('login_attempt')
-    data = get_object_or_404(User, id=id)
-    return render(request, 'viewuser.html', {'data': data})
+    instance = get_object_or_404(User, id=id)
+    return render(request, 'viewuser.html', {'instance': instance})
 
 
 def deleteuser(request, id):
