@@ -63,6 +63,15 @@ class User(AbstractBaseUser):
     staff = models.BooleanField(default=False)
     super = models.BooleanField(default=False)
 
+    plan_user = models.BooleanField(default=False)
+    booking_user = models.BooleanField(default=False)
+    service_user = models.BooleanField(default=False)
+    mechanic_user = models.BooleanField(default=False)
+    customer_review_user = models.BooleanField(default=False)
+    faq_user = models.BooleanField(default=False)
+    support_user = models.BooleanField(default=False)
+    account_user = models.BooleanField(default=False)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

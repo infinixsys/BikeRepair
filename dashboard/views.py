@@ -1,7 +1,7 @@
 from unicodedata import decimal
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from main.models import *
 from repair.models import *
 from .models import *
@@ -30,7 +30,7 @@ def logout_view(request):
 
 
 def adminpanel(request):
-    if not request.user.is_superuser:
+    if not request.user.is_authenticated and not request.user.is_superuser:
         return redirect('login_attempt')
     total_service = Service.objects.all().count()
     annul_service = Service.objects.filter(plan_title="yearly").count()
@@ -53,14 +53,14 @@ def adminpanel(request):
 
 
 def plan(request):
-    if not request.user.is_superuser:
+    if not request.user.plan_user and not request.user.is_superuser:
         return redirect('login_attempt')
     plans = PlanName.objects.all()
     return render(request, 'plan.html', {'plans': plans})
 
 
 def addplan(request):
-    if not request.user.is_superuser:
+    if not request.user.plan_user and not request.user.is_superuser:
         return redirect('login_attempt')
     try:
         if request.method == 'POST':
@@ -97,7 +97,7 @@ def addplan(request):
 
 
 def editplan(request, id):
-    if not request.user.is_superuser:
+    if not request.user.plan_user and not request.user.is_superuser:
         return redirect('login_attempt')
     plans = get_object_or_404(PlanName, id=id)
     try:
@@ -166,6 +166,8 @@ def editplan(request, id):
 
 
 def updateactive(request, id):
+    if not request.user.plan_user and not request.user.is_superuser:
+        return redirect('login_attempt')
     plans = get_object_or_404(PlanName, id=id)
     status = "inactive"
     data = PlanName.objects.get(id=id)
@@ -175,6 +177,8 @@ def updateactive(request, id):
 
 
 def updateinactive(request, id):
+    if not request.user.plan_user and not request.user.is_superuser:
+        return redirect('login_attempt')
     plans = get_object_or_404(PlanName, id=id)
     status = "active"
     data = PlanName.objects.get(id=id)
@@ -184,13 +188,15 @@ def updateinactive(request, id):
 
 
 def deleteplan(request, id):
+    if not request.user.plan_user and not request.user.is_superuser:
+        return redirect('login_attempt')
     instance = get_object_or_404(PlanName, id=id)
     instance.delete()
     return redirect('plan')
 
 
 def review(request):
-    if not request.user.is_superuser:
+    if not request.user.customer_review_user and not request.user.is_superuser:
         return redirect('login_attempt')
 
     rev = ClientReview.objects.all()
@@ -203,7 +209,7 @@ def review(request):
 
 
 def approvedreview(request, id):
-    if not request.user.is_superuser:
+    if not request.user.customer_review_user and not request.user.is_superuser:
         return redirect('login_attempt')
     update = get_object_or_404(ClientReview, id=id)
     status = "approved"
@@ -214,7 +220,7 @@ def approvedreview(request, id):
 
 
 def deletereview(request, id):
-    if not request.user.is_superuser:
+    if not request.user.customer_review_user and not request.user.is_superuser:
         return redirect('login_attempt')
     instance = get_object_or_404(ClientReview, id=id)
     instance.delete()
@@ -222,14 +228,14 @@ def deletereview(request, id):
 
 
 def mechanic_list(request):
-    if not request.user.is_superuser:
+    if not request.user.mechanic_user and not request.user.is_superuser:
         return redirect('login_attempt')
     ml = Mechanic.objects.all()
     return render(request, 'mechanic_list.html', {'ml': ml})
 
 
 def mechanice(request):
-    if not request.user.is_superuser:
+    if not request.user.mechanic_user and not request.user.is_superuser:
         return redirect('login_attempt')
     if request.method == 'POST':
         name = request.POST.get('name', None)
@@ -257,12 +263,16 @@ def mechanice(request):
 
 
 def deletemechanic(request, id):
+    if not request.user.mechanic_user and not request.user.is_superuser:
+        return redirect('login_attempt')
     instance = get_object_or_404(Mechanic, id=id)
     instance.delete()
     return redirect('mechanic_list')
 
 
 def updatemechanic(request, id):
+    if not request.user.mechanic_user and not request.user.is_superuser:
+        return redirect('login_attempt')
     instance = get_object_or_404(Mechanic, id=id)
     if request.method == 'POST':
         name = request.POST.get('name', None)
@@ -296,14 +306,28 @@ def updatemechanic(request, id):
 
 
 def viewmechanic(request, id):
+    if not request.user.mechanic_user and not request.user.is_superuser:
+        return redirect('login_attempt')
     instance = get_object_or_404(Mechanic, id=id)
     return render(request, 'mechanic.html', {'instance': instance})
 
 
 def booking_leads(request):
-    if not request.user.is_superuser:
+    if not request.user.booking_user and not request.user.is_superuser:
         return redirect('login_attempt')
-    plane = Order.objects.all().order_by('-id')
+    plane = Order.objects.filter(isPaid=True).order_by('-id')
+    if request.method == 'POST':
+        data = request.POST.get('data')
+        plane = Order.objects.filter(
+            Q(user__phone__icontains=data) | Q(user__email__icontains=data) | Q(user__fname__icontains=data))
+        return render(request, 'booking_leads.html', {'plane': plane})
+    return render(request, 'booking_leads.html', {'plane': plane})
+
+
+def deactivate_booking_leads(request):
+    if not request.user.booking_user and not request.user.is_superuser:
+        return redirect('login_attempt')
+    plane = Order.objects.filter(isPaid=False).order_by('-id')
     if request.method == 'POST':
         data = request.POST.get('data')
         plane = Order.objects.filter(
@@ -313,7 +337,7 @@ def booking_leads(request):
 
 
 def booking_details(request, id):
-    if not request.user.is_superuser:
+    if not request.user.booking_user and not request.user.is_superuser:
         return redirect('login_attempt')
     order = Order.objects.get(id=id)
     mechnic = Mechanic.objects.all()
@@ -363,7 +387,7 @@ def addservice(request, id):
 
 
 def user_profile(request):
-    if not request.user.is_superuser:
+    if not request.user.service_user and not request.user.is_superuser:
         return redirect('login_attempt')
     plane = User.objects.all()
     if request.method == 'POST':
@@ -374,14 +398,14 @@ def user_profile(request):
 
 
 def user_history(request, id):
-    if not request.user.is_superuser:
+    if not request.user.service_user and not request.user.is_superuser:
         return redirect('login_attempt')
     plane = User.objects.get(id=id)
     return render(request, 'user-history.html', {'plane': plane})
 
 
 def support(request):
-    if not request.user.is_superuser:
+    if not request.user.support_user and not request.user.is_superuser:
         return redirect('login_attempt')
     sup = Support.objects.all()
     cls = ClientSupport.objects.all()
@@ -389,6 +413,8 @@ def support(request):
 
 
 def editsupport(request, id):
+    if not request.user.support_user and not request.user.is_superuser:
+        return redirect('login_attempt')
     cls = get_object_or_404(ClientSupport, id=id)
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -404,7 +430,7 @@ def editsupport(request, id):
 
 
 def account(request):
-    if not request.user.is_superuser:
+    if not request.user.account_user and not request.user.is_superuser:
         return redirect('login_attempt')
     bc = BillCreate.objects.all().order_by('-id')
     if request.method == 'POST':
@@ -413,7 +439,7 @@ def account(request):
 
 
 def create_bill(request):
-    if not request.user.is_superuser:
+    if not request.user.account_user and not request.user.is_superuser:
         return redirect('login_attempt')
     ords = Order.objects.all()
     if request.method == 'POST':
@@ -470,14 +496,14 @@ def create_bill(request):
 
 
 def view_bill(request, id):
-    if not request.user.is_superuser:
+    if not request.user.account_user and not request.user.is_superuser:
         return redirect('login_attempt')
     invoice = BillCreate.objects.get(id=id)
     return render(request, 'view-bill.html', {'invoice': invoice})
 
 
 def faq(request):
-    if not request.user.is_superuser:
+    if not request.user.faq_user and not request.user.is_superuser:
         return redirect('login_attempt')
     if request.method == 'POST':
         question = request.POST.get('question')
@@ -550,7 +576,7 @@ def delete_offer_banner(request, pk):
 
 
 def changeusername(request):
-    if not request.user.is_superuser:
+    if not request.user.is_authenticated:
         return redirect('login_attempt')
     if request.method == 'POST':
         old_phone = request.POST.get('old_phone')
@@ -564,7 +590,7 @@ def changeusername(request):
 
 
 def changepassword(request):
-    if not request.user.is_superuser:
+    if not request.user.is_authenticated:
         return redirect('login_attempt')
     if request.method == 'POST':
         old_password = request.POST.get('old_password')
@@ -577,4 +603,69 @@ def changepassword(request):
     return render(request, 'changepassword.html')
 
 
+def userlist(request):
+    if not request.user.is_superuser:
+        return redirect('login_attempt')
+    user_list = User.objects.all()
+    return render(request, 'userlist.html', {'user_list': user_list})
 
+
+def createuser(request):
+    if not request.user.is_superuser:
+        return redirect('login_attempt')
+    try:
+        if request.method == 'POST':
+            fname = request.POST.get('fname')
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            phone = request.POST.get('phone')
+
+            data = User.objects.create(phone=phone, email=email, fname=fname)
+            data.set_password(password)
+            data.save()
+            return redirect('userlist')
+    except Exception as E:
+        return render(request, 'createuser.html', {'msg': E})
+    return render(request, 'createuser.html')
+
+
+def updateuser(request, id):
+    if not request.user.is_superuser:
+        return redirect('login_attempt')
+    data = get_object_or_404(User, id=id)
+    try:
+        if request.method == 'POST':
+            plan_user = request.POST.get('plan_user')
+            booking_user = request.POST.get('booking_user')
+            service_user = request.POST.get('service_user')
+            mechanic_user = request.POST.get('mechanic_user')
+            customer_review_user = request.POST.get('customer_review_user')
+            faq_user = request.POST.get('faq_user')
+            support_user = request.POST.get('support_user')
+            account_user = request.POST.get('account_user')
+            data.plan_user = plan_user
+            data.booking_user = booking_user
+            data.service_user = service_user
+            data.mechanic_user = mechanic_user
+            data.customer_review_user = customer_review_user
+            data.faq_user = faq_user
+            data.support_user = support_user
+            data.account_user = account_user
+            data.save()
+            return redirect('userlist')
+    except Exception as E:
+        return render(request, 'updateuser.html', {'msg': E})
+    return render(request, 'updateuser.html', {'data': data})
+
+
+def viewuser(request, id):
+    if not request.user.is_superuser:
+        return redirect('login_attempt')
+    data = get_object_or_404(User, id=id)
+    return render(request, 'viewuser.html', {'data': data})
+
+
+def deleteuser(request, id):
+    instance = get_object_or_404(User, id=id)
+    instance.delete()
+    return redirect('userlist')

@@ -46,11 +46,13 @@ INSTALLED_APPS = [
     'dashboard',
     'knox',
     'frontpage',
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -158,4 +160,11 @@ REST_KNOX = {
     'TOKEN_TTL': timedelta(days=1),
 }
 
+# CORS_ALLOWED_ORIGINS = True
+#
+# CORS_ALLOWED_ORIGIN_REGEXES = True
 
+# CORS_ALLOW_ALL_ORIGINS = [
+#     'http://doctorautobikeservice.com/',
+#     'http://doctorautobikeservice.com/',
+# ]

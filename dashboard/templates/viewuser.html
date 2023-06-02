@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- <?php include 'header.php'; ?> -->
+<div class="container-fluid">
+    <div class="row justify-content-end">
+        <!---<?php include 'sidemenu.php' ?>--->
+        <div class="col-lg-10 p-5">
+            <div class="d-flex justify-content-between">
+                <h4>Mechanic Details</h4>
+            </div>
+            <div class="row justify-content-center">
+                <table class="table">
+                     <tr class="">
+                        <th scope="col">#ID</th>
+                        <td class="">{{ instance.id }}</td>
+                    </tr>
+                    <tr class="">
+                        <th scope="col">Name</th>
+                        <td class="">{{ instance.name }}</td>
+                    </tr>
+                    <tr class="">
+                        <th scope="col">Profile</th>
+                        <td class="">{{ instance.profile }}</td>
+                    </tr>
+                    <tr class="">
+                        <th scope="col">Mobile Number</th>
+                        <td class="">{{ instance.number }}</td>
+                    </tr>
+                    <tr class="">
+                        <th scope="col">Email Address</th>
+                        <td class="">{{ instance.email }}</td>
+                    </tr>
+                    <tr class="">
+                        <th scope="col">Profile Image</th>
+                        {% if instance.img %}
+                        <td class=""><img style="width:60px; height:50px;" src="{{ instance.img.url }}" alt="{{ instance.name }}"> </td>
+                        {% endif %}
+                    </tr>
+                    <tr class="">
+                        <th scope="col">Experience</th>
+                        <td class="">{{ instance.experiance }}</td>
+                    </tr>
+                    <tr class="">
+                        <th scope="col">Aadhar Number</th>
+                        <td class="">{{ instance.aadhar }}</td>
+                    </tr>
+                    <tr class="">
+                        <th scope="col">Download Aadhar</th>
+                        {% if instance.upload_aadhar %}
+                        <td class=""><a href="{{ instance.upload_aadhar.url }}">Download</a></td>
+                        {% endif %}
+                    </tr>
+
+                    <tr class="">
+                        <th scope="col">Download Resume</th>
+                        {% if instance.resume %}
+                        <td class=""><a href="{{ instance.resume.url }}">Download</a></td>
+                        {% endif %}
+                    </tr>
+
+                    <tr class="">
+                        <th scope="col">Qualification</th>
+                        <td class="">{{ instance.qualifications }}</td>
+                    </tr>
+
+                    <tr class="">
+                        <th scope="col">Skills</th>
+                        <td class="">{{ instance.skills }}</td>
+                    </tr>
+                    <tr class="">
+                        <th scope="col">New Registration</th>
+                        <td class="">{{ instance.create_at |date }}</td>
+                    </tr>
+                    <tr class="">
+                        <th scope="col">Last Update</th>
+                        <td class="">{{ instance.update_at |date }}</td>
+                    </tr>
+
+
+                </table>
+                <!-- Button trigger modal -->
+<!--                <button type="button" class="btn btn-danger" data-bs-target="#exampleModal">-->
+<!--                    Share to Mechanic-->
+<!--                </button>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

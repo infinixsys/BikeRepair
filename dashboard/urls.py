@@ -12,6 +12,7 @@ urlpatterns = [
     path('deleteplan/<int:id>/', deleteplan, name='deleteplan'),
 
     path('booking/leads', booking_leads, name='booking_leads'),
+    path('booking/leads/deactivate', deactivate_booking_leads, name='deactivate_booking_leads'),
     path('booking/details/<int:id>', booking_details, name='booking_details'),
 
     path('user/profile', user_profile, name='user_profile'),
@@ -51,4 +52,9 @@ urlpatterns = [
     path('updateactive/<int:id>/', updateactive, name='updateactive'),
     path('updateinactive/<int:id>/', updateinactive, name='updateinactive'),
 
+    path('user/list/', userlist, name='userlist'),
+    path('user/create/', createuser, name='createuser'),
+    path('user/update/<int:id>/', updateuser, name='updateuser'),
+    path('user/view/<int:id>/', viewuser, name='viewuser'),
+    path('user/delete/<int:id>/', deleteuser, name='deleteuser'),
 ]

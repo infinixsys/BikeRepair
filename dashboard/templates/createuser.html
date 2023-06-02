@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- <?php include 'header.php'; ?> -->
+<div class="container-fluid">
+    <div class="row justify-content-end">
+        <!---<?php include 'sidemenu.php' ?>--->
+        <div class="col-lg-10 border">
+            <h4 class="text-center fw-bold mt-3">Create User</h4>
+            <hr>
+            {{ msg }}
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            <div class="row px-4">
+                <!-- <div class="col-md-5 p-3 border"> -->
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="fname" id="name" placeholder="Enter  Name" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">User Email</label>
+                    <input type="email" class="form-control" name="email" id="name" placeholder="Enter Email" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">User Number</label>
+                    <input type="number" class="form-control" name="phone" id="name" placeholder="Enter Number" aria-describedby="emailHelp">
+                </div>
+
+
+                  <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" id="name" placeholder="Enter Password" aria-describedby="emailHelp">
+                </div>
+                <!-- <div class="col-md-12 mt-2">
+                        <label for="">Description</label>
+                        <textarea name="editor"></textarea>
+
+                    </div> -->
+                    <div class="col-md-7  d-grid gap-2 my-3">
+                <button class="btn color d-grid gap-2">Create User</button>
+                </div>
+            </div>
+                </form>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    CKEDITOR.replace('editor');
+</script>
+
+{% endblock %}

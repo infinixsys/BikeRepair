@@ -30,6 +30,10 @@
    </a>
    <hr>
    <ul class="nav nav-pills flex-column mb-auto">
+       <img style="height:auto; width:170px;" src="{% static 'front/img/logo.png' %}">
+       <p></p>
+
+
       <li>
          <a href="{% url 'adminpanel' %}" class="nav-link color">
             <i class="bi bi-speedometer2 text-white"></i>
@@ -59,10 +63,21 @@
          <a href="{% url 'offer_banner' %}"><button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse2" aria-controls="contents-collapse2">
                <i class="bi bi-images mx-1"></i>Offer Banner</button></a>
       </li>
-      <li class="mt-1">
-         <a href="{% url 'booking_leads' %}"><button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse2" aria-controls="contents-collapse2">
-               <i class="bi bi-megaphone-fill mx-1"></i>Booking Leads</button></a>
+
+        <li class="mt-1">
+         <button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse" aria-controls="contents-collapse">
+            <i class="bi bi-grid-fill mx-1"></i>Booking Leads</button>
+         <ul class="list-unstyled bg-white ps-1 collapse shadow-sm rounded" id="contents-collapse">
+            <li><a class="d-inline-flex align-items-center rounded" href="{% url 'booking_leads' %}">Activated Lead</a>
+            <li>
+            <li><a class="d-inline-flex align-items-center rounded" href="{% url 'deactivate_booking_leads' %}">Deactivated Lead</a></li>
+         </ul>
       </li>
+
+<!--      <li class="mt-1">-->
+<!--         <a href="{% url 'booking_leads' %}"><button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse2" aria-controls="contents-collapse2">-->
+<!--               <i class="bi bi-megaphone-fill mx-1"></i>Booking Leads</button></a>-->
+<!--      </li>-->
       <li class="mt-1">
          <a href="{% url 'user_profile' %}"><button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse2" aria-controls="contents-collapse2">
                <i class="bi bi-person-fill mx-1"></i>Services</button></a>
@@ -87,6 +102,11 @@
       <li class="mt-1">
          <a href="{% url 'account' %}"><button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse2" aria-controls="contents-collapse2">
                <i class="bi bi-currency-rupee mx-1"></i>Account</button></a>
+      </li>
+
+      <li class="mt-1">
+         <a href="{% url 'userlist' %}"><button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse2" aria-controls="contents-collapse2">
+               <i class="bi bi-person-fill mx-1"></i>User Role</button></a>
       </li>
       <!-- <li class="mt-1">
          <button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse1" aria-controls="contents-collapse1">

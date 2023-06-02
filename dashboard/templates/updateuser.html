@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- <?php include 'header.php'; ?> -->
+<div class="container-fluid">
+    <div class="row justify-content-end">
+        <!---<?php include 'sidemenu.php' ?>--->
+        <div class="col-lg-10 border">
+            <h4 class="text-center fw-bold mt-3">Update User</h4>
+            <hr>
+            {{ msg }}
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            <div class="row px-4">
+                <!-- <div class="col-md-5 p-3 border"> -->
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Plan Authentication</label>
+                    <input type="text" class="form-control" name="plan_user" value="{{data.plan_user}}" id="name" placeholder="Enter  Name" aria-describedby="emailHelp">
+                </div>
+
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Booking Authentication</label>
+                    <input type="text" class="form-control" name="booking_user" value="{{data.booking_user}}" placeholder="Enter  Name" aria-describedby="emailHelp">
+                </div>
+
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Service Authentication</label>
+                    <input type="text" class="form-control" name="service_user" value="{{data.service_user}}" placeholder="Enter  Name" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Mechanic Authentication</label>
+                    <input type="text" class="form-control" name="mechanic_user" value="{{data.mechanic_user}}" placeholder="Enter  Name" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Customer Review Authentication</label>
+                    <input type="text" class="form-control" name="customer_review_user" value="{{data.customer_review_user}}" placeholder="Enter  Name" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">FAQ Authentication</label>
+                    <input type="text" class="form-control" name="faq_user" value="{{data.faq_user}}" placeholder="Enter  Name" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Support Authentication</label>
+                    <input type="text" class="form-control" name="support_user" value="{{data.support_user}}" placeholder="Enter  Name" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Account Authentication</label>
+                    <input type="text" class="form-control" name="account_user" value="{{data.account_user}}" placeholder="Enter  Name" aria-describedby="emailHelp">
+                </div>
+
+
+
+                    <div class="col-md-7  d-grid gap-2 my-3">
+                <button class="btn color d-grid gap-2">Update User</button>
+                </div>
+            </div>
+                </form>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    CKEDITOR.replace('editor');
+</script>
+
+{% endblock %}

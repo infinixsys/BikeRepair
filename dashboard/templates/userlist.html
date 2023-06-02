@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<!-- <?php include 'header.php'; ?> -->
+<div class="container-fluid">
+    <div class="row justify-content-end">
+        <!---<?php include 'sidemenu.php' ?>--->
+        <div class="col-lg-10   p-4">
+            <div class="d-flex justify-content-between p-3">
+                <h4>User Registration</h4>
+            </div>
+            <div class="row">
+            <div class="col-md-8 mb-3">
+                    <a href="{% url 'createuser' %}"><button class="btn btn-success"> <i class="bi bi-plus text-white"></i> Add  User</button></a>
+                </div>
+<!--                <div class="col-md-4">-->
+<!--                    <div class="input-group mb-3">-->
+<!--                        <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">-->
+<!--                        <span class="input-group-text" id="basic-addon2"> <i class="bi bi-search"></i> </span>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+            {% for u in user_list %}
+            <div class="row justify-content-center">
+                <div class="col-lg-12 my-2">
+                    <div class="bg-light shadow-sm rounded p-2 border-style">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <div class="d-flex">
+
+                                    <div>
+
+                                    </div>
+                                </div>
+                                <div class="fw-bold text-secondary">{{ u.fname }}</div>
+                            </div>
+                            <div>
+                                <div>
+                                    <h6 class="text-secondary">{{ u.email }}</h6>
+                                    <h6>{{ u.phone }} </h6>
+                                </div>
+                            </div>
+                            <div style="cursor:pointer;">
+
+                                <div>
+                               <a href="{% url 'updateuser' u.id %}">  <i class="bi bi-pencil-square text-warning fs-4 mx-2"></i></a>
+                                   <a href="{% url 'deleteuser' u.id %}">  <i class="bi bi-archive text-danger fs-4 mx-2"></i></a>
+                                    <a href="{% url 'viewuser' u.id %}"><i class="bi bi-eye text-success fs-4 mx-2"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
