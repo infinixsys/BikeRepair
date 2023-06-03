@@ -68,9 +68,9 @@
 <!--      </li>-->
 {% if request.user.booking_user or request.user.is_superuser %}
         <li class="mt-1">
-         <button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse" aria-controls="contents-collapse">
+         <button class="btn d-inline-flex align-items-center collapsed" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse1" aria-controls="contents-collapse">
             <i class="bi bi-grid-fill mx-1"></i>Booking Leads</button>
-         <ul class="list-unstyled bg-white ps-1 collapse shadow-sm rounded" id="contents-collapse">
+         <ul class="list-unstyled bg-white ps-1 collapse shadow-sm rounded" id="contents-collapse1">
             <li><a class="d-inline-flex align-items-center rounded" href="{% url 'booking_leads' %}">Activated Lead</a>
             <li>
             <li><a class="d-inline-flex align-items-center rounded" href="{% url 'deactivate_booking_leads' %}">Deactivated Lead</a></li>

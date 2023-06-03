@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-md-6 mt-2">
                     <label for="name" class="form-label">Technician Number</label>
-                    <input type="number" class="form-control" value="{{ instance.number }}" name="number" id="name" placeholder="Enter Number" aria-describedby="emailHelp">
+                    <input type="number" class="form-control" pattern=".{10,10}"  value="{{ instance.number }}" name="number" id="name" placeholder="Enter Number" aria-describedby="emailHelp">
                 </div>
 
                 <div class="col-md-6 mt-2">

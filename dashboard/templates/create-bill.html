@@ -11,7 +11,7 @@
             <form method="post">
                 {% csrf_token %}
                 <h4 class="text-center fw-bold mt-3">Bill Details</h4>
-            <div class="row px-4">
+                <div class="row px-4">
                 <!-- <div class="col-md-5 p-3 border"> -->
                 <div class="col-md-6 mt-2">
                     <label for="name" class="form-label">Bill Name</label>
@@ -56,8 +56,8 @@
                 </div>
 
             </div>
-                        <h4 class="text-center fw-bold mt-3">Shipping Details</h4>
-                            <div class="row px-4">
+                <h4 class="text-center fw-bold mt-3">Shipping Details</h4>
+                <div class="row px-4">
                 <!-- <div class="col-md-5 p-3 border"> -->
                 <div class="col-md-6 mt-2">
                     <label for="name" class="form-label">Ship Name</label>
@@ -75,33 +75,16 @@
                     <label for="name" class="form-label">ship Phone</label>
                     <input type="number" class="form-control" name="ship_phone" id="name" placeholder="" aria-describedby="emailHelp">
                 </div>
-
-                                <div class="col-md-6 mt-2">
+                <div class="col-md-6 mt-2">
                     <label for="name" class="form-label">ship Gst</label>
                     <input type="number" class="form-control" name="ship_gst" id="name" placeholder="" aria-describedby="emailHelp">
                 </div>
-
             </div>
-                        <h4 class="text-center fw-bold mt-3">Item Details</h4>
-                            <div class="row px-4">
-                <!-- <div class="col-md-5 p-3 border"> -->
-                <div class="col-md-6 mt-2">
-                    <label for="name" class="form-label">Item Name</label>
-                    <input type="text" class="form-control" name="item_name" id="name" placeholder="Enter Item Name" aria-describedby="emailHelp">
-                </div>
-                <div class="col-md-6 mt-2">
-                    <label for="name" class="form-label">Item Unit</label>
-                    <input type="number" class="form-control" name="item_unit" id="name" placeholder="Enter Unit" aria-describedby="emailHelp">
-                </div>
-                <div class="col-md-6 mt-2">
-                    <label for="name" class="form-label">Item Quantity</label>
-                    <input type="number" class="form-control" name="item_quantity" id="name" placeholder="" aria-describedby="emailHelp">
-                </div>
-                <div class="col-md-6 mt-2">
-                    <label for="name" class="form-label">Item Rate </label>
-                    <input type="number" class="form-control" name="item_rate" id="name" placeholder="" aria-describedby="emailHelp">
-                </div>
 
+                <div class="row px-4">
+                    <div class="col-md-6  d-grid gap-2 my-3">
+                    <input type="hidden" id="itemsArr" name="item">
+                </div>
                 <div class="col-md-12 mt-2">
                     <label for="">Description</label>
                     <textarea name="txt" id="editor"></textarea>
@@ -111,11 +94,94 @@
                     <button class="btn color d-grid gap-2">Add</button>
                 </div>
             </div>
+
                 </form>
+
+
+     <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Item Name</label>
+                    <input type="text" class="form-control" name="item_name" id="FullName" placeholder="Enter Item Name" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Item Unit</label>
+                    <input type="number" class="form-control" name="item_unit" id="Unit" placeholder="Enter Unit" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Item Quantity</label>
+                    <input type="number" class="form-control" name="item_quantity" id="ItemQuantity" placeholder="" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Item Rate </label>
+                    <input type="number" class="form-control" name="item_rate" id="ItemRate" placeholder="" aria-describedby="emailHelp">
+                </div>
+<br>
+    <button class="btn color d-grid gap-2" onclick="storeData()">Store Data</button>
+
+    <h2>Data Array:</h2>
+    <div id="result"></div>
+
         </div>
     </div>
 </div>
 </div>
+
+    <script>
+      var dataArray = [];
+
+      function storeData() {
+        var FullName = document.getElementById('FullName').value;
+        var Unit = document.getElementById('Unit').value;
+        var ItemQuantity = document.getElementById('ItemQuantity').value;
+        var For = document.getElementById('ItemRate').value;
+
+        var dataObject = {
+          FullName: FullName,
+          Unit: Unit,
+          ItemQuantity: ItemQuantity,
+          ItemRate: ItemRate
+        };
+
+        var isDuplicate = dataArray.some(function (item) {
+          return JSON.stringify(item) === JSON.stringify(dataObject);
+        });
+
+        if (!isDuplicate) {
+          dataArray.push(dataObject);
+          displayData();
+
+          // Clear input values
+          document.getElementById('FullName').value = '';
+          document.getElementById('Unit').value = '';
+          document.getElementById('ItemQuantity').value = '';
+          document.getElementById('ItemRate').value = '';
+        }
+      }
+
+      function deleteData(index) {
+        dataArray.splice(index, 1);
+        displayData();
+      }
+
+      function displayData() {
+        var resultElement = document.getElementById('result');
+        resultElement.innerHTML = '';
+
+        for (var i = 0; i < dataArray.length; i++) {
+          var dataItem = dataArray[i];
+          var listItem = document.createElement('p');
+          listItem.textContent = JSON.stringify(dataItem);
+
+          var deleteButton = document.createElement('button');
+          deleteButton.textContent = 'Delete';
+          deleteButton.setAttribute('onclick', 'deleteData(' + i + ')');
+          listItem.appendChild(deleteButton);
+
+          resultElement.appendChild(listItem);
+        }
+        document.getElementById("itemsArr").value = resultElement
+      }
+    </script>
+
 <script>
     CKEDITOR.replace('editor');
 </script>

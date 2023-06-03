@@ -237,32 +237,38 @@ def mechanic_list(request):
 def mechanice(request):
     if not request.user.mechanic_user and not request.user.is_superuser:
         return redirect('login_attempt')
-    if request.method == 'POST':
-        name = request.POST.get('name', None)
-        profile = request.POST.get('profile', None)
-        email = request.POST.get('email', None)
-        price = request.POST.get('price', None)
-        experiance = request.POST.get('experiance', None)
-        number = request.POST.get('number', None)
-        img = request.FILES.get('img', None)
-        aadhar = request.POST.get('aadhar', None)
-        front_aadhar = request.FILES.get('front_aadhar', None)
-        back_aadhar = request.FILES.get('back_aadhar', None)
-        pancard = request.FILES.get('pancard', None)
-        resume = request.FILES.get('resume', None)
-        qualifications = request.POST.get('qualifications', None)
-        skills = request.POST.get('skills', None)
-        date_of_birth = request.POST.get('date_of_birth', None)
-        blood_group = request.POST.get('blood_group', None)
+    try:
+        if request.method == 'POST':
+            name = request.POST.get('name', None)
+            profile = request.POST.get('profile', None)
+            email = request.POST.get('email', None)
+            price = request.POST.get('price', None)
+            experiance = request.POST.get('experiance', None)
+            number = request.POST.get('number', None)
+            img = request.FILES.get('img', None)
+            aadhar = request.POST.get('aadhar', None)
+            front_aadhar = request.FILES.get('front_aadhar', None)
+            back_aadhar = request.FILES.get('back_aadhar', None)
+            pancard = request.FILES.get('pancard', None)
+            resume = request.FILES.get('resume', None)
+            qualifications = request.POST.get('qualifications', None)
+            skills = request.POST.get('skills', None)
+            date_of_birth = request.POST.get('date_of_birth', None)
+            blood_group = request.POST.get('blood_group', None)
+            if int(number) == 10:
+                msg = "Fill Correct Mobile No."
+                return render(request, 'addmechanic.html', {"msg": msg})
+            data = Mechanic.objects.create(name=name, profile=profile, email=email, price=price, experiance=experiance,
+                                           aadhar=aadhar, front_aadhar=front_aadhar, resume=resume, back_aadhar=back_aadhar,
+                                           qualifications=qualifications, pancard=pancard, date_of_birth=date_of_birth,
+                                           skills=skills, blood_group=blood_group,
+                                           number=number, img=img)
+            data.save()
+            msg = "Your Detail Has Been Submitted !!"
+            return redirect('mechanic_list')
+    except Exception as E:
+        return render(request, 'addmechanic.html', {'msg':E})
 
-        data = Mechanic.objects.create(name=name, profile=profile, email=email, price=price, experiance=experiance,
-                                       aadhar=aadhar, front_aadhar=front_aadhar, resume=resume, back_aadhar=back_aadhar,
-                                       qualifications=qualifications, pancard=pancard, date_of_birth=date_of_birth,
-                                       skills=skills, blood_group=blood_group,
-                                       number=number, img=img)
-        data.save()
-        msg = "Your Detail Has Been Submitted !!"
-        return redirect('mechanic_list')
     return render(request, 'addmechanic.html')
 
 
@@ -278,44 +284,48 @@ def updatemechanic(request, id):
     if not request.user.mechanic_user and not request.user.is_superuser:
         return redirect('login_attempt')
     instance = get_object_or_404(Mechanic, id=id)
-    if request.method == 'POST':
-
-        name = request.POST.get('name', None)
-        profile = request.POST.get('profile', None)
-        email = request.POST.get('email', None)
-        price = request.POST.get('price', None)
-        experiance = request.POST.get('experiance', None)
-        number = request.POST.get('number', None)
-        img = request.FILES.get('img', None)
-        aadhar = request.POST.get('aadhar', None)
-        front_aadhar = request.FILES.get('front_aadhar', None)
-        back_aadhar = request.FILES.get('back_aadhar', None)
-        pancard = request.FILES.get('pancard', None)
-        resume = request.FILES.get('resume', None)
-        qualifications = request.POST.get('qualifications', None)
-        skills = request.POST.get('skills', None)
-        date_of_birth = request.POST.get('date_of_birth', None)
-        blood_group = request.POST.get('blood_group', None)
-
-        data = Mechanic.objects.get(id=id)
-        data.name = name
-        data.profile = profile
-        data.email = email
-        data.price = price
-        data.experiance = experiance
-        data.number = number
-        data.img = img
-        data.aadhar = aadhar
-        data.front_aadhar = front_aadhar
-        data.back_aadhar = back_aadhar
-        data.pancard = pancard
-        data.resume = resume
-        data.qualifications = qualifications
-        data.skills = skills
-        data.date_of_birth = date_of_birth
-        data.blood_group = blood_group
-        data.save()
-        return redirect('mechanic_list')
+    try:
+        if request.method == 'POST':
+            name = request.POST.get('name', None)
+            profile = request.POST.get('profile', None)
+            email = request.POST.get('email', None)
+            price = request.POST.get('price', None)
+            experiance = request.POST.get('experiance', None)
+            number = request.POST.get('number', None)
+            img = request.FILES.get('img')
+            aadhar = request.POST.get('aadhar', None)
+            front_aadhar = request.FILES.get('front_aadhar')
+            back_aadhar = request.FILES.get('back_aadhar')
+            pancard = request.FILES.get('pancard')
+            resume = request.FILES.get('resume')
+            qualifications = request.POST.get('qualifications', None)
+            skills = request.POST.get('skills', None)
+            date_of_birth = request.POST.get('date_of_birth', None)
+            blood_group = request.POST.get('blood_group', None)
+            if int(number) == 10:
+                msg = "Fill Correct Mobile No."
+                return render(request, 'addmechanic.html', {"msg": msg})
+            data = Mechanic.objects.get(id=id)
+            data.name = name
+            data.profile = profile
+            data.email = email
+            data.price = price
+            data.experiance = experiance
+            data.number = number
+            data.img = img
+            data.aadhar = aadhar
+            data.front_aadhar = front_aadhar
+            data.back_aadhar = back_aadhar
+            data.pancard = pancard
+            data.resume = resume
+            data.qualifications = qualifications
+            data.skills = skills
+            data.date_of_birth = date_of_birth
+            data.blood_group = blood_group
+            data.save()
+            return redirect('mechanic_list')
+    except Exception as E:
+        return render(request, 'addmechanic.html', {'msg':E})
     return render(request, 'addmechanic.html', {'instance': instance})
 
 
@@ -457,8 +467,7 @@ def create_bill(request):
         return redirect('login_attempt')
     ords = Order.objects.all()
     if request.method == 'POST':
-        # order_id = request.POST.get('order')
-        # order = Order.objects.get(id=order_id)
+
         bill_name = request.POST.get("bill_name", None)
         bill_company = request.POST.get("bill_company", None)
         bill_address = request.POST.get("bill_address", None)
@@ -475,36 +484,39 @@ def create_bill(request):
         ship_pincode = request.POST.get('ship_pincode', None)
         ship_phone = request.POST.get('ship_phone', None)
         ship_gst = request.POST.get('ship_gst', None)
-        item_name = request.POST.get('item_name', None)
-        item_unit = request.POST.get('item_unit', None)
-        item_quantity = request.POST.get('item_quantity', None)
-        item_rate = request.POST.get('item_rate', None)
-        if ship_gst is not None:
-            ship = int(((int(item_unit) * int(item_quantity)) * int(ship_gst)) / 100)
-            total = ship + int(total_service)
-            total = total
-            data = BillCreate.objects.create(bill_name=bill_name, bill_company=bill_company,
-                                             bill_address=bill_address
-                                             , bill_pincode=bill_pincode, bill_phone=bill_phone,
-                                             total_service=total_service,
-                                             tax=tax, igst=igst, sgst=sgst, cgst=cgst, total=total, txt=txt,
-                                             ship_name=ship_name, ship_address=ship_address, ship_pincode=ship_pincode,
-                                             ship_phone=ship_phone, ship_gst=ship_gst, item_name=item_name,
-                                             item_unit=item_unit, item_quantity=item_quantity, item_rate=item_rate)
-            data.save()
-            return redirect('account')
-        else:
-            total = total_service
-            data = BillCreate.objects.create(bill_name=bill_name, bill_company=bill_company,
-                                             bill_address=bill_address
-                                             , bill_pincode=bill_pincode, bill_phone=bill_phone,
-                                             total_service=total_service,
-                                             tax=tax, igst=igst, sgst=sgst, cgst=cgst, total=total, txt=txt,
-                                             ship_name=ship_name, ship_address=ship_address, ship_pincode=ship_pincode,
-                                             ship_phone=ship_phone, ship_gst=ship_gst, item_name=item_name,
-                                             item_unit=item_unit, item_quantity=item_quantity, item_rate=item_rate)
-            data.save()
-            return redirect('account')
+        item = request.POST.getlist('item')
+        print(item)
+        # item_name = request.POST.get('item_name', None)
+        # item_unit = request.POST.get('item_unit', None)
+        # item_quantity = request.POST.get('item_quantity', None)
+        # item_rate = request.POST.get('item_rate', None)
+        # if ship_gst is not None:
+        #     ship = int(((int(item_unit) * int(item_quantity)) * int(ship_gst)) / 100)
+        #     total = ship + int(total_service)
+        #     total = total
+        data = BillCreate.objects.create(bill_name=bill_name, bill_company=bill_company, bill_address=bill_address,
+                                         bill_pincode=bill_pincode, bill_phone=bill_phone, total_service=total_service,
+                                         tax=tax, igst=igst, sgst=sgst, cgst=cgst, total=0, txt=txt,
+                                         ship_name=ship_name, ship_address=ship_address, ship_pincode=ship_pincode,
+                                         ship_phone=ship_phone, ship_gst=ship_gst)
+
+        # Create Item objects and associate them with the BillCreate instance
+        # items = Item.objects.filter(id__in=item)
+        items = []
+        for item_id in item:
+            itm = Item.objects.create(id=int(item_id))
+            items.append(itm)
+
+        data.item.set(items)
+
+        data.save()
+        return redirect('account')
+        # else: total = total_service data = BillCreate.objects.create(bill_name=bill_name,
+        # bill_company=bill_company, bill_address=bill_address , bill_pincode=bill_pincode, bill_phone=bill_phone,
+        # total_service=total_service, tax=tax, igst=igst, sgst=sgst, cgst=cgst, total=total, txt=txt,
+        # ship_name=ship_name, ship_address=ship_address, ship_pincode=ship_pincode, ship_phone=ship_phone,
+        # ship_gst=ship_gst, item_name=item_name, item_unit=item_unit, item_quantity=item_quantity,
+        # item_rate=item_rate) data.save() return redirect('account')
 
     return render(request, 'create-bill.html', {'ords': ords})
 
@@ -683,3 +695,7 @@ def deleteuser(request, id):
     instance = get_object_or_404(User, id=id)
     instance.delete()
     return redirect('userlist')
+
+
+def demo(request):
+    return render(request, 'demo.html')

@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(AddBanner)
 admin.site.register(AddOfferBanner)
 admin.site.register(BillCreate)
+admin.site.register(Item)

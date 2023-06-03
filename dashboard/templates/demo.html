@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Storage and Display</title>
+    <script>
+      var dataArray = [];
+
+      function storeData() {
+        var FullName = document.getElementById('FullName').value;
+        var Unit = document.getElementById('Unit').value;
+        var ItemQuantity = document.getElementById('ItemQuantity').value;
+        var For = document.getElementById('ItemRate').value;
+
+        var dataObject = {
+          FullName: FullName,
+          Unit: Unit,
+          ItemQuantity: ItemQuantity,
+          ItemRate: ItemRate
+        };
+
+        var isDuplicate = dataArray.some(function (item) {
+          return JSON.stringify(item) === JSON.stringify(dataObject);
+        });
+
+        if (!isDuplicate) {
+          dataArray.push(dataObject);
+          displayData();
+          
+          // Clear input values
+          document.getElementById('FullName').value = '';
+          document.getElementById('Unit').value = '';
+          document.getElementById('ItemQuantity').value = '';
+          document.getElementById('ItemRate').value = '';
+        }
+      }
+
+      function deleteData(index) {
+        dataArray.splice(index, 1);
+        displayData();
+      }
+
+      function displayData() {
+        var resultElement = document.getElementById('result');
+        resultElement.innerHTML = '';
+
+        for (var i = 0; i < dataArray.length; i++) {
+          var dataItem = dataArray[i];
+          var listItem = document.createElement('p');
+          listItem.textContent = JSON.stringify(dataItem);
+
+          var deleteButton = document.createElement('button');
+          deleteButton.textContent = 'Delete';
+          deleteButton.setAttribute('onclick', 'deleteData(' + i + ')');
+          listItem.appendChild(deleteButton);
+
+          resultElement.appendChild(listItem);
+        }
+      }
+    </script>
+  </head>
+  <body>
+
+
+
+     <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Item Name</label>
+                    <input type="text" class="form-control" name="item_name" id="FullName" placeholder="Enter Item Name" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Item Unit</label>
+                    <input type="number" class="form-control" name="item_unit" id="Unit" placeholder="Enter Unit" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Item Quantity</label>
+                    <input type="number" class="form-control" name="item_quantity" id="ItemQuantity" placeholder="" aria-describedby="emailHelp">
+                </div>
+                <div class="col-md-6 mt-2">
+                    <label for="name" class="form-label">Item Rate </label>
+                    <input type="number" class="form-control" name="item_rate" id="ItemRate" placeholder="" aria-describedby="emailHelp">
+                </div>
+
+    <button onclick="storeData()">Store Data</button>
+
+    <h2>Data Array:</h2>
+    <div id="result"></div>
+  </body>
+</html>

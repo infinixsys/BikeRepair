@@ -19,6 +19,15 @@ class AddOfferBanner(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
 
 
+class Item(models.Model):
+    item_name = models.CharField(max_length=200, blank=True, null=True)
+    item_unit = models.CharField(max_length=200, blank=True, null=True)
+    item_quantity = models.CharField(max_length=200, blank=True, null=True)
+    item_rate = models.CharField(max_length=200, blank=True, null=True)
+
+    create_at = models.DateTimeField(auto_now_add=True)
+
+
 class BillCreate(models.Model):
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
     bill_name = models.CharField(max_length=200, blank=True, null=True)
@@ -41,10 +50,7 @@ class BillCreate(models.Model):
     ship_phone = models.CharField(max_length=200, blank=True, null=True)
     ship_gst = models.CharField(max_length=200, blank=True, null=True)
 
-    item_name = models.CharField(max_length=200, blank=True, null=True)
-    item_unit = models.CharField(max_length=200, blank=True, null=True)
-    item_quantity = models.CharField(max_length=200, blank=True, null=True)
-    item_rate = models.CharField(max_length=200, blank=True, null=True)
+    item = models.ManyToManyField(Item, blank=True, null=True)
 
     create_at = models.DateField(auto_now_add=True)
 

@@ -61,7 +61,11 @@
                      <tr class="">
                         <th scope="col">Pancard</th>
                          {% if instance.pancard %}
-                        <td class=""><a href="{{ instance.pancard.url }}"><img style="height:70px; width:70px;" src="{{ instance.pancard.url }}"></a></td>
+                        <td class=""><a target="_blank" href="{{ instance.pancard.url }}"><img style="height:70px; width:70px;" src="{{ instance.pancard.url }}"></a>
+                        <a href="{{ instance.pancard.url }}" download> download</a>
+                        </td>
+                         <br>
+
                         {% endif %}
                     </tr>
 
