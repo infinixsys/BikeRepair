@@ -246,15 +246,19 @@ def mechanice(request):
         number = request.POST.get('number', None)
         img = request.FILES.get('img', None)
         aadhar = request.POST.get('aadhar', None)
-        upload_aadhar = request.FILES.get('upload_aadhar', None)
+        front_aadhar = request.FILES.get('front_aadhar', None)
+        back_aadhar = request.FILES.get('back_aadhar', None)
+        pancard = request.FILES.get('pancard', None)
         resume = request.FILES.get('resume', None)
         qualifications = request.POST.get('qualifications', None)
         skills = request.POST.get('skills', None)
+        date_of_birth = request.POST.get('date_of_birth', None)
+        blood_group = request.POST.get('blood_group', None)
 
         data = Mechanic.objects.create(name=name, profile=profile, email=email, price=price, experiance=experiance,
-                                       aadhar=aadhar, upload_aadhar=upload_aadhar, resume=resume,
-                                       qualifications=qualifications,
-                                       skills=skills,
+                                       aadhar=aadhar, front_aadhar=front_aadhar, resume=resume, back_aadhar=back_aadhar,
+                                       qualifications=qualifications, pancard=pancard, date_of_birth=date_of_birth,
+                                       skills=skills, blood_group=blood_group,
                                        number=number, img=img)
         data.save()
         msg = "Your Detail Has Been Submitted !!"
@@ -275,6 +279,7 @@ def updatemechanic(request, id):
         return redirect('login_attempt')
     instance = get_object_or_404(Mechanic, id=id)
     if request.method == 'POST':
+
         name = request.POST.get('name', None)
         profile = request.POST.get('profile', None)
         email = request.POST.get('email', None)
@@ -283,10 +288,15 @@ def updatemechanic(request, id):
         number = request.POST.get('number', None)
         img = request.FILES.get('img', None)
         aadhar = request.POST.get('aadhar', None)
-        upload_aadhar = request.FILES.get('upload_aadhar', None)
+        front_aadhar = request.FILES.get('front_aadhar', None)
+        back_aadhar = request.FILES.get('back_aadhar', None)
+        pancard = request.FILES.get('pancard', None)
         resume = request.FILES.get('resume', None)
         qualifications = request.POST.get('qualifications', None)
         skills = request.POST.get('skills', None)
+        date_of_birth = request.POST.get('date_of_birth', None)
+        blood_group = request.POST.get('blood_group', None)
+
         data = Mechanic.objects.get(id=id)
         data.name = name
         data.profile = profile
@@ -296,10 +306,14 @@ def updatemechanic(request, id):
         data.number = number
         data.img = img
         data.aadhar = aadhar
-        data.upload_aadhar = upload_aadhar
+        data.front_aadhar = front_aadhar
+        data.back_aadhar = back_aadhar
+        data.pancard = pancard
         data.resume = resume
         data.qualifications = qualifications
         data.skills = skills
+        data.date_of_birth = date_of_birth
+        data.blood_group = blood_group
         data.save()
         return redirect('mechanic_list')
     return render(request, 'addmechanic.html', {'instance': instance})
