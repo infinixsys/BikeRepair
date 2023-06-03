@@ -47,9 +47,21 @@
                         <td class="">{{ instance.aadhar }}</td>
                     </tr>
                     <tr class="">
-                        <th scope="col">Download Aadhar</th>
-                        {% if instance.upload_aadhar %}
-                        <td class=""><a href="{{ instance.upload_aadhar.url }}">Download</a></td>
+                        <th scope="col">Front Aadhar</th>
+                        {% if instance.front_aadhar %}
+                        <td class=""><a href="{{ instance.front_aadhar.url }}"><img style="height:70px; width:70px;" src="{{ instance.front_aadhar.url }}"></a></td>
+                        {% endif %}
+                    </tr>
+                     <tr class="">
+                        <th scope="col">Back Aadhar</th>
+                         {% if instance.back_aadhar %}
+                        <td class=""><a href="{{ instance.back_aadhar.url }}"><img style="height:70px; width:70px;" src="{{ instance.back_aadhar.url }}"></a></td>
+                        {% endif %}
+                    </tr>
+                     <tr class="">
+                        <th scope="col">Pancard</th>
+                         {% if instance.pancard %}
+                        <td class=""><a href="{{ instance.pancard.url }}"><img style="height:70px; width:70px;" src="{{ instance.pancard.url }}"></a></td>
                         {% endif %}
                     </tr>
 
@@ -69,7 +81,15 @@
                         <th scope="col">Employee ID</th>
                         <td class="">{{ instance.skills }}</td>
                     </tr>
+                     <tr class="">
+                        <th scope="col">Blood Group</th>
+                        <td class="">{{ instance.blood_group}}</td>
+                    </tr>
                     <tr class="">
+                        <th scope="col">Date Of Birth</th>
+                        <td class="">{{ instance.date_of_birth}}</td>
+                    </tr>
+                     <tr class="">
                         <th scope="col">New Registration</th>
                         <td class="">{{ instance.create_at |date }}</td>
                     </tr>
