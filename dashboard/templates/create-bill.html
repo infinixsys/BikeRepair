@@ -128,34 +128,39 @@
     <script>
       var dataArray = [];
 
-      function storeData() {
-        var FullName = document.getElementById('FullName').value;
-        var Unit = document.getElementById('Unit').value;
-        var ItemQuantity = document.getElementById('ItemQuantity').value;
-        var For = document.getElementById('ItemRate').value;
+      // Test
+            var dataArray = [];
 
-        var dataObject = {
-          FullName: FullName,
-          Unit: Unit,
-          ItemQuantity: ItemQuantity,
-          ItemRate: ItemRate
-        };
+              function storeData() {
+                var FullName = document.getElementById('FullName').value;
+                var Unit = document.getElementById('Unit').value;
+                var ItemQuantity = document.getElementById('ItemQuantity').value;
+                var For = document.getElementById('ItemRate').value;
 
-        var isDuplicate = dataArray.some(function (item) {
-          return JSON.stringify(item) === JSON.stringify(dataObject);
-        });
+                var dataObject = {
+                  FullName: FullName,
+                  Unit: Unit,
+                  ItemQuantity: ItemQuantity,
+                  ItemRate: ItemRate
+                };
 
-        if (!isDuplicate) {
-          dataArray.push(dataObject);
-          displayData();
+                var isDuplicate = dataArray.some(function (item) {
+                  return JSON.stringify(item) === JSON.stringify(dataObject);
+                });
 
-          // Clear input values
-          document.getElementById('FullName').value = '';
-          document.getElementById('Unit').value = '';
-          document.getElementById('ItemQuantity').value = '';
-          document.getElementById('ItemRate').value = '';
-        }
-      }
+                if (!isDuplicate) {
+                  dataArray.push(dataObject);
+                  // displayData();
+                  document.getElementById("itemsArr").value += JSON.stringify(dataObject,null,2) + ',' ;
+
+                  // Clear input values
+                  document.getElementById('FullName').value = '';
+                  document.getElementById('Unit').value = '';
+                  document.getElementById('ItemQuantity').value = '';
+                  document.getElementById('ItemRate').value = '';
+                }
+              }
+            // Test
 
       function deleteData(index) {
         dataArray.splice(index, 1);
